@@ -1,0 +1,718 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Computer Arithmetic - Algorithms and Hardware Designs">
+      
+      
+      
+        <link rel="canonical" href="https://jszheng.github.io/ComputerArithmetic/Preface_1st/">
+      
+      
+        <link rel="prev" href="../Front/">
+      
+      
+        <link rel="next" href="../Preface_2nd/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+    
+    
+      
+        <title>第一版序言 - 计算机数学-算法与硬件实现</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="计算机数学-算法与硬件实现" class="md-header__button md-logo" aria-label="计算机数学-算法与硬件实现" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            计算机数学-算法与硬件实现
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第一版序言
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jszheng/ComputerArithmetic" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jszheng/ComputerArithmetic
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="计算机数学-算法与硬件实现" class="md-nav__button md-logo" aria-label="计算机数学-算法与硬件实现" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    计算机数学-算法与硬件实现
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jszheng/ComputerArithmetic" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jszheng/ComputerArithmetic
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        封面
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Front/" class="md-nav__link">
+        标题
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          第一版序言
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        第一版序言
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    计算机算术的背景
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    本书的目的与结构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    主题摘要
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    本书的阅读指南
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Preface_2nd/" class="md-nav__link">
+        第二版序言
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../Part_01/">Part-I &nbsp; 数字的表示方法</a>
+          
+            <label for="__nav_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Part-I &nbsp; 数字的表示方法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Part_01/01/" class="md-nav__link">
+        1. 数字与算术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Part_01/02/" class="md-nav__link">
+        2. 有符号数的表示
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../Part_02/">Part-II</a>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Part-II
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BackCover/" class="md-nav__link">
+        封底
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    计算机算术的背景
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    本书的目的与结构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    主题摘要
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    本书的阅读指南
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/jszheng/ComputerArithmetic/edit/master/docs/Preface_1st.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="_1">第一版序言</h1>
+<h2 id="_2">计算机算术的背景</h2>
+<p>在过去20年间，计算机体系结构的进步使得数字计算机硬件的性能持续呈指数级增长，尽管在电路层提高速度的技术难度在不断提高。如果没有理论上的洞察力、实验研究和工具构建的努力，这种现象级的增长速度是不可能的，这些努力有助于将计算机体系结构从一门艺术转变为计算机科学和工程中最量化的一个分支，且预计在不久的将来也会继续下去。对不同形式的并发性的理解，以及具备合理有效性并且用户友好的编程模型的发展，是这一成功故事的关键推动因素。</p>
+<p>处理器性能成本增长背后的问题是硬件和软件复杂性的空前增加。复杂化的趋势不仅与可测试性和可验证性相抵触，还阻碍了可适应性、性能调整，以及各种权衡的评估，所有的这些最终导致了开发成本的飙升。当前和未来的计算机设计所面临的一个关键挑战是：需要通过去除一层又一层的复杂性来扭转这一趋势。在选择简洁、稳健、易于验证的设计同时，还要继续尝试新的设计方法。应当从较简单的电路中获得性能与易用性的好处，并能随时适应应用的需求。</p>
+<p>在计算机设计者对用户友好性、紧凑性、简单性、高性能、低成本和功耗的追求中，计算机算术起到了关键作用。它是计算机体系结构中最古老的子领域之一。早期数字计算机的大部分硬件开销都来自累加器和其它算术/逻辑电路中。因此，第一代计算机设计者的动机是在可能的范围内尽可能简化和共享硬件，并在提出方案前进行详细的性价比分析。我们今天使用的许多巧妙的设计方法实际上都源自于30～50年前笨重、耗电的机器中。</p>
+<p>实际上，计算机算术如今已经非常成功了，以至于有时会变得非常透明。就复杂性而言，如今的算术电路早已不再占据主导地位；寄存器、存储器和粗出气管理、指令发射逻辑和流水线控制逻辑才是当今处理器芯片面积的主要消费者。算术电路的正确性与高性能是人们通常的预期，像1990s英特尔奔腾的除法错误这样的事件实际上很少发生。</p>
+<p>前面所述的情况正在转变，这里有几个原因。首先，在极高的时钟频率下，算术电路和处理器其它部分间的接口开始变得非常关键。算术单元也不再能被孤立地设计和验证了。相反，需要进行综合的设计与优化，这使得开发工作变得更加复杂且昂贵。其次，还要利用新技术的优势优化算术电路以满足设计目标，并能容忍弱点，这使得我们需要对现有的设计模式进行重新审视。最后，将更高级别的算术基础单元纳入硬件，使得设计、优化和验证工作变得高度复杂，且相互关联。</p>
+<p>这便是计算机算术在如今仍具活力的原因。这个领域的设计者和研究人员以惊人的规律性产生了新的结构。超前进位加法器就是一个典型的例子：在不远的过去，我们曾认为我们知道所有关于超前进位加法器的知识。然而，新的设计、改进和优化仍在不断出现。IEEE 754标准浮点格式消除了许多有关浮点计算兼容性与误差控制的但又，从而产生了许多对大众市场具有吸引力的新设计与产品。鉴于许多新应用场景（如加密、错误检测和多媒体）都具有算术密集性的特点，计算机算术在未来几年仍将继续蓬勃发展。</p>
+<h2 id="_3">本书的目的与结构</h2>
+<p>计算机算术这一领域已经发展成熟，已经有十几篇材料和参考书被出版了。其中一些涉及计算机算术的一般书籍（相对于特殊应用或高级/非常规方法）被列在了序言的最后（参考文献索引请见原书序言末）。这些书的每一本都具有独特的优势，且对该领域的形成和发展做出了贡献。本书，《Computer Arithmetic: Algorithms and Hardware Designs》就是坐着多年来开发并完善的讲义的产物。以下是本书与所列书籍相比，最重要的特点：</p>
+<ol>
+<li><strong>材料章节按照讲座的规模划分：</strong>在我的教学方案中，一个讲座或多或少是一个独立的模块，其与过去的讲座有联系，且会指出未来会发生什么。每个讲座都必须有一个主题或标题，且必须从动机到细节再到结论。在设计文本时，我努力将材料分为几章，每章都适合用于一个讲座（1～2小时）。简短的讲座可以仅涵盖其中前面几个小节，而较长的讲座则可处理知识或方法的变种、次要的思想或接近章末时的高级材料。为使结构具有层次性（而不是扁平或线性的），本书一共被分为了七个部分，每个部分由四章组成，每章对应一个讲座，涵盖该领域的一个方面（见图P.1，在本文后面请往下翻）。</li>
+<li><strong>强调基础理论与硬件设计：</strong>处理复杂问题的能力既需要包括计算机算术理论基础的深刻理解，也需要帮助我们理解理论的设计实例。这些设计也同时为综合提供了构建块，并在 成本-性能 比较方面提供了参考点。这种观点反映在，例如，通过对冗余数字表示和相关算术的详细了解（第3章），可以使我们对后面各种乘法器设计和实时算术得到更好的理解。另一个例子见于第22章，其从更直观的几何学角度介绍了坐标旋转数字计算机，或者CORDIC算法。</li>
+<li><strong>将计算机算术与计算机其它子领域联系：</strong>计算机算术常受计算机体系结构和其它子领域的字样，同时也能反过来滋养这些领域。这种联系的例子比比皆是。例如对于超前进位加法器，我们可以意识到其进位计算实际上就是并行前缀计算的一个特例，而并行前缀计算已经被并行计算的研究者做出了广泛地研究。神经网络的算术则是一个仍在探索的领域。剩余数系统（residue number system）为复杂性理论和高速算术的极限感兴趣的研究员，以及容错数字系统的设计者提供了一个宝贵的工具。</li>
+<li><strong>广泛涵盖了重要主题：</strong>本书几乎涵盖了计算机算术的所有重要算法和硬件设计主题，从而为该领域提供了一个平衡且完整的视角。涵盖内容包括非常规数字表示方法（3,4章）、越来越重要的查找表算术（24章）、容错和可验证算术（19,20章）、以及第七部分（25～28章）的主题，这些内容在其它教材中并没有全部出现。</li>
+<li><strong>全书采用，并尽可能地使用统一且一致的符号与术语：</strong>例如，本书中 <span class="arithmatex">\(r\)</span>r 总是代表数字表示的基数（radix），或者处罚和平方根中的余数。虽然其它作者在他们文章的基本部分中也都基本这样做了，但许多人仍倾向于在高级研究主题中简单地借用参考资料中的符号和术语。这种方法的好处是使得原书和参考资料间的过度更容易，但对大多数学生来说，这完全是一种迷惑，他们依赖原书，除非写论文，并不会去参考原始参考资料。</li>
+</ol>
+<h2 id="_4">主题摘要</h2>
+<p>本书包括七个部分每部分由四章组成，它们的写作动机分别如下：</p>
+<ol>
+<li>第一部分：提供一个台阶，以让我们领略接下来的内容，并详细地介绍定点数的各种表示方法。包括对有符号数、冗余数表示、剩余数表示的详细讨论。</li>
+<li>第二部分：包括加法和减法，它们构成了最基本的算术构建，常用于实现其它算术运算。讨论内容包括常数的加法（计数器），高速加法器的各种设计，以及多操作数加法器。</li>
+<li>第三部分：这部分专门讨论乘法，从基本的移位/加法算法开始，到高基、树形、阵列、位串行、模乘法和其它各种乘法，此外还讨论了平方这种特殊情况。</li>
+<li>第四部分：包括除法算法及其硬件实现，从最基本的移位/减法算法开始，到高基、预缩放、模除法、阵列、收敛除法。</li>
+<li>第五部分：涉及实数算术，包括表示实数的各种方法、浮点算术、表示与计算中的误差，以及高精度和可验证算术。</li>
+<li>第六部分：涉及函数求值，从平方根求值开始，然后是CORDIC算法，接着是一般的收敛和近似方法，包括基于查找表的方法。</li>
+<li>第七部分：广泛地讨论了设计和实现方面的主题，包括流水线、低功耗和容错算术。这部分的最后一章还提供了历史角度和实际计算机中算术单元的例子。</li>
+</ol>
+<h2 id="_5">本书的阅读指南</h2>
+<p>对于教学使用，本书的每章主题都可在1～2小时的讲座中涵盖。在作者自己的教学中，每章分别被用于1.5小时的讲座，每周2次，为期10轴，且省略或合并了部分章节，以便将材料纳入18～20次讲座。但本文的模块化结构也适用于其它讲座形式、自学或从业人员对该领域的回顾。在后两种情况，读者可把每章看作是一个学习单元（比如一周），而不是一个讲座。理想情况下，读者进入下一章前，每章的所有主题都应被覆盖。在授课时间较少的情况下，一些位于章节末尾的小节可以被省略，或者仅介绍动机与关键结果。</p>
+<p>每章都提供了不同复杂程度的问题，从简单地数字例子或联系到要求更高的研究或小型项目。这些问题是本书不可分割的一部分：它们不是为了使本书在使用时更具吸引力而事后添加的。全书包括464个问题（每章15～18个）。假设每周有两次讲座，则可每周或每两周布置一次作业，每次作业都以相应的一半（2章）或全部（4章）部分的具体内容作为标题。</p>
+<p>这里也为教师提供解答手册。作者在UCSB的ECE 252B课程的详细教学大纲可在下网址找到：</p>
+<p>http://www.ece.ucsb.edu/~parhami/ece_252b.htm</p>
+<p>一个用于对各种算术算法进行数值实验的模拟器则可在下网址找到：</p>
+<p>http://www.ecs.umass.edu/ece/koren/arith/simulator/</p>
+<p>由Israel Koren教授提供。</p>
+<p>每章末尾都列出了计算机算术的经典论文、关键设计思想和重要的最新研究贡献的参考文献。这些参考文献为深入研究或学期论文或者项目提供了良好的七点。大量的经典论文和计算机算术中的重要贡献已在两卷中重印[Swar90]。</p>
+<p>计算机算术领域的新想法会出现在被称为 ARITH-n 的会议中，两年一次，在奇数年矩形[ARIT]。其它会议包括：</p>
+<ul>
+<li>Asilomar Conference on Signals, Systems, and Computers [Asil]</li>
+<li>International Conference on Circuits and Systems [ICCS]</li>
+<li>Midwest Symposium on Circuits and Systems [MSCS]</li>
+<li>International Conference on Computer Design [ICCD]</li>
+</ul>
+<p>相关期刊包括IEEE Transactions on Computers[TrCo]，特别是其中有关计算机算术的期刊：</p>
+<ul>
+<li>IEEE Transactions on Circuits and Systems[TrCS]</li>
+<li>Computers &amp; Mathematics with Applications[CoMa]</li>
+<li>IET Circuits, Devices &amp; Systems[CDS], IET Computers &amp; Digital Techniques[CDT]</li>
+<li>IEEE Transactions on VLSI Systems[TrVL]</li>
+<li>Journal of VLSI Signal Processing [JVSP]</li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../Front/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 标题" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                标题
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Preface_2nd/" class="md-footer__link md-footer__link--next" aria-label="下一页: 第二版序言" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                第二版序言
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.indexes", "navigation.instant", "navigation.top", "navigation.footer", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../javascripts/mathjax.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+        
+          <script src="../javascripts/katex.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        
+      
+    
+  </body>
+</html>
