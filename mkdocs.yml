@@ -4,8 +4,8 @@ site_description: Computer Arithmetic - Algorithms and Hardware Designs
 
 # Repository
 repo_name: jszheng/ComputerArithmetic
-repo_url: https://gitee.com/niuniu4/computer-arithmetic-behrooz
-edit_uri: https://gitee.com/niuniu4/computer-arithmetic-behrooz/tree/main/docs/
+repo_url:  https://github.com/jszheng/ComputerArithmetic
+edit_uri:  https://github.com/jszheng/ComputerArithmetic/tree/main/docs/
 
 nav:
   - 封面: index.md
@@ -15,6 +15,7 @@ nav:
   - Part-I &nbsp; 数字的表示方法: 
     - Part_01/index.md  
     - Part_01/01.md
+    - Part_01/02.md    
   - Part-II: 
     - Part_02/index.md
   - 封底: BackCover.md
