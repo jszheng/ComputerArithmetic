@@ -10,7 +10,7 @@ NUMBER REPRESENTATION
 >
 > *“Of all the great things that are found among us the existence of nothing is the greatest.”* — LEONARDO DAVINCI
 >
-> “在我们发现的伟大事物中，“无”的存在是最伟大的。”  — 莱昂纳多·达文西
+> “在我们发现的伟大事物中，“无”的存在是最伟大的。”  — 莱昂纳多·达芬奇
 
 
 
@@ -21,6 +21,6 @@ NUMBER REPRESENTATION IS ARGUABLY THE MOST  IMPORTANT TOPIC IN COMPUTER arithmet
 
 
 -   [第一章 数字与算术](01.md) Numbers and Arithmetic
--   第二章 有符号数的表示 Representing Signed Numbers
+-   [第二章 有符号数的表示](02.md) Representing Signed Numbers
 -   第三章 冗余数系统 Redundant Number Systems
 -   第四章 剩余数系统 Residue Number Systems

@@ -1,24 +1,12 @@
-site_name: 计算机数学-算法与硬件实现
+site_name: 计算机算术-算法与硬件实现
 site_url: https://jszheng.github.io/ComputerArithmetic
 site_description: Computer Arithmetic - Algorithms and Hardware Designs
 
 # Repository
 repo_name: jszheng/ComputerArithmetic
 repo_url:  https://github.com/jszheng/ComputerArithmetic
-edit_uri:  https://github.com/jszheng/ComputerArithmetic/tree/main/docs/
+edit_uri:  https://github.com/jszheng/ComputerArithmetic/blob/master/docs/
 
-nav:
-  - 封面: index.md
-  - 标题: Front.md
-  - Preface_1st.md
-  - Preface_2nd.md
-  - Part-I &nbsp; 数字的表示方法: 
-    - Part_01/index.md  
-    - Part_01/01.md
-    - Part_01/02.md    
-  - Part-II: 
-    - Part_02/index.md
-  - 封底: BackCover.md
 
 theme:
   name: material
@@ -47,11 +35,69 @@ theme:
     - search.suggest
     - toc.follow
     # - toc.integrate
+  palette:
+    - scheme: default
+      primary: white
+      # accent: indigo
+      toggle:
+        icon: material/theme-light-dark
+        name: Switch to dark mode
+    - scheme: slate
+      primary: grey
+      # accent: indigo
+      toggle:
+        icon: material/theme-light-dark
+        name: Switch to light mode
+  font:
+    text: Noto Sans SC
+    code: Fira Code
+  favicon: assets/images/favicon.png
+  #logo: assets/images/logo.png
+  icon:
+    logo: logo
+    repo: fontawesome/brands/github
+    edit: material/file-edit-outline
       
 markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  # - pymdownx.emoji:
+  #     emoji_index: !!python/name:materialx.emoji.twemoji
+  #     emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.keys
+  # - pymdownx.magiclink:
+  #     repo_url_shorthand: true
+  #     user: squidfunk
+  #     repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
 
+# Plugins
+plugins:
+  - search
+    
 extra_javascript:
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
@@ -62,5 +108,21 @@ extra_javascript:
 
 extra_css:
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
+  
+nav:
+  - 封面: index.md
+  - 标题: Front.md
+  - Preface_1st.md
+  - Preface_2nd.md
+  - Part-I &nbsp; 数字的表示方法: 
+    # [icon: material/book-open-outline]
+    - Part_01/index.md  
+    - Part_01/01.md
+    - Part_01/02.md    
+    - Part_01/03.md    
+  - Part-II: 
+    - Part_02/index.md
+  - 封底: BackCover.md
+
   
   
