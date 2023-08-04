@@ -115,13 +115,48 @@ nav:
   - Preface_1st.md
   - Preface_2nd.md
   - Part-I &nbsp; 数字的表示方法: 
-    # [icon: material/book-open-outline]
     - Part_01/index.md  
     - Part_01/01.md
     - Part_01/02.md    
-    - Part_01/03.md    
-  - Part-II: 
+    - Part_01/03.md
+    - Part_01/04.md        
+  - Part-II &nbsp; 加法与减法: 
     - Part_02/index.md
+    - Part_02/05.md
+    - Part_02/06.md
+    - Part_02/07.md
+    - Part_02/08.md
+  - Part-III &nbsp; 乘法:
+    - Part_03/index.md
+    - Part_03/09.md
+    - Part_03/10.md
+    - Part_03/11.md
+    - Part_03/12.md
+  - Part-IV &nbsp; 除法:
+    - Part_04/index.md
+    - Part_04/13.md
+    - Part_04/14.md
+    - Part_04/15.md
+    - Part_04/16.md
+  - Part-V &nbsp; 实数算数:
+    - Part_05/index.md
+    - Part_05/17.md
+    - Part_05/18.md
+    - Part_05/19.md
+    - Part_05/20.md
+  - Part_VI &nbsp; 特殊函数求值:
+    - Part_06/index.md
+    - Part_06/21.md
+    - Part_06/22.md
+    - Part_06/23.md
+    - Part_06/24.md
+  - Part_VII &nbsp; 实现相关主题:
+    - Part_07/index.md
+    - Part_07/25.md
+    - Part_07/26.md
+    - Part_07/27.md
+    - Part_07/28.md
+  - 附录: Appendix.md
   - 封底: BackCover.md
 
   
