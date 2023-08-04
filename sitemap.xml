@@ -2,47 +2,212 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://jszheng.github.io/ComputerArithmetic/</loc>
-         <lastmod>2023-07-27</lastmod>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Appendix/</loc>
+         <lastmod>2023-08-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jszheng.github.io/ComputerArithmetic/BackCover/</loc>
-         <lastmod>2023-07-27</lastmod>
+         <lastmod>2023-08-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jszheng.github.io/ComputerArithmetic/Front/</loc>
-         <lastmod>2023-07-27</lastmod>
+         <lastmod>2023-08-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jszheng.github.io/ComputerArithmetic/Preface_1st/</loc>
-         <lastmod>2023-07-27</lastmod>
+         <lastmod>2023-08-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jszheng.github.io/ComputerArithmetic/Preface_2nd/</loc>
-         <lastmod>2023-07-27</lastmod>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/translation/</loc>
+         <lastmod>2023-08-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jszheng.github.io/ComputerArithmetic/Part_01/</loc>
-         <lastmod>2023-07-27</lastmod>
+         <lastmod>2023-08-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jszheng.github.io/ComputerArithmetic/Part_01/01/</loc>
-         <lastmod>2023-07-27</lastmod>
+         <lastmod>2023-08-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jszheng.github.io/ComputerArithmetic/Part_01/02/</loc>
-         <lastmod>2023-07-27</lastmod>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_01/03/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_01/04/</loc>
+         <lastmod>2023-08-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jszheng.github.io/ComputerArithmetic/Part_02/</loc>
-         <lastmod>2023-07-27</lastmod>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_02/05/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_02/06/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_02/07/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_02/08/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_03/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_03/09/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_03/10/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_03/11/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_03/12/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_04/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_04/13/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_04/14/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_04/15/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_04/16/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_05/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_05/17/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_05/18/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_05/19/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_05/20/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_06/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_06/21/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_06/22/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_06/23/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_06/24/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_07/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_07/25/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_07/26/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_07/27/</loc>
+         <lastmod>2023-08-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jszheng.github.io/ComputerArithmetic/Part_07/28/</loc>
+         <lastmod>2023-08-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

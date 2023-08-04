@@ -1,0 +1,1930 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Computer Arithmetic - Algorithms and Hardware Designs">
+      
+      
+      
+        <link rel="canonical" href="https://jszheng.github.io/ComputerArithmetic/Part_01/04/">
+      
+      
+        <link rel="prev" href="../03/">
+      
+      
+        <link rel="next" href="../../Part_02/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+    
+    
+      
+        <title>4 剩余数系统 - 计算机算术-算法与硬件实现</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.eebd395e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="计算机算术-算法与硬件实现" class="md-header__button md-logo" aria-label="计算机算术-算法与硬件实现" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            计算机算术-算法与硬件实现
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4 剩余数系统
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07 19.07 3.5m-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13.51 1.67m-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87.4 1.31M19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35-2.53-2.2m4.33-2.7 1.15-2.77 2.2 2.54-3.35.23m1.15-4.96-1.14-2.78 3.34.24-2.2 2.54M9.63 18.93l2.77 1.15-2.53 2.19-.24-3.34Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07 19.07 3.5m-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13.51 1.67m-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87.4 1.31M19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35-2.53-2.2m4.33-2.7 1.15-2.77 2.2 2.54-3.35.23m1.15-4.96-1.14-2.78 3.34.24-2.2 2.54M9.63 18.93l2.77 1.15-2.53 2.19-.24-3.34Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jszheng/ComputerArithmetic" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jszheng/ComputerArithmetic
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="计算机算术-算法与硬件实现" class="md-nav__button md-logo" aria-label="计算机算术-算法与硬件实现" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    计算机算术-算法与硬件实现
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jszheng/ComputerArithmetic" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jszheng/ComputerArithmetic
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        封面
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front/" class="md-nav__link">
+        标题
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Preface_1st/" class="md-nav__link">
+        第一版序言
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Preface_2nd/" class="md-nav__link">
+        第二版序言
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Part-I &nbsp; 数字的表示方法</a>
+          
+            <label for="__nav_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Part-I &nbsp; 数字的表示方法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01/" class="md-nav__link">
+        1. 数字与算术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02/" class="md-nav__link">
+        2. 有符号数的表示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03/" class="md-nav__link">
+        3. 冗余数系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          4 剩余数系统
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        4 剩余数系统
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41-rns" class="md-nav__link">
+    4.1 RNS 表示和算法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-rns" class="md-nav__link">
+    4.2 选择 RNS 模数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    4.3 数字的编码和解码
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 数字的编码和解码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rns" class="md-nav__link">
+    从二进制/十进制到 RNS 的转换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rns_1" class="md-nav__link">
+    从 RNS 到混合基数形式的转换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rns_2" class="md-nav__link">
+    RNS 到二进制/十进制的转换
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-rns" class="md-nav__link">
+    4.4 困难的 RNS 算术运算
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-rns" class="md-nav__link">
+    4.5 冗余 RNS 表示
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-rns" class="md-nav__link">
+    4.6 RNS 中快速算术的限制
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    问题（略）
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考文献和进一步阅读
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Part_02/">Part-II &nbsp; 加法与减法</a>
+          
+            <label for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Part-II &nbsp; 加法与减法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_02/05/" class="md-nav__link">
+        5. 基础的加法与计数方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_02/06/" class="md-nav__link">
+        6. 超前进位加法器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_02/07/" class="md-nav__link">
+        7. 其它高速加法器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_02/08/" class="md-nav__link">
+        8. 多操作数加法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Part_03/">Part-III &nbsp; 乘法</a>
+          
+            <label for="__nav_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Part-III &nbsp; 乘法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_03/09/" class="md-nav__link">
+        9. 基础的乘法方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_03/10/" class="md-nav__link">
+        10. 高基乘法器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_03/11/" class="md-nav__link">
+        11. 树型乘法器与阵列乘法器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_03/12/" class="md-nav__link">
+        12. 其它乘法器
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Part_04/">Part-IV &nbsp; 除法</a>
+          
+            <label for="__nav_8">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Part-IV &nbsp; 除法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_04/13/" class="md-nav__link">
+        13. 基础除法方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_04/14/" class="md-nav__link">
+        14. 高基除法器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_04/15/" class="md-nav__link">
+        15. 其它除法器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_04/16/" class="md-nav__link">
+        16. 除法的收敛算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Part_05/">Part-V &nbsp; 实数算数</a>
+          
+            <label for="__nav_9">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Part-V &nbsp; 实数算数
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_05/17/" class="md-nav__link">
+        17. 浮点数表示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_05/18/" class="md-nav__link">
+        18. 浮点数运算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_05/19/" class="md-nav__link">
+        19. 误差与误差控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_05/20/" class="md-nav__link">
+        20. 精确可靠的算术
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Part_06/">Part_VI &nbsp; 特殊函数求值</a>
+          
+            <label for="__nav_10">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Part_VI &nbsp; 特殊函数求值
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_06/21/" class="md-nav__link">
+        21. 平方根算法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_06/22/" class="md-nav__link">
+        22. CORDIC算法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_06/23/" class="md-nav__link">
+        23. 其它函数求值方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_06/24/" class="md-nav__link">
+        24. 查表法算术
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Part_07/">Part_VII &nbsp; 实现相关主题</a>
+          
+            <label for="__nav_11">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          Part_VII &nbsp; 实现相关主题
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_07/25/" class="md-nav__link">
+        25. 高吞吐量算术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_07/26/" class="md-nav__link">
+        26. 低功耗算术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_07/27/" class="md-nav__link">
+        27. 容错算术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_07/28/" class="md-nav__link">
+        28. 可重构算术
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Appendix/" class="md-nav__link">
+        附录
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BackCover/" class="md-nav__link">
+        封底
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41-rns" class="md-nav__link">
+    4.1 RNS 表示和算法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-rns" class="md-nav__link">
+    4.2 选择 RNS 模数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    4.3 数字的编码和解码
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 数字的编码和解码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rns" class="md-nav__link">
+    从二进制/十进制到 RNS 的转换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rns_1" class="md-nav__link">
+    从 RNS 到混合基数形式的转换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rns_2" class="md-nav__link">
+    RNS 到二进制/十进制的转换
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-rns" class="md-nav__link">
+    4.4 困难的 RNS 算术运算
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-rns" class="md-nav__link">
+    4.5 冗余 RNS 表示
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-rns" class="md-nav__link">
+    4.6 RNS 中快速算术的限制
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    问题（略）
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考文献和进一步阅读
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/jszheng/ComputerArithmetic/blob/master/docs/Part_01/04.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="4">4 剩余数系统<a class="headerlink" href="#4" title="Permanent link">&para;</a></h1>
+<p>Residue Number Systems</p>
+<p><em>“God created the integers, all else is the work of man”</em> </p>
+<p>​                           —— LEOPOLD KRONECKER , 1886</p>
+<p>“上帝创造了整数，其他一切都是人类的工作”</p>
+<p>​                           —— 利奥波德·克罗内克 , 1886</p>
+<p>By converting arithmetic on large numbers to arithmetic on a collection of smaller numbers, residue number system (RNS) representations produce significant speedup for some classes of arithmetic-intensive algorithms in signal processing applications. Additionally, RNS arithmetic is a valuable tool for theoretical studies of the limits of fast arithmetic. In this chapter, we study RNS representations and arithmetic, along with their advantages and drawbacks. Chapter topics include:</p>
+<p>通过将对于大数的算术转换为对于较小数集合的算术，剩余数数系统（RNS）表示对于信号处理应用中某些类型的算术密集型算法产生显著的加速。此外，RNS 算术对于快速算术极限的理论研究来说是一个很有价值的工具。在本章中，我们研究 RNS 表示和算法，以及它们的优点和缺点。章节主题包括：</p>
+<p><strong>4.1</strong> RNS表示和算术 RNS Representation and Arithmetic</p>
+<p><strong>4.2</strong> 选择 RNS 模数 Choosing the RNS Moduli</p>
+<p><strong>4.3</strong> 数字的编码和解码 Encoding and Decoding of Numbers</p>
+<p><strong>4.4</strong> 困难的RNS算术运算 Difficult RNS Arithmetic Operations</p>
+<p><strong>4.5</strong> 冗余RNS表示 Redundant RNS Representations</p>
+<p><strong>4.6</strong> RNS 中快速算术的局限性 Limits of Fast Arithmetic in RNS</p>
+<h2 id="41-rns">4.1 RNS 表示和算法<a class="headerlink" href="#41-rns" title="Permanent link">&para;</a></h2>
+<p>What number has the remainders of 2, 3, and 2 when divided by the numbers 7, 5, and 3, respectively? This puzzle, written in the form of a verse by the Chinese scholar Sun Tsu more than 1500 years ago [Jenk93], is perhaps the first documented use of number representation using multiple residues. The puzzle essentially asks us to convert the coded representation  <em>(</em> 2|3|2 <em>)</em>  of a residue number system, based on the moduli  <em>(</em> 7|5|3 <em>)</em>, into standard decimal format. </p>
+<p>哪个数字分别除以数字 7、5 和 3 时，余数为 2、3 和 2？这个谜题由中国学者孙子在 1500 多年前以诗句的形式写成 [Jenk93]，可能是第一个有记录的使用多个余数的数字表示形式。该难题本质上要求我们将基于模（7|5|3 ）的余数系统的编码表示（ 2|3|2 ）转换为标准十进制格式。</p>
+<p>In a residue number system (RNS), a number  <em>x</em>  is represented by the list of its residues with respect to  <em>k</em>  pairwise relatively prime moduli  <em>mk</em>−1  <em>&gt;</em> · · ·  <em>&gt; m</em> 1  <em>&gt; m</em> 0. The residue <em>xi</em>  of  <em>x</em>  with respect to the  <em>i</em> th modulus  <em>mi</em>  is akin to a digit and the entire  <em>k</em>-residue representation of  <em>x</em>  can be viewed as a  <em>k</em>-digit number, where the digit set for the  <em>i</em> th position is [0,  <em>mi</em> − 1]. Notationally, we write</p>
+<p>在余数系统 (RNS) 中，数字 x 由其相对于 k 个成对互素模 <span class="arithmatex">\(m_{k−1} &gt; · · · &gt; m_1 &gt; m_0\)</span> 的余数列表表示。x 相对于第 i 个模数 <span class="arithmatex">\(m_i\)</span> 的余数 <span class="arithmatex">\(x_i\)</span> 类似于一个数字，并且 x 的整个 k 余数表示可以视为一个 k 位数字，其中第 i 个位置的数字集是 [<span class="arithmatex">\(0, m_{i − 1}\)</span>]。我们记为</p>
+<div class="arithmatex">\[
+x_i = x \mod m_i = \left \langle x  \right \rangle _{mi}
+\]</div>
+<p>and specify the RNS representation of  <em>x</em>  by enclosing the list of residues, or digits, in parentheses. For example, </p>
+<p>并通过将余数或数字列表括在括号中来指定 x 的 RNS 表示形式。例如，</p>
+<div class="arithmatex">\[
+x = ( 2|3|2 )_{RNS ( 7|5|3 )}
+\]</div>
+<p>represents the puzzle given at the beginning of this section. The list of moduli can be deleted from the subscript when we have agreed on a default set. In many of the examples of this chapter, the following RNS is assumed:</p>
+<p>代表本节开头给出的难题。当我们就默认集达成一致时，可以从下标中删除模数列表。在本章的许多示例中，假设了以下 RNS：</p>
+<p><center>RNS ( 8|7|5|3 )      第 4 章的默认 RNS</center></p>
+<p>The product  <em>M</em>  of the  <em>k</em>  pairwise relatively prime moduli is the number of different representable values in the RNS and is known as its  <em>dynamic range</em>. </p>
+<p>k 个成对互质模的乘积 M 是 RNS 中不同可表示值的数量，称为其动态范围。</p>
+<div class="arithmatex">\[
+M = m_{k−1} × · · · × m_1 × m_0
+\]</div>
+<p>For example,  <em>M</em> = 8 × 7 × 5 × 3 = 840 is the total number of distinct values that are representable in our chosen 4-modulus RNS. Because of the equality</p>
+<p>例如，<span class="arithmatex">\(M = 8 × 7 × 5 × 3 = 840\)</span> 是我们选择的 4 模 RNS 中可表示的不同值的总数。因为等式</p>
+<div class="arithmatex">\[
+\left \langle -x \right \rangle _{m_i} = \left \langle M-x \right \rangle _{m_i}
+\]</div>
+<p>the 840 available values can be used to represent numbers 0 through 839, −420 through +419, or any other interval of 840 consecutive integers. In effect, negative numbers are represented using a complement system with the complementation constant  <em>M</em> . </p>
+<p>840 个可用值可用于表示数字 0 到 839、-420 到 +419，或 840 个连续整数的任何其他区间。实际上，负数是使用具有补码常数 M 的补码系统来表示的。</p>
+<p>Here are some example numbers in RNS <em>(</em> 8|7|5|3 <em>)</em>:</p>
+<p>以下是 RNS 中的一些示例数字 ( 8|7|5|3 )：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>( 0 | 0 | 0 | 0 ) RNS 代表0或840或····
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>( 1 | 1 | 1 | 1 ) RNS 代表1或841或····
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>( 2 | 2 | 2 | 2 ) RNS 代表2或842或····
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>( 0 | 1 | 3 | 2 ) RNS 代表8或848或····
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>( 5 | 0 | 1 | 0 ) RNS 代表21或861或····
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>( 0 | 1 | 4 | 1 ) RNS 代表64或904或····
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>( 2 | 0 | 0 | 2 ) RNS 代表−70或770或····
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>( 7 | 6 | 4 | 2 ) RNS 代表−1或839或····
+</code></pre></div>
+<p>Given the RNS representation of  <em>x</em>, the representation of − <em>x</em>  can be found by complementing each of the digits  <em>xi</em>  with respect to its modules  <em>mi</em> (0 digits are left unchanged). </p>
+<p>给定 x 的 RNS 表示，− x 的表示可以通过对每个数字 xi 相对于其模块 mi 求补来找到（0 位保持不变）。</p>
+<p>Thus, given that 21 =  <em>(</em> 5 | 0 | 1 | 0 <em>)</em> RNS, we find</p>
+<p>因此，假设 21 = ( 5 | 0 | 1 | 0 ) RNS，我们可以得到</p>
+<div class="arithmatex">\[
+−21 = ( 8 − 5 | 0 | 5 − 1 | 0 )_{RNS} = ( 3 | 0 | 4 | 0 )_{RNS}
+\]</div>
+<p>Any RNS can be viewed as a weighted representation. We will present a general method for determining the position weights (the Chinese remainder theorem) in Section 4.3. For RNS <em>(</em> 8|7|5|3 <em>)</em>, the weights associated with the four positions are</p>
+<p>任何 RNS 都可以被视为加权表示。我们将在 4.3 节中提出确定位置权重的通用方法（中国剩余定理）。对于 RNS ( 8|7|5|3 )，与四个位置相关的权重为 </p>
+<p>​          105     120    336    280</p>
+<p>As an example,  <em>(</em> 1 | 2 | 4 | 0 <em>)</em> RNS represents the number</p>
+<p>例如，( 1 | 2 | 4 | 0 ) RNS 代表数字</p>
+<div class="arithmatex">\[
+\left \langle (105×1)+(120×2)+(336×4)+(280×0) \right \rangle _{840}=\left \langle 1689 \right \rangle _{840}=9
+\]</div>
+<p>In practice, each residue must be represented or encoded in binary. For our example RNS, such a representation would require 11 bits (Fig. 4.1). To determine the number representation efficiency of our 4-modulus RNS, we note that 840 different values are being represented using 11 bits, compared with 2048 values possible with binary representation. Thus, the representational efficiency is</p>
+<p>实际上，每个余数必须以二进制表示或编码。对于我们的示例 RNS，这样的表示需要 11 位（图 4.1）。为了确定 4 模 RNS 的数字表示效率，我们注意到使用 11 位表示了 840 个不同的值，而二进制表示可能表示 2048 个值。因此，表征效率为 <span class="arithmatex">\(840 / 2048 = 41\%\)</span></p>
+<p>Since log2 840 = 9.714, another way to quantify the representational efficiency is to note that in our example RNS, about 1.3 bits of the 11 bits go to waste. </p>
+<p>由于 <span class="arithmatex">\(\log_2 840 = 9.714\)</span>，量化表示效率的另一种方法是, 本例中，11 位中大约有 1.3 位被浪费了。</p>
+<p><img alt="image-20230802144731302" src="../assets/image-20230802144731302.png" /></p>
+<p>图 4.1 RNS ( 8 | 7 | 5 | 3 ) 的二进制编码数字格式 </p>
+<p>As noted earlier, the sign of an RNS number can be changed by independently complementing each of its digits with respect to its modulus. Similarly, addition, subtraction, and multiplication can be performed by independently operating on each digit. The following examples for RNS <em>(</em> 8 | 7 | 5 | 3 <em>)</em>  illustrate the process:</p>
+<p>如前所述，RNS 编号的符号可以通过独立更改对每个数字的模数求补。类似地，加法、减法和乘法可以通过对每个数字进行独立运算来进行。以下 RNS ( 8 | 7 | 5 | 3 ) 示例说明了该过程： </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>( 5 | 5 | 0 | 2 ) RNS    代表x=+5
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>( 7 | 6 | 4 | 2 ) RNS    表示 y = −1
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>( 4 | 4 | 4 | 1 ) RNS    x + y：(5 + 7) mod 8 = 4、(5 + 6) mod 7 = 4 等。
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>( 6 | 6 | 1 | 0 ) RNS    x − y：(5 − 7) mod 8 = 6、(5 − 6) mod 7 = 6 等。
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>                        （或者，找到 -y 并加上 x）
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>( 3 | 2 | 0 | 1 ) RNS    x × y：5 × 78 = 3、5 × 67 = 2 等。
+</code></pre></div>
+<p>Figure 4.2 depicts the structure of an adder, subtractor, or multiplier for RNS arithmetic. Since each digit is a relatively small number, these operations can be quite fast and simple in RNS. This speed and simplicity are the primary advantages of RNS arithmetic. In the case of addition, for example, carry propagation is limited to within a single residue (a few bits). Thus, RNS representation pretty much solves the carry-propagation problem. As for multiplication, a 4 × 4 multiplier for example is considerably more than four times simpler than a 16 × 16 multiplier, besides being much faster. In fact, since the residues are small (say, 6 bits wide), it is quite feasible to implement addition, subtraction, and multiplication by direct table lookup. With 6-bit residues, say, each operation requires a 4K × 6 table. Thus, excluding division, a complete arithmetic unit module for one 6-bit residue can be implemented with 9 KB of memory. </p>
+<p>图 4.2 描述了 RNS 算术的加法器、减法器或乘法器的结构。由于每个数字都是一个相对较小的数字，因此这些操作在 RNS 中可以非常快速且简单。这种速度和简单性是 RNS 算法的主要优点。例如，在加法的情况下，进位传播仅限于单个余数（一些比特位）。因此，RNS 表示几乎解决了进位传播问题。至于乘法，例如 4 × 4 乘法器比 16 × 16 乘法器简单四倍多，而且速度更快。事实上，由于余数很小（比如6位宽），通过直接查表来实现加法、减法和乘法是相当可行的。例如，对于 6 位余数，每个操作都需要一个 4K × 6 表。因此，除了除法之外，一个 6 位余数的完整算术单元模块可以用 9 KB 的内存来实现。</p>
+<p><img alt="image-20230802152211258" src="../assets/image-20230802152211258.png" /></p>
+<p>Unfortunately, however, what we gain in terms of the speed and simplicity of addition, subtraction, and multiplication can be more than nullified by the complexity of division and the difficulty of certain auxiliary operations such as sign test, magnitude comparison, and overflow detection. Given the numbers</p>
+<p>然而不幸的是，我们在加法、减法和乘法的速度和简单性方面所获得的成果可能会被除法的复杂性和某些辅助操作（例如符号测试、幅度比较和溢出检测）的难度所抵消。对于下面两个数字</p>
+<p>​      ( 7 | 2 | 2 | 1 ) RNS   和   ( 2 | 5 | 0 | 1 ) RNS</p>
+<p>we cannot easily tell their signs, determine which of the two is larger, or find out whether <em>(</em> 1 | 0 | 2 | 2 <em>)</em> RNS represents their true sum as opposed to the residue of their sum modulo 840. </p>
+<p>我们无法轻易辨别它们的符号，确定两者中哪一个更大，或者找出 ( 1 | 0 | 2 | 2 ) RNS 是否代表它们的真实和，而不是它们模 840 的和的余数。</p>
+<p>These difficulties have thus far limited the application of RNS representations to certain signal processing problems in which additions and multiplications are used either exclusively or predominantly and the results are within known ranges (e.g., digital filters, Fourier transforms). We discuss division and other “difficult” RNS operations in Section 4.4. </p>
+<p>迄今为止，这些困难限制了 RNS 表示在某些信号处理问题中的应用，在这些问题中，仅使用加法和乘法，或者主要使用加法和乘法，并且结果在已知范围内（例如，数字滤波器、傅立叶变换）。我们在 4.4 节中讨论除法和其他“困难”的 RNS 操作。</p>
+<h2 id="42-rns">4.2 选择 RNS 模数<a class="headerlink" href="#42-rns" title="Permanent link">&para;</a></h2>
+<p>The set of the moduli chosen for RNS affects both the representational efficiency and the complexity of arithmetic algorithms. In general, we try to make the moduli as small as possible, since it is the magnitude of the largest modulus  <em>mk</em>−1 that dictates the speed of arithmetic operations. We also often try to make all the moduli comparable in magnitude to the largest one, since with the computation speed already dictated by  <em>mk</em>−1, there is usually no advantage in fragmenting the design of Fig. 4.2 through the use of very small moduli at the right end. </p>
+<p>为 RNS 选择的模集会影响算术算法的表示效率和复杂性。一般来说我们尝试使模量尽可能小，这是可能的，因为最大模 <span class="arithmatex">\(m_{k−1}\)</span> 的大小决定了算术运算的速度。我们还经常尝试使所有模数在大小上与最大模数相当，因为计算速度已经由 <span class="arithmatex">\(m_{k−1}\)</span>决定，通过在右端使用非常小的模数来分割图 4.2 的设计通常没有优势。</p>
+<p>We illustrate the process of selecting the RNS moduli through an example. Let us assume that we want to represent unsigned integers in the range 0 to (100 000)ten, requiring 17 bits with unsigned binary representation. </p>
+<p>我们通过一个例子来说明选择 RNS 模数的过程。让我们假设我们想要表示 0 到 <span class="arithmatex">\((100 000)_{10}\)</span> 范围内的无符号整数，需要 17 位无符号二进制表示。</p>
+<p>A simple strategy is to pick prime numbers in sequence until the dynamic range  <em>M</em> becomes adequate. Thus, we pick  <em>m</em> 0 = 2,  <em>m</em> 1 = 3,  <em>m</em> 2 = 5, etc. After we add  <em>m</em> 5 = 13 to our list, the dynamic range becomes</p>
+<p>一个简单的策略是依次选择素数，直到动态范围M变得足够了。因此，我们选择 <span class="arithmatex">\(m_0 = 2\)</span>、<span class="arithmatex">\(m_1 = 3\)</span>、<span class="arithmatex">\(m_2 = 5\)</span> 等等。当添加到 <span class="arithmatex">\(m_5 = 13\)</span> 后对于我们的列表，动态范围变为</p>
+<p>​        RNS ( 13 | 11 | 7 | 5 | 3 | 2 )           <em>M</em>  = 30 030</p>
+<p>This range is not yet adequate, so we add  <em>m</em> 6 = 17 to the list:</p>
+<p>这个范围还不够，所以我们将 m 6 = 17 添加到列表中：</p>
+<p>​        RNS ( 17 | 13 | 11 | 7 | 5 | 3 | 2 )    <em>M</em> = 510 510</p>
+<p>The dynamic range is now 5.1 times as large as needed, so we can remove the modulus 5 and still have adequate range:</p>
+<p>动态范围现在是所需的 5.1 倍，因此我们可以删除模数 5 并且仍然有足够的范围：</p>
+<p>​        RNS(17 | 13 | 11 | 7 | 3 | 2)             <em>M</em> = 102 102</p>
+<p>With binary encoding of the six residues, the number of bits needed for encoding each number is</p>
+<p>通过对六个余数进行二进制编码，对每个数字进行编码所需的位数为</p>
+<p>​        5 + 4 + 4 + 3 + 2 + 1 = 19 位</p>
+<p>Now, since the speed of arithmetic operations is dictated by the 5-bit residues modulo <em>m</em> 5, we can combine the pairs of moduli 2 and 13, and 3 and 7, with no speed penalty. This leads to:</p>
+<p>现在，由于算术运算的速度由模 <span class="arithmatex">\(m_5\)</span> 的 5 位余数决定，因此我们可以组合模 2 和 13、模 3 和 7 的对，而不会影响速度。这导致：</p>
+<p>​         RNS ( 26 | 21 | 17 | 11 )                 <em>M</em> = 102 102</p>
+<p>This alternative RNS still needs 5 + 5 + 5 + 4 = 19 bits per operand, but has two fewer modules in the arithmetic unit. </p>
+<p>此替代 RNS 每个操作数仍需要 5 + 5 + 5 + 4 = 19 位，但算术单元中的模块少了两个。</p>
+<p>Better results can be obtained if we proceed as above, but include powers of smaller primes before moving to larger primes. The chosen moduli will still be pairwise relatively prime, since powers of any two prime numbers are relatively prime. For example, after including  <em>m</em> 0 = 2 and  <em>m</em> 1 = 3 in our list of moduli, we note that 22 is smaller than the next prime 5. So we modify  <em>m</em> 0 and  <em>m</em> 1 to get</p>
+<p>如果我们按照上述步骤进行，但在转向较大素数之前先包括较小素数的幂，可以获得更好的结果。所选择的模数仍将是成对互质的，因为任何两个素数的幂都是互质的。例如，在模数列表中包含 <span class="arithmatex">\(m_0 = 2\)</span> 和 <span class="arithmatex">\(m_1 = 3\)</span> 后，我们注意到 <span class="arithmatex">\(2^2\)</span> 小于下一个素数 5。因此我们修改 <span class="arithmatex">\(m_0\)</span> 和 <span class="arithmatex">\(m_1\)</span> 以获得</p>
+<p>​         RNS ( 22 | 3 )                                   <em>M</em> = 12</p>
+<p>This strategy is consistent with our desire to minimize the magnitude of the largest modulus. Similarly, after we have included  <em>m</em> 2 = 5 and  <em>m</em> 3 = 7, we note that both 23 and 32 are smaller than the next prime 11. So the next three steps lead to</p>
+<p>该策略与我们最小化最大模量的愿望是一致的。类似地，在我们包含 <span class="arithmatex">\(m_2 = 5\)</span> 和 <span class="arithmatex">\(m_3 = 7\)</span> 后，我们注意到 <span class="arithmatex">\(2^3\)</span></p>
+<p>和 <span class="arithmatex">\(3^2\)</span> 比下一个素数 11 小。所以接下来的三个步骤导致</p>
+<p>​       RNS ( 32 | 23 | 7 | 5 )                      <em>M</em> = 2520</p>
+<p>​       RNS ( 11 | 32 | 23 | 7 | 5 )             <em>M</em> = 27 720</p>
+<p>​       RNS ( 13 | 11 | 32 | 23 | 7 | 5 )    <em>M</em> = 360 360</p>
+<p>The dynamic range is now 3.6 times as large as needed, so we can replace the modulus 9 with 3 and then combine the pair 5 and 3 to obtain</p>
+<p>现在动态范围是所需的 3.6 倍，因此我们可以将模数 9 替换为 3，然后将 5 和 3 组合起来得到</p>
+<p>​       RNS ( 15 | 13 | 11 | 23 | 7 )          <em>M</em> = 120 120</p>
+<p>The number of bits needed by this last RNS is</p>
+<p>最后一个 RNS 所需的位数为</p>
+<p>​       4 + 4 + 4 + 3 + 3 = 18 位</p>
+<p>which is better than our earlier result of 19 bits. The speed has also improved because the largest residue is now 4 bits wide instead of 5. Other variations are possible. For example, given the simplicity of operations with power-of-2 moduli, we might want to backtrack and maximize the size of our even modulus within the 4-bit residue limit</p>
+<p>这比我们之前的 19 位结果要好。速度也得到了提高，因为最大余数现在是 4 位宽，而不是 5 位。其他变化也是可能的。例如，考虑到 2 次幂模运算的简单性，我们可能希望在 4 位余数限制内回溯并最大化偶数模的大小</p>
+<p>​        RNS ( 24 | 13 | 11 | 32 | 7 | 5 )    <em>M</em> = 720 720</p>
+<p>We can now remove 5 or 7 from the list of moduli, but the resulting RNS is in fact inferior to RNS(15|13|11|23|7). This might not be the case with other examples; thus, once we have converged on a feasible set of moduli, we should experiment with other sets that can be derived from it by increasing the power of the even modulus at hand. </p>
+<p>我们现在可以从模数列表中删除 5 或 7，但生成的 RNS 实际上不如 RNS(15|13|11|23|7)。其他示例可能并非如此；因此，一旦我们收敛到一组可行的模数，我们应该尝试 通过增加现有偶模数的幂，并使用可以从中导出的其他集合。</p>
+<p>The preceding strategy for selecting the RNS moduli is guaranteed to lead to the smallest possible number of bits for the largest modulus, thus maximizing the speed of RNS arithmetic. However, speed and cost do not just depend on the widths of the residues but also on the moduli chosen. For example, we have already noted that power-of-2 moduli simplify the required arithmetic operations, so that the modulus 16 might be better than the smaller modulus 13 (except, perhaps, with table-lookup implementation). Moduli of the form 2 <em>a</em> − 1 are also desirable and are referred to as low-cost moduli [Merr64], [Parh76]. From our discussion of addition of 1’s-complement numbers in Section 2.4, we know that addition modulo 2 <em>a</em> − 1 can be performed using a standard <em>a</em>-bit binary adder with end-around carry. </p>
+<p>上述选择RNS模数的策略保证了最大模数的尽可能少的位数，从而最大化RNS算法的速度。然而，速度和成本不仅取决于余数的宽度，还取决于所选择的模量。例如，我们已经注意到，2 的幂模简化了所需的算术运算，因此模 16 可能比较小的模 13 更好（也许除了查表实现之外）。<span class="arithmatex">\(2^a − 1\)</span> 形式的模数也是理想的，被称为低成本模数[Merr64]，[Parh76]。从我们在第 2.4 节中对 1 补码的加法的讨论中，我们知道模 <span class="arithmatex">\(2^a − 1\)</span> 的加法可以使用带尾部进位的标准 a 位二进制加法器来执行。</p>
+<p>Hence, we are motivated to restrict the moduli to a power of 2 and odd numbers of the form 2 <em>a</em> − 1. One can prove (left as exercise) that the numbers 2 <em>a</em> − 1 and 2 <em>b</em> − 1 are relatively prime if and only if  <em>a</em>  and  <em>b</em>  are relatively prime. Thus, any list of relatively prime numbers  <em>ak</em>−2  <em>&gt;</em> · · ·  <em>&gt; a</em> 1  <em>&gt; a</em> 0 can be the basis of the following  <em>k</em>-modulus RNS</p>
+<p>因此，我们有动机将模限制为 2 的幂和 <span class="arithmatex">\(2^a − 1\)</span> 形式的奇数。可以证明（留作练习）数字 <span class="arithmatex">\(2^a − 1\)</span> 和 <span class="arithmatex">\(2^b − 1\)</span> 互质当且仅当 a 和 b 互质。因此，任何相对质数的列表 <span class="arithmatex">\(a_{k−2} &gt; · · · &gt; a_1 &gt; a_0\)</span> 都可以作为以下 k 模 RNS 的基础</p>
+<p>​        <span class="arithmatex">\(RNS ( 2^{a_{k−2}} | 2^{a_{k−2}} − 1 | · · · | 2^{a_1} − 1 | 2^{a_0} − 1 )\)</span></p>
+<p>for which the widest residues are  <em>ak</em>−2-bit numbers. Note that to maximize the dynamic range with a given residue width, the even modulus is chosen to be as large as possible. </p>
+<p>其中最宽的余数是 <span class="arithmatex">\(a_{k−2}\)</span> 位数字。请注意，为了最大化给定余数宽度的动态范围，偶数模量被选择为尽可能大。</p>
+<p>Applying this strategy to our desired RNS with the target range [0, 100 000], leads to the following steps:</p>
+<p>将此策略应用于我们所需的目标范围为 [0, 100 000] 的 RNS，将导致以下步骤：</p>
+<ul>
+<li><span class="arithmatex">\(RNS (2^3 | 2^3 − 1 | 2^2 − 1)\)</span> Basis: 3, 2                      M =        168</li>
+<li><span class="arithmatex">\(RNS (2^4 | 2^4 − 1 | 2^3 − 1)\)</span> Basis: 4, 3                      M =      1680</li>
+<li><span class="arithmatex">\(RNS (2^5 | 2^5 − 1 | 2^3 − 1 | 2^2 − 1)\)</span> Basis: 5, 3, 2     M =   20 832</li>
+<li><span class="arithmatex">\(RNS (2^5 | 2^5 − 1 | 2^4 − 1 | 2^3 − 1)\)</span> Basis: 5, 4, 3     M = 104 160</li>
+</ul>
+<p>This last system, RNS <em>(</em> 32 | 31 | 15 | 7 <em>)</em>, possesses adequate range. Note that once the number 4 is included in the base list, 2 must be excluded because 4 and 2, and thus 24 − 1 and 22 − 1, are not relatively prime. </p>
+<p>最后一个系统 RNS ( 32 | 31 | 15 | 7 ) 拥有足够的范围。请注意，一旦数字 4 包含在基本列表中，则必须排除 2，因为 4 和 2，且 <span class="arithmatex">\(2^4 − 1\)</span> 和 <span class="arithmatex">\(2^2 − 1\)</span> 不是互质的。</p>
+<p>The derived RNS requires 5 + 5 + 4 + 3 = 17 bits for representing each number, </p>
+<p>with the largest residues being 5 bits wide. In this case, the representational efficiency is close to 100% and no bit is wasted. In general, the representational efficiency of low-cost RNS is provably better than 50% (yet another exercise!), leading to the waste of no more than 1 bit in number representation. </p>
+<p>导出的 RNS 需要 5 + 5 + 4 + 3 = 17 位来表示每个数字，最大余数为 5 位宽。在这种情况下，表示效率接近 100%，并且没有浪费任何比特。一般来说，低成本 RNS 的表示效率被证明优于 50%（又一个练习！），导致数字表示中不超过 1 位的浪费。</p>
+<p>To compare the RNS above to our best result with unrestricted moduli, we list the parameters of the two systems together:</p>
+<p>为了将上面的 RNS 与我们使用无限制模数的最佳结果进行比较，我们将两个系统的参数一起列出：</p>
+<ul>
+<li>RNS <span class="arithmatex">\((15 | 13 | 11 | 2^3 | 7)\)</span>                        18 bits        M = 120 120</li>
+<li>RNS <span class="arithmatex">\((2^5 | 2^5 − 1 | 2^4 − 1 | 2^3 − 1|)\)</span>    17 bits        M = 104 160</li>
+</ul>
+<p>Both systems provide the desired range. The latter has wider, but fewer, residues. However, the simplicity of arithmetic with low-cost moduli makes the latter a more attractive choice. In general, restricting the moduli tends to increase the width of the largest residues and the optimal choice is dependent on both the application and the target implementation technology. </p>
+<p>两种系统都提供所需的范围。后者具有更宽但更少的余数。然而，算法的简单性和低成本模数使后者成为更具吸引力的选择。一般来说，限制模数往往会增加最大余数的宽度，最佳选择取决于应用和目标实现技术。</p>
+<h2 id="43">4.3 数字的编码和解码<a class="headerlink" href="#43" title="Permanent link">&para;</a></h2>
+<p>Since input numbers provided from the outside (machine or human interface) are in standard binary or decimal and outputs must be presented in the same way, conversions between binary/decimal and RNS representations are required. </p>
+<p>由于从外部（机器或人机界面）提供的输入数字是标准二进制或十进制，并且输出必须以相同的方式呈现，因此需要二进制/十进制和 RNS 表示之间的转换。</p>
+<h3 id="rns">从二进制/十进制到 RNS 的转换<a class="headerlink" href="#rns" title="Permanent link">&para;</a></h3>
+<p>The binary-to-RNS conversion problem is stated as follows: Given an integer  <em>y</em>, find its residues with respect to the moduli  <em>mi</em>, 0 ≤  <em>i</em> ≤  <em>k</em> − 1. Let us assume that  <em>y</em>  is an unsigned binary integer. Conversion of signed-magnitude or 2’s-complement numbers can be accomplished by converting the magnitude and then complementing the RNS representation if needed. </p>
+<p>二进制到 RNS 的转换问题表述如下：给定一个整数 y，求其相对于模 <span class="arithmatex">\(m_i, 0 ≤ i ≤ k − 1\)</span> 的余数。假设 y 是一个无符号二进制整数。有符号数值或 2 补码的转换可以通过转换幅度值，然后根据需要对 RNS 求补来完成。</p>
+<p>To avoid time-consuming divisions, we take advantage of the following equality:</p>
+<p>为了避免耗时的除法，我们利用以下等式： </p>
+<p>$$
+\left \langle (y_{k-1} \cdots y_1 y_0)<em k-1="k-1">2 \right \rangle _{m_i} = \left \langle 
+\left \langle 2^{k-1}y</em> \right \rangle_{m_i} + \cdots + 
+\left \langle 2y_1 \right \rangle_{m_i} +
+\left \langle y_0 \right \rangle_{m_i}
+\right \rangle
+$$
+If we precompute and store 2 <em>j</em> <em>m</em> <em>i</em>  for each  <em>i</em>  and  <em>j</em>, then the residue  <em>x</em> <em>i</em>   of  <em>y</em> (mod  <em>mi</em> ) can be computed by modulo- <em>mi</em>  addition of some of these constants. </p>
+<p>如果我们为每个 i 和 j 预先计算并存储 <span class="arithmatex">\(\left \langle 2^j \right \rangle _{m_{i}}\)</span> ，则y的余数 <span class="arithmatex">\(x_i\)</span>    (mod <span class="arithmatex">\(m_i\)</span> ) 可以 通过对一些查出常数的模加法来计算。</p>
+<p>Table 4.1 shows the required lookup table for converting 10-bit binary numbers in the range [0, 839] to RNS(8 | 7 | 5 | 3). Only residues mod 7, mod 5, and mod 3 are given in the table, since the residue mod 8 is directly available as the three least-significant bits of the binary number  <em>y</em>. </p>
+<p>表 4.1 显示了将 [0, 839] 范围内的 10 位二进制数转换为 RNS(8|7|5|3) 所需的查找表。表中只给出了余数 mod 7、mod 5 和 mod 3，因为余数 mod 8 可直接用作二进制数 y 的三个最低有效位。</p>
+<p><img alt="image-20230802163304524" src="../assets/image-20230802163304524.png" /></p>
+<p><strong>EXAMPLE 4.1</strong> Represent  <em>y</em> =  <em>(</em> 1010 0100 <em>)</em> two =  <em>(</em> 164 <em>)</em> ten in RNS <em>(</em> 8 | 7 | 5 | 3 <em>)</em>.  The residue of  <em>y</em>  mod 8 is  <em>x</em> 3 =  <em>(y</em> 2 <em>y</em> 1 <em>y</em> 0 <em>)</em> two =  <em>(</em> 100 <em>)</em> two = 4. Since  <em>y</em> = 27 + 25 + 22, the required residues mod 7, mod 5, and mod 3 are obtained by simply adding the values stored in the three rows corresponding to  <em>j</em> = 7, 5, 2 in Table 4.1:</p>
+<p><strong>示例4.1</strong> 用<span class="arithmatex">\(RNS (8 | 7 | 5 | 3 )\)</span> 表示<span class="arithmatex">\(y = ( 1010 0100 )_2 = ( 164 )_{10}\)</span> 。</p>
+<p>y mod 8 的余数为 <span class="arithmatex">\(x_3 = (y_2 y_1 y_0 )_2 = (100)_2 = 4\)</span>。由于 <span class="arithmatex">\(y = 2^7 + 2^5 + 2^2\)</span>，只需将表 4.1 中 j = 7, 5, 2 对应的三行中存储的值相加即可获得所需的余数 mod 7、mod 5 和 mod 3：</p>
+<p>$$
+\begin{array}{c}
+x_2 = \left \langle y \right \rangle _7 = \left \langle 2 + 4 + 4\right \rangle _7 = 3 \
+x_1 = \left \langle y \right \rangle _5 = \left \langle 3 + 2 + 4\right \rangle _5 = 4 \
+x_0 = \left \langle y \right \rangle _3 = \left \langle 2 + 2 + 1\right \rangle _3 = 2
+\end{array}
+$$
+Therefore, the RNS(8 | 7 | 5 | 3) representation of (164)ten is (4 | 3 | 4 | 2)RNS. </p>
+<p>因此，<span class="arithmatex">\((164)_{10}\)</span> 的 <span class="arithmatex">\(RNS(8 | 7 | 5 | 3)\)</span> 表示为 <span class="arithmatex">\((4 | 3 | 4 | 2)_{RNS}\)</span>。</p>
+<p>In the worst case,  <em>k</em>  modular additions are required for computing each residue of a <em>k</em>-bit number. To reduce the number of operations, one can view the given input number as a number in a higher radix. For example, if we use radix 4, then storing the residues of 4 <em>i</em>, 2 × 4 <em>i</em>  and 3 × 4 <em>i</em>  in a table would allow us to compute each of the required residues using only  <em>k/</em> 2 modular additions. </p>
+<p>在最坏的情况下，需要 k 个模加法来计算 k 位数字的每个余数。为了减少运算次数，可以将给定的输入数字视为更高基数的数字。例如，如果我们使用基数 4，那么将 <span class="arithmatex">\(4^i、2 × 4^i 和 3 × 4^i\)</span> 的余数存储在表中将允许我们仅使用 <span class="arithmatex">\(k/ 2\)</span> 模加法来计算每个所需的留数。</p>
+<p>The conversion for each modulus can be done by repeatedly using a single lookup table and modular adder or by several copies of each arranged into a pipeline. For a low-cost modulus  <em>m</em> = 2 <em>a</em> − 1, the residue can be determined by dividing up  <em>y</em>  into  <em>a</em>-bit segments and adding them modulo 2 <em>a</em> − 1. </p>
+<p>每个模数的转换可以通过重复使用单个查找表和模加法器或通过排列到管道中的每个模数的多个副本来完成。对于低成本模数 <span class="arithmatex">\(m = 2^a − 1\)</span>，可以通过将 y 分成 a 位段并将它们加上模 <span class="arithmatex">\(2^a − 1\)</span> 来确定余数。</p>
+<h3 id="rns_1">从 RNS 到混合基数形式的转换<a class="headerlink" href="#rns_1" title="Permanent link">&para;</a></h3>
+<p>Associated with any residue number system RNS <em>(mk</em>−1 | · · · | <em>m</em> 2 | <em>m</em> 1 | <em>m</em> 0 <em>)</em> is a mixed-radix number system MRS <em>(mk</em>−1 | · · · | <em>m</em> 2 | <em>m</em> 1 | <em>m</em> 0 <em>)</em>, which is essentially a <em>k</em>-digit positional number system with position weights</p>
+<p>与任何剩余数数字系统 RNS <span class="arithmatex">\((m_{k−1} | · · · | m_2 | m_1 | m_0 )\)</span> 相关联的是混合基数系统 MRS <span class="arithmatex">\((m_{k−1} | · · · | m_2 | m_1 | m_0 )\)</span>，它本质上是一个k 位的位置数字系统，具有位置权重：</p>
+<p>$$
+m_{k−2}\cdots m_2m_1m_0,  \cdots,   m_2m_1m_0,  m_1m_0,  m_0,  1
+$$
+and digit sets [0,  <em>mk</em>−1 − 1], · · · , [0,  <em>m</em> 2 − 1], [0,  <em>m</em> 1 − 1], and [0,  <em>m</em> 0 − 1] in its  <em>k</em>-digit positions. Hence, the MRS digits are in the same ranges as the RNS digits (residues). For example, the mixed-radix system MRS <em>(</em> 8 | 7 | 5 | 3 <em>)</em>  has position weights 7 × 5 × 3 = 105, 5 × 3 = 15, 3, and 1, leading to  </p>
+<p>以及在其 k 位位置上的数字集 [<span class="arithmatex">\(0, m_{k−1} − 1\)</span>]、···、[<span class="arithmatex">\(0, m_2 − 1\)</span>]、[<span class="arithmatex">\(0, m_1 − 1\)</span>] 和 [<span class="arithmatex">\(0, m_0 − 1\)</span>]。因此，MRS 数字与 RNS 数字（余数）处于相同范围。例如，混合基数系统 MRS ( 8 | 7 | 5 | 3 ) 的位置权重为 7 × 5 × 3 =105, 5 × 3 = 15, 3, 1, 导致</p>
+<div class="arithmatex">\[
+( 0 | 3 | 1 | 0 )_{MRS ( 8|7|5|3 )} = ( 0 × 105 ) + ( 3 × 15 ) + ( 1 × 3 ) + ( 0 × 1 ) = 48
+\]</div>
+<p>The RNS-to-MRS conversion problem is that of determining the  <em>zi</em>  digits of MRS, given the  <em>xi</em>  digits of RNS, so that</p>
+<p>RNS 到 MRS 的转换问题是在给定 RNS 的 <span class="arithmatex">\(x_i\)</span> 数字的情况下确定 MRS 的 <span class="arithmatex">\(z_i\)</span> 数字，以便</p>
+<div class="arithmatex">\[
+y = (x_{k−1}| · · · | x_2 | x_1 | x_0 ) _{RNS} = (z_{k−1} | · · · | z_2 | z_1 | z_0 ) _{MRS}
+\]</div>
+<p>From the definition of MRS, we have</p>
+<p>根据MRS的定义，我们有</p>
+<div class="arithmatex">\[
+y = z_{k−1} (m_{k−2} \cdots m_2 m_1 m_0 ) + \cdots + z_2 (m_1 m_0 ) + z_1 (m_0 ) + z_0
+\]</div>
+<p>It is thus immediately obvious that  <em>z</em> 0 =  <em>x</em> 0. Subtracting  <em>z</em> 0 =  <em>x</em> 0 from both the RNS and MRS representations, we get</p>
+<p>因此很明显 <span class="arithmatex">\(z_0 = x_0\)</span>。从 RNS 和 MRS 表示中减去 <span class="arithmatex">\(z_0 = x_0\)</span>，我们得到</p>
+<div class="arithmatex">\[
+y - x_0 = (x'_{k−1}| · · · | x'_2 | x'_1 | 0 ) _{RNS} = (z_{k−1} | · · · | z_2 | z_1 | 0 ) _{MRS}
+\]</div>
+<p>其中<span class="arithmatex">\(x'_j=\left \langle x_j - x_0 \right \rangle_{m_j}\)</span>​. </p>
+<p>If we now divide both representations by  <em>m*0, we get the following in the reduced RNS and MRS from which *m</em> 0 has been removed:</p>
+<p>如果我们现在将两个表示除以 <span class="arithmatex">\(m_0\)</span>，得到结果 是已删除 <span class="arithmatex">\(m_0\)</span> 的简化 RNS 和 MRS ：</p>
+<p>$$
+(x''<em k_1="k−1">{k−1}| · · · | x''_2 | x''_1) _{RNS} = (z</em> | · · · | z_2 | z_1) _{MRS}
+$$
+Thus, if we demonstrate how to divide the number  <em>y</em> =  <em>(x</em>| · · · |  <em>x</em> |  <em>x</em> | 0 *)*RNS by m0 to obtain (xk−1 | · · · | x2 | x1)RNS, we have converted the original problem to a similar problem with one fewer modulus. Repeating the same process then leads to the determination of all the zi digits in turn. </p>
+<p>因此，如果我们演示如何将 <span class="arithmatex">\(y’ = (x’_{k-1}|\cdots|x’_2|x’_1|0)_{RNS}\)</span> 除以数字<span class="arithmatex">\(m_0\)</span> 来得到 <span class="arithmatex">\((x''_{k−1}| · · · | x''_2 | x''_1) _{RNS}\)</span>， 我们已经将原始问题转换为少一个模数的类似问题。重复相同的过程即可依次确定所有的 <span class="arithmatex">\(z_i\)</span> 数字。</p>
+<p>Dividing <em>y</em>, which is a multiple of <em>m</em> 0, by a given constant (in this case <em>m</em> 0) is known as <em>scaling</em> and is much simpler than general division in RNS. Division by <em>m</em> 0 can be accomplished by multiplying each residue by the <em>multiplicative inverse</em> of <em>m</em> 0 with respect to the associated modulus. For example, the multiplicative inverses of 3 relative to 8, 7, and 5 are 3, 5, and 2, respectively, because</p>
+<p>将 y（是<span class="arithmatex">\(m_0\)</span>的倍数）除以给定常数（在本例中为 <span class="arithmatex">\(m_0\)</span>）称为缩放，并且比 RNS 中的一般除法简单得多。除以<span class="arithmatex">\(m_0\)</span> 可以通过将每个余数乘以<span class="arithmatex">\(m_0\)</span> 相对于相关模数的*乘法逆元*来完成。例如，3 相对于 8、7 和 5 的*乘法逆元*分别为 3、5 和 2，因为</p>
+<p>$$
+\left \langle 3 \times 3 \right \rangle _8 =
+\left \langle 3 \times 5 \right \rangle _7 =
+\left \langle 3 \times 2 \right \rangle _5 =
+1
+$$
+因此，数字 <span class="arithmatex">\(y = ( 0 | 6 | 3 | 0 )_{RNS}\)</span> 可以通过乘以 <span class="arithmatex">\(( 3 | 5 | 2 | − ) _{RNS}\)</span> 来除以 3：</p>
+<p>$$
+\frac{( 0 | 6 | 3 | 0 )<em RNS="RNS">{RNS}}{3}=( 0 | 6 | 3 | 0 )</em>\times ( 3 | 5 | 2 | − ) <em RNS="RNS">{RNS} =  (0 | 2 | 1 | −)</em>
+$$
+Multiplicative inverses of the moduli can be precomputed and stored in tables to facilitate RNS-to-MRS conversion.</p>
+<p>模的乘法逆可以预先计算并存储在表中，以方便 RNS 到 MRS 的转换。</p>
+<p><strong>EXAMPLE 4.2</strong> Convert <em>y</em> = <em>(</em> 0 | 6 | 3 | 0 <em>)</em> RNS to mixed-radix representation. We have <em>z</em> 0 = <em>x</em> 0 = 0. Based on the preceding discussion, dividing <em>y</em> by 3 yields: <em>(</em> 0 | 6 | 3 | 0 <em>)</em> RNS = <em>(</em> 0 | 6 | 3 | 0 <em>)</em> RNS × <em>(</em> 3 | 5 | 2 | − <em>)</em> RNS</p>
+<p><strong>示例4.2</strong> 将<span class="arithmatex">\(y = ( 0 | 6 | 3 | 0 ) _{RNS}\)</span> 转换为混合基数表示。</p>
+<p>我们有 <span class="arithmatex">\(z_0 = x_0 = 0\)</span>。根据前面的讨论，将 y 除以 3 得到： </p>
+<div class="arithmatex">\[
+\frac{( 0 | 6 | 3 | 0 )_{RNS}}{3}=( 0 | 6 | 3 | 0 )_{RNS}\times ( 3 | 5 | 2 | − ) _{RNS} =  (0 | 2 | 1 | −)_{RNS}
+\]</div>
+<p>Thus we have <em>z</em> 1 = 1. Subtracting 1 and dividing by 5, we get:</p>
+<p>因此我们有 <span class="arithmatex">\(z_1 = 1\)</span>。减去 1 再除以 5，我们得到：</p>
+<div class="arithmatex">\[
+\frac{(7|1|0|-)_{RNS}}{5} = (7|1|0|-)_{RNS} \times (5|3|-|-)_{RNS}=(0|-|-|-)_{RNS}
+\]</div>
+<p>Next, we get <em>z</em> 2 = 3. Subtracting 3 and dividing by 7, we find:</p>
+<p>接下来，我们得到 <span class="arithmatex">\(z_2 = 3\)</span>。减去 3 再除以 7，我们发现：</p>
+<div class="arithmatex">\[
+\frac{(0|0|-|-)_{RNS}}{7} = (0|0|-|-)_{RNS} \times (7|-|-|-)_{RNS} = (0|-|-|-)_{RNS}
+\]</div>
+<p>We conclude by observing that <em>z</em> 3 = 0. The conversion is now complete:</p>
+<p>我们通过观察 得出结论<span class="arithmatex">\(z_3 = 0\)</span> 。转换现已完成：</p>
+<div class="arithmatex">\[
+y = (0 | 6 | 3 | 0)_{RNS} = (0 | 3 | 1 | 0)_{MRS} = 48
+\]</div>
+<p>Mixed-radix representation allows us to compare the magnitudes of two RNS numbers or to detect the sign of a number. For example, the RNS representations <em>(</em> 0 | 6 | 3 | 0 <em>)</em> RNS and <em>(</em> 5 | 3 | 0 | 0 <em>)</em> RNS of 48 and 45 provide no clue to their relative magnitudes, whereas the equivalent mixed-radix representations <em>(</em> 0 | 3 | 1 | 0 <em>)</em> MRS and <em>(</em> 0 | 3 | 0 | 0 <em>)</em> MRS, or <em>(</em> 000 | 011 | 001 | 00 <em>)</em> MRS and <em>(</em> 000 | 011 | 000 | 00 <em>)</em> MRS, when coded in binary, can be compared as ordinary numbers.</p>
+<p>混合基数表示允许我们比较两个RNS数字的大小或检测数字的符号。例如，48 和 45 的 RNS 表示 <span class="arithmatex">\(( 0 | 6 | 3 | 0 )_{RNS}\)</span> 和 <span class="arithmatex">\(( 5 | 3 | 0 | 0 ) _{RNS}\)</span> 没有提供它们相对大小的线索，而等效的混合基数表示 <span class="arithmatex">\(( 0 | 3 | 1 | 0 ) _{MRS}\)</span></p>
+<p>和<span class="arithmatex">\(( 0 | 3 | 0 | 0 ) _{MRS}\)</span>，或<span class="arithmatex">\(( 000 | 011 | 001 | 00 )_{MRS}\)</span> 和<span class="arithmatex">\(( 000 | 011 | 000 | 00 ) _{MRS}\)</span>，当以二进制编码时，可以像普通数字一样进行比较。</p>
+<h3 id="rns_2">RNS 到二进制/十进制的转换<a class="headerlink" href="#rns_2" title="Permanent link">&para;</a></h3>
+<p>One method for RNS-to-binary conversion is to first derive the mixed-radix representation of the RNS number and then use the weights of the mixed-radix positions to complete the conversion. We can also derive position weights for the RNS directly based on the Chinese remainder theorem (CRT), as discussed below.</p>
+<p>RNS 到二进制转换的一种方法是首先导出 RNS 数的混合基表示，然后使用混合基位置的权重来完成转换。我们还可以直接基于中国剩余定理 (CRT) 导出 RNS 的位置权重，如下所述。</p>
+<p>Consider the conversion of <em>y</em> = <em>(</em> 3 | 2 | 4 | 2 <em>)</em> RNS from RNS <em>(</em> 8 | 7 | 5 | 3 <em>)</em> to decimal. Based on RNS properties, we can write</p>
+<p>考虑将 y = ( 3 | 2 | 4 | 2 ) RNS 从 RNS ( 8 | 7 | 5 | 3 ) 转换为十进制。基于 RNS 属性，我们可以写做</p>
+<div class="arithmatex">\[
+\begin{array}{l}
+(3 | 2 | 4 | 2)_{RNS} &amp;= (3 | 0 | 0 | 0)_{RNS} + (0 | 2 | 0 | 0)_{RNS}
++ (0 | 0 | 4 | 0)_{RNS} + (0 | 0 | 0 | 2)_{RNS} \\
+&amp;= 3 × (1 | 0 | 0 | 0)_{RNS} + 2 × (0 | 1 | 0 | 0)_{RNS}
++ 4 × (0 | 0 | 1 | 0)_{RNS} + 2 × (0 | 0 | 0 | 1)_{RNS}
+\end{array}
+\]</div>
+<p>Thus, knowing the values of the following four constants (the RNS position weights) would allow us to convert any number from RNS <em>(</em> 8 | 7 | 5 | 3 <em>)</em> to decimal using four multiplications and three additions.</p>
+<p>因此，知道以下四个常量（RNS 位置权重）的值将允许我们使用四次乘法和三次加法将任何数字从 RNS (8 | 7 | 5 | 3 ) 转换为十进制。</p>
+<div class="arithmatex">\[
+\begin{array}{c}
+(1 | 0 | 0 | 0)_{RNS} = 105 \\
+(0 | 1 | 0 | 0)_{RNS} = 120 \\
+(0 | 0 | 1 | 0)_{RNS} = 336 \\
+(0 | 0 | 0 | 1)_{RNS} = 280
+\end{array}
+\]</div>
+<p>所以我们可以发现</p>
+<div class="arithmatex">\[
+(3 | 2 | 4 | 2)RNS = \left \langle (3 × 105) + (2 × 120) + (4 × 336) + (2 × 280)\right \rangle _{840} = 779
+\]</div>
+<p>It only remains to show how the preceding weights were derived. How, for example, did we determine that <em>w</em> 3 = <em>(</em> 1 | 0 | 0 | 0 <em>)</em> RNS = 105? To determine the value of <em>w</em> 3, we note that it is divisible by 3, 5, and 7, since its last three residues are 0s. Hence, <em>w</em> 3 must be a multiple of 105. We must then pick the appropriate multiple of 105 such that its residue with respect to 8 is 1. This is done by multiplying 105 by its multiplicative inverse with respect to 8. Based on the preceding discussion, the conversion process can be formalized in the form of CRT.</p>
+<p>只需要说明前面的权重是如何得出的。例如，我们如何确定 <span class="arithmatex">\(w_3 = ( 1 | 0 | 0 | 0 ) _{RNS} = 105\)</span>？ 为了确定 <span class="arithmatex">\(w_3\)</span> 的值，我们注意到它可以被 3、5 和 7 整除，因为它的最后三个余数是 0。因此，w 3 必须是 105 的倍数。然后我们必须选择 105 的适当倍数，使其相对于 8 的余数为 1。这是通过将 105 乘以它相对于 8 的乘法逆元来完成的。基于前面的讨论，转换过程可以以 CRT 的形式形式化。</p>
+<p><strong>THEOREM 4.1</strong> (The Chinese remainder theorem) The magnitude of an RNS number can be obtained from the CRT formula:</p>
+<p><strong>定理 4.1</strong>（中国剩余定理）RNS 数字的大小可以从CRT公式中获得：</p>
+<p>$$
+x = (x_{k−1} | · · · | x_2 | x_1 | x_0 ) <em i="0">{RNS} = \left \langle \sum</em>^{k-1}M_i \left \langle \alpha_i x_i\right \rangle_{m_i} \right \rangle_M
+$$
+其中 <span class="arithmatex">\(M_i=M/m_i\)</span>, 而 <span class="arithmatex">\(\alpha_i=\left \langle M_i^{-1}\right \rangle _{m_i}\)</span> 是<span class="arithmatex">\(M_i\)</span>相对于<span class="arithmatex">\(m_i\)</span>的乘法逆元。</p>
+<p>To avoid multiplications in the conversion process, we can store the values of</p>
+<p>为了避免转换过程中的乘法，我们可以存储对于所有可能的<span class="arithmatex">\(i\)</span> 和<span class="arithmatex">\(x_i\)</span>对应的<span class="arithmatex">\(\left \langle M_i \left \langle \alpha_i x_i\right \rangle_{m_i} \right \rangle_M\)</span>的值到一个表中，表大小有<span class="arithmatex">\(\sum_{i=0}^{k-1}m_i\)</span>个word。</p>
+<p><img alt="image-20230803145813831" src="../assets/image-20230803145813831.png" /></p>
+<p><center>表 4.2 应用中国余数定理到RNS(8|7|5|3)所需的值</center></p>
+<p>shows the required values for RNS <em>(</em> 8 | 7 | 5 | 3 <em>)</em>. Conversion is then performed exclusively by table lookups and modulo- <em>M</em> additions.</p>
+<p>表 4.2显示 RNS ( 8 | 7 | 5 | 3 ) 所需的值。仅通过表查找和模 M 加法就可以执行转换。</p>
+<h2 id="44-rns">4.4 困难的 RNS 算术运算<a class="headerlink" href="#44-rns" title="Permanent link">&para;</a></h2>
+<p>In this section, we discuss algorithms and hardware designs for sign test, magnitude comparison, overflow detection, and general division in RNS. The first three of these operations are essentially equivalent in that if an RNS with dynamic range  <em>M</em>  is used for representing signed numbers in the range [− <em>N</em> ,  <em>P</em>], with  <em>M</em> =  <em>N</em> +  <em>P</em> + 1, then sign test is the same as comparison with  <em>P</em>  and overflow detection can be performed based on the signs of the operands and that of the result. Thus, it suffices to discuss magnitude comparison and general division. </p>
+<p>在本节中，我们将讨论 RNS 中符号测试、幅度比较、溢出检测和一般除法的算法和硬件设计。前三个操作本质上是等价的，如果使用动态范围为 <span class="arithmatex">\(M\)</span> 的 RNS 来表示 <span class="arithmatex">\([− N , P]\)</span> 范围内的有符号数，其中 <span class="arithmatex">\(M = N + P + 1\)</span>，则符号测试与与 <span class="arithmatex">\(P\)</span> 的比较相同，并且可以根据操作数的符号和结果的符号进行溢出检测。因此，讨论大小比较和一般除法就足够了。</p>
+<p>To compare the magnitudes of two RNS numbers, we can convert both to binary</p>
+<p>or mixed-radix form. However, this would involve a great deal of overhead. A moreefficient approach is through approximate CRT decoding. Dividing the equality in the statement of Theorem 4.1 by  <em>M</em> , we obtain the following expression for the scaled value of  <em>x</em>  in [0, 1):</p>
+<p>为了比较两个 RNS 数字的大小，我们可以将两者转换为二进制或混合基数形式。然而，这将涉及大量的开销。一个更有效的方法是通过近似 CRT 解码。将定理 4.1 的陈述中的等式除以 M ，我们得到 [0, 1) 中 x 的缩放值的以下表达式：</p>
+<p>$$
+\frac{x}{M} = \frac{(x_{k−1} | · · · | x_2 | x_1 | x_0 ) <em i="0">{RNS}}{M} = \left \langle \sum</em><sup -1="-1">{k-1}m_i</sup> \left \langle \alpha_i x_i\right \rangle_{m_i} \right \rangle_1
+$$
+Here, the addition of terms is performed modulo 1, meaning that in adding the terms <span class="arithmatex">\(m_i^{-1} \left \langle \alpha_i x_i\right \rangle_{m_i}\)</span>, each of which is in [0, 1), the whole part of the result is discarded and only the fractional part is kept; this is much simpler than the modulo- <em>M</em>  addition needed in conventional CRT decoding. </p>
+<p>这里，项的相加是以模 1 进行的，这意味着在相加项 <span class="arithmatex">\(m_i^{-1} \left \langle \alpha_i x_i\right \rangle_{m_i}\)</span> 每一个都在[0, 1)中，结果整数丢弃，只保留小数部分；这比传统 CRT 解码中所需的模 M 加法简单得多。</p>
+<p>Again, the terms  <span class="arithmatex">\(m_i^{-1} \left \langle \alpha_i x_i\right \rangle_{m_i}\)</span> can be precomputed for all possible  <em>i</em>  and  *x*i and stored in
+tables of total size k i=−01 mi words. Table 4.3 shows the required lookup table for approximate CRT decoding in RNS(8 | 7 | 5 | 3). Conversion is then performed exclusively by table lookups and modulo-1 additions (i.e., fractional addition, with the carry-out simply ignored).</p>
+<p>同样的，可以预先计算所有可能的 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(x_i\)</span>对应的项 <span class="arithmatex">\(m_i^{-1} \left \langle \alpha_i x_i\right \rangle_{m_i}\)</span> 放在一个有<span class="arithmatex">\(\sum_{i=0}^{k-1}m_i\)</span>个word的表中。表 4.3 显示了近似中国剩余定理计算RNS(8|7|5|3)所需的查找表， 然后仅根据表 4.3 应用所需的值进行转换， 表查找和模 1 加法（即小数加法，忽略进位）</p>
+<p><img alt="image-20230803152818090" src="../assets/image-20230803152818090.png" /></p>
+<p><center>表4.3 将近似中国剩余定理解码应用于 RNS(8|7|5|3) 所需的值 </center></p>
+<p><strong>EXAMPLE 4.3</strong> Use approximate CRT decoding to determine the larger of the two numbers <em>x</em> = <em>(</em> 0 | 6 | 3 | 0 <em>)</em> RNS and <em>y</em> = <em>(</em> 5 | 3 | 0 | 0 <em>)</em> RNS. Reading values from Table 4.3, we get:</p>
+<p><strong>示例4.3</strong> 使用近似CRT 解码来确定两个数字<span class="arithmatex">\(x = ( 0 | 6 | 3 | 0 ) _{RNS}\)</span> 和<span class="arithmatex">\(y = ( 5 | 3 | 0 | 0 ) _{RNS}\)</span> 中较大的一个。从表 4.3 中读取值，我们得到：</p>
+<div class="arithmatex">\[
+\begin{array}{c}
+\frac{x}{M} \approx \left \langle .0000 + .8571 + .2000 + .0000 \right \rangle _1 =  .0571 \\
+\frac{y}{M} \approx \left \langle .6250 + .4286 + .0000 + .0000 \right \rangle _1 =  .0536
+\end{array}
+\]</div>
+<p>Thus, we can conclude that  <em>x &gt; y</em>, subject to approximation errors to be discussed next. </p>
+<p>因此，我们可以得出结论，x &gt; y，但会受到接下来讨论的近似误差的影响。</p>
+<p>If the maximum error in each table entry is  <em>ε</em>, then approximate CRT decoding yields the scaled value of an RNS number with an error of no more than  <em>kε</em>. In Example 4.3, assuming that the table entries have been rounded to four decimal digits, the maximum error in each entry is  <em>ε</em> = 0.000 05 and the maximum error in the scaled value is 4 <em>ε</em> = 0.0002. The conclusion  <em>x &gt; y</em>  is, therefore, safe. </p>
+<p>如果每个表条目中的最大误差为ε，则近似CRT解码产生误差不超过kε的RNS数的缩放值。在例 4.3 中，假设表格条目已四舍五入为四位小数，则每个条目的最大误差为 ε = 0.000 05，换算值的最大误差为 4 ε = 0.0002。因此，结论 x &gt; y 是安全的。</p>
+<p>Of course we can use highly precise table entries to avoid the possibility of erroneous conclusions altogether. But this would defeat the advantage of approximate CRT decoding in simplicity and speed. Thus, in practice, a two-stage process might be envisaged: a quick approximate decoding process is performed first, with the resulting scaled value(s) and error bound(s) used to decide whether a more precise or exact decoding is needed for arriving at a conclusion. </p>
+<p>当然，我们可以使用高精度的表格条目来完全避免得出错误结论的可能性。但这会抵消近似 CRT 解码在简单性和速度方面的优势。因此，在实践中，可以设想一个两阶段的过程：首先执行快速近似解码过程，使用得到的缩放值和误差界限来决定是否需要更精确或更精确的解码来得出结论。</p>
+<p>In many practical situations, an exact comparison of  <em>x</em>  and  <em>y</em>  might not be required and a ternary decision result  <em>x &lt; y</em>,  <em>x</em> ≈  <em>y</em> (i.e., too close to call), or  <em>x &gt; y</em>  might do. In such cases, approximate CRT decoding is just the right tool. For example, in certain division algorithms (to be discussed in Chapter 14), the sign and the magnitude of the partial remainder  <em>s</em>  are used to choose the next quotient digit  <em>qj</em>  from the redundant digit set [−1, 1] according to the following:</p>
+<p>在许多实际情况下，可能不需要对 x 和 y 进行精确比较，而可能需要三元决策结果 x &lt; y、x ≈ y（即，太接近而无法决定）或 x &gt; y。在这种情况下，近似 CRT 解码正是正确的工具。例如，在某些除法算法中（将在第14章中讨论），部分余数s的符号和大小用于根据以下公式从冗余数字集[−1, 1]中选择下一个商数字qj：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>       s &lt; 0       quotient digit = −1
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>       s ≈ 0       quotient digit = 0
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>       s &gt; 0       quotient digit = 1
+</code></pre></div>
+<p>In this case, the algorithm’s built-in tolerance to imprecision allows us to use it for RNS division. Once the quotient digit in [−1, 1] has been chosen, the value  <em>qjd</em> , where  <em>d</em> is the divisor, is subtracted from the partial remainder to obtain the new partial remainder for the next iteration. Also, the quotient, derived in positional radix-2 format using the digit set [−1, 1], is converted to RNS on the fly. </p>
+<p>在这种情况下，算法内置的对不精确性的容忍度允许我们将其用于 RNS 除法。一旦选择了 [−1, 1] 中的商数字，就从部分余数中减去值 <span class="arithmatex">\(q_jd\)</span> （其中 d 是除数）以获得下一次迭代的新部分余数。此外，使用数字集 [−1, 1] 以位置基 2 格式导出的商会即时转换为 RNS。</p>
+<p>In other division algorithms, to be discussed in Chapters 14 and 15, approximate comparison of the partial remainder  <em>s</em>  and divisor  <em>d</em>  is used to choose a radix- <em>r</em>  quotient digit in [− <em>α</em>,  <em>β</em>]. An example includes radix-4 division with the redundant quotient digit set [−2, 2]. In these cases, too, approximate CRT decoding can be used to facilitate RNS division [Hung94]. </p>
+<p>在第 14 章和第 15 章讨论的其他除法算法中，部分余数 s 和除数 d 的近似比较用于选择 [− α, β] 中的基数 r 商位。一个示例包括具有冗余商数字集 [−2, 2] 的基 4 除法。在这些情况下，也可以使用近似 CRT 解码来促进 RNS除法 [Hung94]。</p>
+<h2 id="45-rns">4.5 冗余 RNS 表示<a class="headerlink" href="#45-rns" title="Permanent link">&para;</a></h2>
+<p>Just as the digits in a positional radix- <em>r</em>  number system do not have to be restricted to the set [0,  <em>r</em> − 1], we are not obliged to limit the residue digits for the modulus  <em>mi</em>  to the set [0,  <em>mi</em> − 1]. Instead, we can agree to use the digit set [0,  <em>βi</em>] for the mod- <em>mi</em>  residue, provided  <em>βi</em> ≥  <em>mi</em> − 1. If  <em>βi</em> ≥  <em>mi</em>, then the resulting RNS is redundant. </p>
+<p>正如位置基数 r 数系中的数字不必限制在集合 [<span class="arithmatex">\(0, r − 1\)</span>] 中一样，我们也没有一定需要将模 <span class="arithmatex">\(m_i\)</span> 的余数数字限制在集合 [<span class="arithmatex">\(0, m_i − 1\)</span>] 中。相反，我们可以同意使用数字集 [<span class="arithmatex">\(0, β_i\)</span>] 作为 mod-<span class="arithmatex">\(m_i\)</span> 余数，前提是 <span class="arithmatex">\(β_i ≥ m_i − 1\)</span>。如果 <span class="arithmatex">\(β_i ≥ m_i\)</span>，则生成的 RNS 是冗余的。</p>
+<p>One reason to use redundant residues is to simplify the modular reduction step needed after each arithmetic operation. Consider, for example, the representation of mod-13 residues using 4-bit binary numbers. Instead of using residues in [0, 12], we can use pseudoresidues in [0, 15]. Residues 0, 1, and 2 will then have two representations, since 13 = 0 mod 13, 14 = 1 mod 13, and 15 = 2 mod 13. Addition of such a pseudoresidue <em>y</em>  to an ordinary residue  <em>x</em>, producing a pseudoresidue  <em>z</em>, can be performed by a 4-bit binary adder. If the carry-out is 0, the addition result is kept intact; otherwise, the carry-out, which is worth 16 units, is dropped and 3 is added to the result. Thus, the required mod-13 addition unit is as shown in Fig. 4.3. Addition of two pseudoresidues is possible in a similar way [Parh01]. </p>
+<p>使用冗余余数的原因之一是简化每次算术运算后所需的模归约步骤。例如，考虑 mod-13 的表示使用 4 位二进制数的余数。我们可以在 [0, 15] 中使用伪余数，而不是在 [0, 12] 中。余数 0、1 和 2 将有两种表示，因为 13 = 0 mod 13、14 = 1 mod 13 和 15 = 2 mod 13。将这样的伪余数 y 添加到普通余数 x，产生伪余数 z，可以由 4 位二进制加法器执行。如果进位为0，则加法结果保持不变；否则，值 16 个单位的进位将被丢弃，结果将添加 3。因此，所需的mod-13加法单元如图4.3所示。可以用类似的方式添加两个伪余数[Parh01]。</p>
+<p><img alt="image-20230803162237837" src="../assets/image-20230803162237837.png" /></p>
+<p>One can go even further and make the pseudoresidues 2 <em>h</em>  bits wide, where normal mod- <em>m</em>  residues would be only  <em>h</em>  bits wide. This simplifies a multiply-accumulate operation, which is done by adding the 2 <em>h</em>-bit product of two normal residues to a 2 <em>h</em>-bit running total, reducing the (2 <em>h</em> + 1)-bit result to a 2 <em>h</em>-bit pseudoresidue for the next step by subtracting 2 <em>hm</em>  from it if needed (Fig. 4.4). Reduction to a standard  <em>h</em>-bit residue is then done only once at the end of accumulation. </p>
+<p>我们可以更进一步，使伪余数为 <span class="arithmatex">\(2 h\)</span> 位宽，而正常的 mod-m 余数只有 <span class="arithmatex">\(h\)</span> 位宽。这简化了乘法累加运算，该运算是通过将两个正常残数的 <span class="arithmatex">\(2 h\)</span> 位乘积添加到 <span class="arithmatex">\(2 h\)</span> 位运行总数中来完成的，如果需要的话，通过从中减去 <span class="arithmatex">\(2^hm\)</span> 将 <span class="arithmatex">\((2 h + 1)\)</span> 位结果减少为 <span class="arithmatex">\(2 h\)</span> 位伪余数（图 4.4）。然后，仅在累加结束时将其减少到标准 h 位余数。</p>
+<h2 id="46-rns">4.6 RNS 中快速算术的限制<a class="headerlink" href="#46-rns" title="Permanent link">&para;</a></h2>
+<p>How much faster is RNS arithmetic than conventional (say, binary) arithmetic? We will see later in Chapters 6 and 7 that addition of binary numbers in the range <span class="arithmatex">\([0,  M − 1]\)</span>​ can be done in O(log log  <em>M</em> ) time and with O(log  <em>M</em> ) cost using a variety of methods such as carry-lookahead, conditional-sum, or multilevel carry-select. Both these are optimal to within constant factors, given the fixed-radix positional representation. For example, one can use the constant fan-in argument to establish that the circuit depth of an adder must be at least logarithmic in the number  <em>k</em> = log <em>r M</em>  of digits. Redundant representations allow O(1)-time, O(log  <em>M</em> )-cost addition. What is the best one can do with RNS arithmetic? </p>
+<p>RNS 算术比传统（例如二进制）算术快多少？我们稍后将在第 6 章和第 7 章中看到 [<span class="arithmatex">\(0, M − 1\)</span>] 范围内的二进制数的加法可以使用各种方法（例如进位前瞻、条件和或多级进位选择）在 <span class="arithmatex">\(O(log log M )\)</span> 时间内以 <span class="arithmatex">\(O(log M )\)</span> 成本完成。考虑到固定基数位置表示，这两者在常数因子内都是最佳的。例如，可以使用恒定扇入参数来确定加法器的电路深度必须至少是数字 <span class="arithmatex">\(k = log_r M\)</span> 的对数。剩余数表示允许 O(1) 时间、O(log M) 成本相加。使用 RNS 算法可以做的最好的事情是什么？</p>
+<p>Consider the residue number system RNS( <em>mk</em>−1 | · · · |  <em>m</em> 1 |  <em>m</em> 0). Assume that the moduli are chosen as the smallest possible prime numbers to minimize the size of the moduli, and thus maximize computation speed. The following theorems from number theory help us in figuring out the complexity. </p>
+<p>考虑余数系统 <span class="arithmatex">\(RNS(m_{k−1} | · · · | m_1 | m_0)\)</span>。假设模数被选择为尽可能小的素数，以最小化模数的大小，从而最大化计算速度。以下数论定理帮助我们计算复杂性。</p>
+<p><strong>THEOREM 4.2</strong> The  <em>i</em> th prime  <em>pi</em>  is asymptotically equal to  <em>i</em>  ln  <em>i</em>. </p>
+<p><strong>定理 4.2</strong> 第 i 个素数 <span class="arithmatex">\(p_i\)</span> 渐近等于 <span class="arithmatex">\(i \ln i\)</span>。</p>
+<p><strong>THEOREM 4.3</strong> The number of primes in [1,  <em>n</em>] is asymptotically equal to <em>n</em>/(ln  <em>n</em>). </p>
+<p><strong>定理 4.3</strong> [<span class="arithmatex">\(1, n\)</span>] 中的素数个数渐近等于 <span class="arithmatex">\(n/(\ln n)\)</span>。</p>
+<p><strong>THEOREM 4.4</strong> The product of all primes in [1,  <em>n</em>] is asymptotically equal to  <em>en</em>. </p>
+<p><strong>定理 4.4</strong> [<span class="arithmatex">\(1, n\)</span>] 中所有素数的乘积渐近等于 <span class="arithmatex">\(e^n\)</span>。</p>
+<p>Table 4.4 lists some numerical values that can help us understand the asymptotic approximations given in Theorems 4.2 and 4.3. </p>
+<p>表4.4列出了一些数值，可以帮助我们理解定理4.2和4.3中给出的渐近近似。</p>
+<p><img alt="image-20230803170617199" src="../assets/image-20230803170617199.png" /></p>
+<p>Armed with these results from number theory, we can derive an interesting limit on the speed of RNS arithmetic. </p>
+<p>借助数论的这些结果，我们可以得出 RNS 算术速度的有趣限制。</p>
+<p><strong>THEOREM 4.5</strong> It is possible to represent all  <em>k</em>-bit binary numbers in RNS with O( <em>k</em>/log  <em>k</em>) moduli such that the largest modulus has O(log  <em>k</em>) bits. </p>
+<p><strong>定理 4.5</strong> 可以用 <span class="arithmatex">\(O(k/\log k)\)</span> 模来表示 RNS 中的所有 k 位二进制数，使得最大模数具有 <span class="arithmatex">\(O(\log k)\)</span> 位。</p>
+<p><strong>Proof:</strong> If the largest needed prime is  <em>n</em>, by Theorem 4.4, we must have  <em>en</em> ≈ 2 <em>k</em> . This equality implies  <em>n &lt; k</em>. The number of moduli required is the number of primes less than  <em>n</em>, which by Theorem 4.3 is O( <em>n</em>/log  <em>n</em>) = O( <em>k</em>/log  <em>k</em>). </p>
+<p>证明：如果所需的最大素数是n，根据定理4.4，我们必须有<span class="arithmatex">\(e^n ≈ 2^k\)</span> 。这个等式意味着 <span class="arithmatex">\(n &lt; k\)</span>。所需的模数是小于 n 的素数的个数，根据定理 4.3 为 <span class="arithmatex">\(O( n/\log n)\)</span> = <span class="arithmatex">\(O( k/\log k)\)</span>。</p>
+<p>As a result, addition of such residue numbers can be performed in O(log log log  <em>M</em> ) time and with O(log  <em>M</em> ) cost. So, the cost of addition is asymptotically comparable to that of binary representation whereas the delay is much smaller, though not constant. </p>
+<p>结果，可以在 <span class="arithmatex">\(O(\log \log \log M )\)</span> 时间内以 <span class="arithmatex">\(O(\log M )\)</span> 成本执行此类余数的加法。因此，加法的成本与二进制表示的成本渐近相当，而延迟要小得多，尽管不是恒定的。</p>
+<p>If for implementation ease, we limit ourselves to moduli of the form 2 <em>a</em>  or 2 <em>a</em> − 1, the following results from number theory are applicable. </p>
+<p>如果为了便于实现，我们将模数限制为 <span class="arithmatex">\(2^a\)</span> 或 <span class="arithmatex">\(2^a − 1\)</span> 形式，则适用以下数论结果。</p>
+<p><strong>THEOREM 4.6</strong> The numbers 2 <em>a</em> − 1 and 2 <em>b</em> − 1 are relatively prime if and only if  <em>a</em>  and  <em>b</em>  are relatively prime. </p>
+<p><strong>定理 4.6</strong> 当且仅当 a 和 b 互质时，数 <span class="arithmatex">\(2^a − 1\)</span> 和 <span class="arithmatex">\(2^b − 1\)</span> 互质。</p>
+<p><strong>THEOREM 4.7</strong> The sum of the first  <em>i</em>  primes is asymptotically O( <em>i</em> 2 ln  <em>i</em>). </p>
+<p><strong>定理 4.7</strong> 前 <span class="arithmatex">\(i\)</span> 个素数之和渐近为 <span class="arithmatex">\(O( i^2 \ln i)\)</span> 。</p>
+<p>These theorems allow us to prove the following asymptotic result for low-cost residue number systems. </p>
+<p>这些定理使我们能够证明低成本剩余数系统的以下渐近结果。</p>
+<p><strong>THEOREM 4.8</strong> It is possible to represent all  <em>k</em>-bit binary numbers in RNS with O( <em>(k/</em>  log  <em>k)</em> 1 <em>/</em> 2) low-cost moduli of the form 2 <em>a</em> −1 such that the largest modulus has O( <em>(k</em>  log  <em>k)</em> 1 <em>/</em> 2) bits. </p>
+<p><strong>定理 4.8</strong> 可以用 <span class="arithmatex">\(2^a −1\)</span> 形式的 <span class="arithmatex">\(O( (k/ \log k)^ {1 / 2})\)</span> 低成本模来表示 RNS 中的所有 k 位二进制数，使得最大模数具有 <span class="arithmatex">\(O( (k \log k)^{1 / 2})\)</span> 位。</p>
+<p><strong>Proof:</strong> If the largest modulus that we need is 2 <em>l</em> − 1, by Theorem, 4.7, we must have $ l^2 \ln  l ≈  k$. This implies that  <em>l</em> = O <em>((k/</em>  log  <em>k)</em> 1 <em>/</em> 2 <em>)</em>. By Theorem 4.2, the <em>l</em> th prime is approximately  <em>pl</em> ≈  <em>l</em>  ln  <em>l</em> ≈ O <em>((k</em>  log  <em>k)</em> 1 <em>/</em> 2 <em>)</em>. The proof is complete upon noting that to minimize the size of the moduli, we pick the  <em>i</em> th modulus to be 2 <em>pi</em> − 1. </p>
+<p><strong>证明</strong>：如果我们需要的最大模数是 <span class="arithmatex">\(2^l − 1\)</span>，根据定理 4.7，我们必须有 l 2 ln l ≈ k。这意味着 <span class="arithmatex">\(l = O ((k/ \log k)^{1 / 2} )\)</span>。根据定理 4.2，第 <span class="arithmatex">\(l\)</span>个素数近似为 <span class="arithmatex">\(p_l ≈ l ln l ≈ O ((k \log k)^{1 / 2} )\)</span>。证明完成后注意到，为了最小化模数的大小，我们选择第 <span class="arithmatex">\(i\)</span> 个模数为 <span class="arithmatex">\(2^{p_i} − 1\)</span>。</p>
+<p>As a result, addition of low-cost residue numbers can be performed in O(log log  <em>M</em> ) time with O(log  <em>M</em> ) cost and thus, asymptotically, offers little advantage over binary representation. </p>
+<p>因此，低成本余数的加法可以在 O(log log M ) 时间内以 O(log M ) 成本执行，因此渐近地与二进制表示相比几乎没有优势。</p>
+<h2 id="_1">问题（略）<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_2">参考文献和进一步阅读<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[Garn59] Garner, H. L., “The Residue Number System,” IRE Trans. Electronic Computers, Vol.
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>         8, pp. 140–147, 1959.
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>[Hung94] Hung, C. Y., and B. Parhami, “An Approximate Sign Detection Method for Residue
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>         Numbers and Its Application to RNS Division,” Computers &amp; Mathematics with
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>         Applications, Vol. 27, No. 4, pp. 23–35, 1994.
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>[Hung95] Hung, C. Y., and B. Parhami, “Error Analysis of Approximate Chinese-RemainderTheorem Decoding,” IEEE Trans.                 Computers, Vol. 44, No. 11, pp. 1344–1348, 1995.
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>[Jenk93] Jenkins, W. K., “Finite Arithmetic Concepts,” in Handbook for Digital Signal
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>         Processing, S. K. Mitra and J. F. Kaiser (eds.), Wiley, 1993, pp. 611–675.
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>[Merr64] Merrill, R.D., “Improving Digital Computer Performance Using Residue Number
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>         Theory,” IEEE Trans. Electronic Computers, Vol. 13, No. 2, pp. 93–101, 1964.
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>[Omon07] Omondi, A., and B. Premkumar, Residue Number Systems: Theory and
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>         Implementation, Imperial College Press, 2007.
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>[Parh76] Parhami, B., “Low-Cost Residue Number Systems for Computer Arithmetic,”
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>         AFIPS Conf. Proc., Vol. 45 (1976 National Computer Conference), AFIPS Press,
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>         1976, pp. 951–956.
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>[Parh93] Parhami, B., and H.-F. Lai, “Alternate Memory Compression Schemes for Modular
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>         Multiplication,” IEEE Trans. Signal Processing, Vol. 41, pp. 1378–1385, 1993.
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>[Parh96] Parhami, B., “A Note on Digital Filter Implementation Using Hybrid RNS-Binary
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>         Arithmetic,” Signal Processing, Vol. 51, pp. 65-67, 1996.
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>[Parh01] Parhami, B., “RNS Representations with Redundant Residues,” Proc. 35th Asilomar
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>         Conf. Signals, Systems, and Computers, pp. 1651–1655, 2001.
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>[Sode86] Soderstrand, M. A., W. K. Jenkins, G. A. Jullien, and F. J. Taylor (eds.), Residue
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>         Number System Arithmetic, IEEE Press, 1986.
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>[Szab67] Szabo, N. S., and R. I. Tanaka, Residue Arithmetic and Its Applications to Computer
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>         Technology, McGraw-Hill, 1967.
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>[Verg08] Vergos, H. T., “A Unifying Approach for Weighted and Diminished-1 Modulo 2n + 1
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>         Addition,” IEEE Trans. Circuits and Systems II, Vol. 55, No. 10, pp. 1041–1045, 2008.
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../03/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 3. 冗余数系统" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                3. 冗余数系统
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../Part_02/" class="md-footer__link md-footer__link--next" aria-label="下一页: 加法与减法" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                加法与减法
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.indexes", "navigation.instant", "navigation.top", "navigation.footer", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../javascripts/mathjax.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+        
+          <script src="../../javascripts/katex.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1737 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Computer Arithmetic - Algorithms and Hardware Designs">
+      
+      
+      
+        <link rel="canonical" href="https://jszheng.github.io/ComputerArithmetic/Part_02/05/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../06/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+    
+    
+      
+        <title>5. 基础的加法与计数方案 - 计算机算术-算法与硬件实现</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.eebd395e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="计算机算术-算法与硬件实现" class="md-header__button md-logo" aria-label="计算机算术-算法与硬件实现" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            计算机算术-算法与硬件实现
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5. 基础的加法与计数方案
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07 19.07 3.5m-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13.51 1.67m-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87.4 1.31M19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35-2.53-2.2m4.33-2.7 1.15-2.77 2.2 2.54-3.35.23m1.15-4.96-1.14-2.78 3.34.24-2.2 2.54M9.63 18.93l2.77 1.15-2.53 2.19-.24-3.34Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07 19.07 3.5m-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13.51 1.67m-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87.4 1.31M19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35-2.53-2.2m4.33-2.7 1.15-2.77 2.2 2.54-3.35.23m1.15-4.96-1.14-2.78 3.34.24-2.2 2.54M9.63 18.93l2.77 1.15-2.53 2.19-.24-3.34Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jszheng/ComputerArithmetic" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jszheng/ComputerArithmetic
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="计算机算术-算法与硬件实现" class="md-nav__button md-logo" aria-label="计算机算术-算法与硬件实现" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    计算机算术-算法与硬件实现
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jszheng/ComputerArithmetic" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jszheng/ComputerArithmetic
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        封面
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front/" class="md-nav__link">
+        标题
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Preface_1st/" class="md-nav__link">
+        第一版序言
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Preface_2nd/" class="md-nav__link">
+        第二版序言
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Part_01/">Part-I &nbsp; 数字的表示方法</a>
+          
+            <label for="__nav_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Part-I &nbsp; 数字的表示方法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_01/01/" class="md-nav__link">
+        1. 数字与算术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_01/02/" class="md-nav__link">
+        2. 有符号数的表示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_01/03/" class="md-nav__link">
+        3. 冗余数系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_01/04/" class="md-nav__link">
+        4 剩余数系统
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Part-II &nbsp; 加法与减法</a>
+          
+            <label for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Part-II &nbsp; 加法与减法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          5. 基础的加法与计数方案
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        5. 基础的加法与计数方案
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    5.1 位串行加法器与逐位进位加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    5.2 条件与异常
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    5.3 进位传播分析
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54" class="md-nav__link">
+    5.4 进位完成的检测
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55" class="md-nav__link">
+    5.5 加上一个常数:计数器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56" class="md-nav__link">
+    5.6 曼彻斯特进位链与加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    问题（略）
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考文献和进一步阅读
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06/" class="md-nav__link">
+        6. 超前进位加法器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07/" class="md-nav__link">
+        7. 其它高速加法器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08/" class="md-nav__link">
+        8. 多操作数加法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Part_03/">Part-III &nbsp; 乘法</a>
+          
+            <label for="__nav_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Part-III &nbsp; 乘法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_03/09/" class="md-nav__link">
+        9. 基础的乘法方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_03/10/" class="md-nav__link">
+        10. 高基乘法器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_03/11/" class="md-nav__link">
+        11. 树型乘法器与阵列乘法器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_03/12/" class="md-nav__link">
+        12. 其它乘法器
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Part_04/">Part-IV &nbsp; 除法</a>
+          
+            <label for="__nav_8">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Part-IV &nbsp; 除法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_04/13/" class="md-nav__link">
+        13. 基础除法方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_04/14/" class="md-nav__link">
+        14. 高基除法器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_04/15/" class="md-nav__link">
+        15. 其它除法器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_04/16/" class="md-nav__link">
+        16. 除法的收敛算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Part_05/">Part-V &nbsp; 实数算数</a>
+          
+            <label for="__nav_9">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Part-V &nbsp; 实数算数
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_05/17/" class="md-nav__link">
+        17. 浮点数表示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_05/18/" class="md-nav__link">
+        18. 浮点数运算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_05/19/" class="md-nav__link">
+        19. 误差与误差控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_05/20/" class="md-nav__link">
+        20. 精确可靠的算术
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Part_06/">Part_VI &nbsp; 特殊函数求值</a>
+          
+            <label for="__nav_10">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Part_VI &nbsp; 特殊函数求值
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_06/21/" class="md-nav__link">
+        21. 平方根算法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_06/22/" class="md-nav__link">
+        22. CORDIC算法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_06/23/" class="md-nav__link">
+        23. 其它函数求值方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_06/24/" class="md-nav__link">
+        24. 查表法算术
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Part_07/">Part_VII &nbsp; 实现相关主题</a>
+          
+            <label for="__nav_11">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          Part_VII &nbsp; 实现相关主题
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_07/25/" class="md-nav__link">
+        25. 高吞吐量算术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_07/26/" class="md-nav__link">
+        26. 低功耗算术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_07/27/" class="md-nav__link">
+        27. 容错算术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Part_07/28/" class="md-nav__link">
+        28. 可重构算术
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Appendix/" class="md-nav__link">
+        附录
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BackCover/" class="md-nav__link">
+        封底
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    5.1 位串行加法器与逐位进位加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    5.2 条件与异常
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    5.3 进位传播分析
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54" class="md-nav__link">
+    5.4 进位完成的检测
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55" class="md-nav__link">
+    5.5 加上一个常数:计数器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56" class="md-nav__link">
+    5.6 曼彻斯特进位链与加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    问题（略）
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考文献和进一步阅读
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/jszheng/ComputerArithmetic/blob/master/docs/Part_02/05.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="5">5. 基础的加法与计数方案<a class="headerlink" href="#5" title="Permanent link">&para;</a></h1>
+<p>Basic Addition and Counting</p>
+<blockquote>
+<p>“Not everything that can be counted counts,and not everything that counts can be counted.”
+              — ALBERT EINSTEIN</p>
+<p>“不是所有可以计算的东西都重要，也不是所有重要的东西都可以计算。”
+              — 艾尔伯特爱因斯坦</p>
+</blockquote>
+<p>As stated in Section 3.1, propagation of carries is a major impediment to high speed addition with fixed-radix positional number representations. Before exploring various ways of speeding up the carry-propagation process, however, we need to examine simple ripple-carry adders, the building blocks used in their construction, the nature of the carry-propagation process, and the special case of counting.Chapter topics include:</p>
+<p>如第 3.1 节所述，进位传播是固定基数位置数表示法做高速加法的主要障碍。 然而，在探索加速进位传播过程的各种方法之前，我们需要研究简单的脉动进位加法器、其构造中使用的构建块、进位传播过程的性质以及计数的特殊情况。 主题包括：</p>
+<ul>
+<li>5.1 位串行加法器与逐位进位加法器 BIT SERIAL AND RIPPLE-CARRY ADDERS</li>
+<li>5.2 条件与异常 CONDITIONS AND EXCEPTIONS</li>
+<li>5.3 进位传播分析 ANALYSIS OF CARRY PROPAGATION</li>
+<li>5.4 进位完成的检测 CARRY-COMPLETION DETECTION</li>
+<li>5.5 加上一个常数:计数器 ADDITION OF A CONSTANT: COUNTERS</li>
+<li>5.6 曼彻斯特进位链与加法器 MANCHESTER CARRY CHAINS AND ADDERS</li>
+</ul>
+<h2 id="51">5.1 位串行加法器与逐位进位加法器<a class="headerlink" href="#51" title="Permanent link">&para;</a></h2>
+<p>Single-bit half-adders (HAs) and full adders (FAs) are versatile building blocks that are used in synthesizing adders and many other arithmetic circuits. A HA receives two input bits <em>x</em> and <em>y</em>, producing a sum bit <em>s</em> = <em>x</em> ⊕ <em>y</em> = <em>xy</em> ∨ <em>xy</em> and a carry bit <em>c</em> = <em>xy</em>. Figure 5.1 depicts three of the many possible logic realizations of a HA. A HA can be viewed as a single-bit binary adder that produces the 2-bit sum of its 1-bit inputs, namely, <span class="arithmatex">\(x + y = (c_{out}\ s)_{two}\)</span>, where the plus sign in this expression stands for arithmetic sum rather than logical OR.</p>
+<p>单比特半加器 (HA) 和全加器 (FA) 是通用构建模块，用于合成加法器和许多其他算术电路。 HA 接收两个输入位 x 和 y，产生和 <span class="arithmatex">\(s = x ⊕ y = xy ∨ xy\)</span> 与进位 <span class="arithmatex">\(c = xy\)</span>。图 5.1 描述了 HA 的多种可能逻辑实现中的三种。 HA 可以被视为一位二进制加法器，它产生 1 位输入的 2 位和，即 <span class="arithmatex">\(x + y = (c_{out}\ s)_2\)</span>，其中该表达式中的加号代表算术和而不是逻辑或。</p>
+<p><img alt="image-20230804111123337" src="../assets/image-20230804111123337.png" /></p>
+<p>一比特的全加器 FA定义为：</p>
+<div class="arithmatex">\[
+\begin{array}{l}
+\text{输入: } &amp;\text{操作数 x, y 和输入进位 }c_{in} &amp;(\text{或第i级的 }x_i, y_i, c_i)\\
+\text{输出: } &amp;\text{加法的和 s 和输出进位}c_{out} &amp;(\text{或第i级的 }s_i, c_{i+1}) \\
+&amp; s=x \oplus y \oplus c_{in} &amp;(\text{奇数校验函数 odd parity function}) \\
+&amp; \ \ = xyc_{in} \vee \bar{x}\bar{y}c_{in} \vee \bar{x}y\bar{c_{in}} \vee x\bar{y}\bar{c_{in}} \\
+&amp; c_{out}=xy \vee xc_{in} \vee yc_{in} &amp;(\text{多数函数 majority function})
+\end{array}
+\]</div>
+<p>An FA can be implemented by using two HAs and an OR gate as shown in Fig. 5.2a. The OR gate in Fig. 5.2a can be replaced with a NAND gate if the two HAs are NAND-gate HAs with complemented carry outputs. Alternatively, one can implement an FA as two-level AND-OR/NAND-NAND circuits according to the preceding logic equations for  <em>s</em>  and  <em>c</em> out (Fig. 5.2b). Because of the importance of the FA as an arithmetic building block, many optimized FA designs exist for a variety of implementation technologies. Figure 5.2c shows an FA, built of seven inverters and two 4-to-1 multiplexers (mux), that is suitable for complementary metal-oxide semiconductor (CMOS) transmission-gate logic implementation. </p>
+<p>FA 可以通过使用两个 HA 和一个 OR 门来实现，如图 5.2a 所示。 如果两个 HA 是具有互补进位输出的 NAND 门 HA，则图 5.2a 中的 OR 门可以用 NAND 门代替。 或者，可以根据前面的 <em>s</em> 和 <em>c</em> out 逻辑方程将 FA 实现为两级 AND-OR/NAND-NAND 电路（图 5.2b）。 由于 FA 作为算术构建模块的重要性，因此针对各种实现技术存在许多优化的 FA 设计。 图 5.2c 显示了由七个反相器和两个 4 选 1 多路复用器 (mux) 构成的 FA，适用于互补金属氧化物半导体 (CMOS) 传输门逻辑实现。</p>
+<p><img alt="image-20230804113710711" src="../assets/image-20230804113710711.png" /></p>
+<p>Full and half-adders can be used for realizing a variety of arithmetic functions. We will see many examples in this and the following chapters. For instance, a bit-serial adder can be built from an FA and a carry flip-flop, as shown in Fig. 5.3a. The operands are supplied to the FA 1 bit per clock cycle, beginning with the least-significant bit, from a pair of shift registers, and the sum is shifted into a result register. Addition of <em>k</em>-bit numbers can thus be completed in  <em>k</em>  clock cycles. A  <em>k</em>-bit ripple-carry binary adder requires  <em>k</em>  FAs, with the carry-out of the  <em>i</em> th FA connected to the carry-in input of the ( <em>i</em> + 1)th FA. The resulting  <em>k</em>-bit adder produces a  <em>k</em>-bit sum output and a carry-out; alternatively,  <em>c</em> out can be viewed as the most-significant bit of a ( <em>k</em> + 1)-bit sum. Figure 5.3b shows a ripple-carry adder for 4-bit operands, producing a 4-bit or 5-bit sum. </p>
+<p>全加器和半加器可用于实现多种算术功能。我们将在本章和后续章节中看到许多示例。例如，位串行加法器可以由 FA 和进位触发器构建，如图 5.3a 所示。每个时钟周期从最低有效位开始，从一对移位寄存器向 FA 提供 1 位操作数，并将总和移入结果寄存器。因此，k位数的加法可以在k个时钟周期内完成。 k 位纹波进位二进制加法器需要 k 个 FA，第 i 个 FA 的进位输出连接到第 ( i + 1) 个 FA 的进位输入。由此产生的 k 位加法器产生 k 位和输出和进位输出；或者，c out 可以被视为 ( k + 1) 位和的最高有效位。图 5.3b 显示了 4 位操作数的纹波进位加法器，产生 4 位或 5 位和。</p>
+<p><img alt="image-20230804113759627" src="../assets/image-20230804113759627.png" /></p>
+<p>The ripple-carry adder shown in Fig. 5.3b leads directly to a CMOS implementation with transmission-gate logic using the FA design of Fig. 5.2c. A possible layout is depicted in Fig. 5.4, which also shows the approximate area requirements for the 4-bit ripple-carry adder in units of <em>λ</em> (half the minimum feature size). For details of this particular design, refer to [Puck94, pp. 213–223].</p>
+<p>图 5.3b 所示的纹波进位加法器直接导致使用图 5.2c 的 FA 设计的带有传输门逻辑的 CMOS 实现。图 5.4 描述了一种可能的布局，其中还显示了 4 位纹波进位加法器的大致面积要求，单位为 λ（最小特征尺寸的一半）。有关此特定设计的详细信息，请参阅 [Puck94，第 213–223 页]。</p>
+<p><img alt="image-20230804114004630" src="../assets/image-20230804114004630.png" /></p>
+<p>The latency of a  <em>k</em>-bit ripple-carry adder can be derived by considering the worst-case signal propagation path. As shown in Fig. 5.5, the critical path usually begins at the  <em>x</em> 0 or  <em>y</em> 0 input, proceeds through the carry-propagation chain to the leftmost FA, and terminates at the  <em>sk</em>−1 output. Of course, it is possible that for some FA implementations, the critical path might begin at  <em>c</em> 0 and/or terminate at  <em>ck</em> . However, given that the delay from carry-in to carry-out is more important than from  <em>x</em>  to carry-out or from carry-in to <em>s</em>, FA designs often minimize the delay from carry-in to carry-out, making the path shown in Fig. 5.5 the one with the largest delay. </p>
+<p><span class="arithmatex">\(k\)</span> 位纹波进位加法器的延迟可以通过考虑最坏情况的信号传播路径来得出。如图 5.5 所示，关键路径通常从 x 0 或 y 0 输入开始，通过进位传播链到达最左边的 FA，并在 <span class="arithmatex">\(s_{k−1}\)</span> 输出处终止。当然，对于某些 FA 实现，关键路径可能始于 <span class="arithmatex">\(c_0\)</span> 与/或终止于 <span class="arithmatex">\(c_k\)</span> 。然而，考虑到从进位到进位的延迟比从x到进位或从进位到s更重要，FA设计通常会最小化从进位到进位的延迟，使图5.5所示的路径成为延迟最大的路径。</p>
+<p><img alt="image-20230804114446063" src="../assets/image-20230804114446063.png" /></p>
+<p>We can thus write the following expression for the latency of a  <em>k</em>-bit ripple-carry adder:</p>
+<p>因此，我们可以为 k 位纹波进位加法器的延迟编写以下表达式：</p>
+<div class="arithmatex">\[
+T_{ripple−add} = T_{FA} (x, y → c out ) + (k − 2 ) × T_{FA} (c_{in} → c_{out} ) + T_{FA} (c_{in} → s) 
+\]</div>
+<p>where  <span class="arithmatex">\(T_{FA}(input → output)\)</span> represents the latency of an FA on the path between its specified input and output. As an approximation to the foregoing, we can say that the latency of a ripple-carry adder is <span class="arithmatex">\(kT _{FA}\)</span>  </p>
+<p>其中 <span class="arithmatex">\(T_{FA}(输入 → 输出)\)</span> 表示 FA 在其指定输入和输出之间的路径上的延迟。作为前述的近似，我们可以说行波进位加法器的延迟为 <span class="arithmatex">\(kT _{FA}\)</span> 。</p>
+<p>We see that the latency grows linearly with  <em>k</em>, making the ripple-carry design undesirable for large  <em>k</em>  or for high-performance arithmetic units. Note that the latency of a bit-serial adder is also O( <em>k</em>), although the constant of proportionality is larger here because of the latching and clocking overheads. </p>
+<p>我们看到延迟随 k 线性增长，使得纹波进位设计对于大 k 或高性能算术单元来说是不可取的。请注意，位串行加法器的延迟也是 <span class="arithmatex">\(O(k)\)</span>，尽管由于锁存和时钟开销，比例常数在这里较大。</p>
+<p>Full and half-adders, as well as multibit binary adders, are powerful building blocks that can also be used in realizing nonarithmetic functions if the need arises. For example, a 4-bit binary adder with  <em>c</em> in, two 4-bit operand inputs,  <em>c</em> out, and a 4-bit sum output can be used to synthesize the four-variable logic function  <em>w</em> ∨  <em>xyz</em>  and its complement, as depicted and justified in Fig. 5.6. The logic expressions written next to the arrows in Fig. 5.6 represent the carries between various stages. Note, however, that the 4-bit adder need not be implemented as a ripple-carry adder for the results at the outputs to be valid.</p>
+<p>全加法器和半加法器以及多位二进制加法器是功能强大的构建块，如果需要，也可用于实现非算术函数。例如，一个具有 <span class="arithmatex">\(c_{in}\)</span> 、两个 4 位操作数输入, <span class="arithmatex">\(c_{out}\)</span> 和一个 4 位和输出的 4 位二进制加法器可用于合成四变量逻辑函数$ w ∨ xyz$ 及其求反，如图 5.6 所示和证明。箭头旁边写的逻辑表达式表示各个阶段之间的进位。但请注意的是4 位加法器不一定实现为纹波进位加法器，输出结果还是同样有效的。</p>
+<p><img alt="image-20230804121745680" src="../assets/image-20230804121745680.png" /></p>
+<h2 id="52">5.2 条件与异常<a class="headerlink" href="#52" title="Permanent link">&para;</a></h2>
+<p>When a  <em>k</em>-bit adder is used in an arithmetic/logic unit (ALU), it is customary to provide the  <em>k</em>-bit sum along with information about the following outcomes, which are associated with flag bits within a condition/exception register:</p>
+<p>当算术/逻辑单元 (ALU) 中使用 k 位加法器时，通常会提供 k 位和以及有关以下结果的信息，这些结果与条件/异常寄存器中的标志位相关联：</p>
+<div class="arithmatex">\[
+\begin{array}{l}
+c_{out}  &amp; \text{表示产生了 1 的进位输出} \\
+Overflow &amp; \text{表示输出的和不正确} \\
+Negative &amp; \text{表示相加结果为负} \\
+Zero     &amp; \text{表示相加结果为零} \\
+\end{array}
+\]</div>
+<p>When we are adding unsigned numbers,  <em>c</em> out and “overflow” are one and the same, and the “sign” condition is obviously irrelevant. For 2’s-complement addition, overflow occurs when two numbers of like sign are added and a result of the opposite sign is produced. Thus</p>
+<p>当我们对无符号数进行加法时，<span class="arithmatex">\(c_{out}\)</span> 和“overflow”是一回事，而“sign”条件显然是不相关的。对于 2 的补码加法，当两个相同符号的数字相加并产生相反符号的结果时，就会发生溢出。因此</p>
+<p>​       <span class="arithmatex">\(Overflow_{2’s-compl} = x_{k−1} y_{k−1} \bar{s}_{k−1} \vee \bar{x}_{k−1} \bar{y}_{k−1} s_{k−1}\)</span></p>
+<p>It is fairly easy to show that overflow in 2’s-complement addition can be detected from the leftmost two carries as follows:</p>
+<p>很容易证明，可以从最左边的两个进位检测到 2 补码加法中的溢出，如下所示：</p>
+<p>​       <span class="arithmatex">\(Overflow_{2’s-compl} = c_k \oplus c_{k−1} = c_k\bar{c}_{k−1} \vee \bar{c}_kc_{k−1}\)</span></p>
+<p>In 2’s-complement addition,  <em>c</em> out has no significance. However, since a single adder is frequently used to add both unsigned and 2’s-complement numbers,  <em>c</em> out is a useful output as well. Figure 5.7 shows a ripple-carry implementation of an unsigned or 2’s-complement adder with auxiliary outputs for conditions and exceptions. Because of the large number of inputs into the NOR gate that tests for 0, it must be implemented as an OR tree followed by an inverter. </p>
+<p>在 2 的补码加法中，<span class="arithmatex">\(c_{out}\)</span> 没有意义。然而，由于单个加法器经常用于将无符号数和 2 补码数相加，因此 <span class="arithmatex">\(c_{out}\)</span> 也是一个有用的输出。图 5.7 显示了带条件和异常辅助输出的无符号或 2 补码加法器的纹波进位实现。由于测试 0 的 NOR 门有大量输入，因此必须将其实现为 OR 树，后跟一个反相器。</p>
+<p><img alt="image-20230804123305044" src="../assets/image-20230804123305044.png" /></p>
+<p>When the sum of unsigned input operands is too large for representation in  <em>k</em>  bits, an overflow exception is indicated by the  <em>c</em> out signal in Fig. 5.5 and a “wrapped” value, which is 2 <em>k</em>  less than the correct sum, appears as the output. A similar wrapped value may appear for signed addition in the event of overflow. In certain applications, a “saturated”  value would be more appropriate than a wrapped value because a saturated value at least maintains the proper ordering of various sums. For example, if the numbers being manipulated represent the pixel intensities in an image, then an intensity value that is too large should be represented as the maximum possible intensity level, rather than as a wrapped value that could be much smaller. A saturating unsigned adder can be obtained from any unsigned adder design by using a multiplexer at the output, with its control input tied to the adder’s overflow signal. A signed saturating adder can be similarly designed.</p>
+<p>当无符号输入操作数的总和太大而无法用 k 位表示时，图 5.5 中的 <span class="arithmatex">\(c_{out}\)</span> 信号会指示溢出异常，并且输出会出现比正确总和小 <span class="arithmatex">\(2^k\)</span> 的“绕回”的截断值。，有符号加法如果发生溢出也可能会出现类似的绕回值。在某些应用中，“饱和”值比绕回值更合适，因为饱和值至少维持了结果的正确排序。例如，如果所操作的数字表示图像中的像素强度，则太大的强度值应表示为最大可能的强度级别，而不是表示为可能小得多的绕回值。通过在输出处使用多路复用器，其控制输入与加法器的溢出信号相关联，可以从任何无符号加法器设计中获得饱和无符号加法器。有符号饱和加法器可以类似地设计。</p>
+<h2 id="53">5.3 进位传播分析<a class="headerlink" href="#53" title="Permanent link">&para;</a></h2>
+<p>Various ways of dealing with the carry problem were enumerated in Section 3.1. Some of the methods already discussed include limiting the propagation of carries (hybrid signed-digit, residue number system) or eliminating carry propagation altogether (redundant representation). The latter approach, when used for adding a set of numbers in carry-save form, can be viewed as a way of amortizing the propagation delay of the final conversion step over many additions, thus making the per-add contribution of the carry-propagation delay quite small. What remains to be discussed, in this and the following two chapters, is how one can speed up a single addition operation involving conventional (binary) operands. </p>
+<p>3.1 节列举了处理进位问题的各种方法。已经讨论的一些方法包括限制进位传播（混合有符号数字、剩余数系统）或完全消除进位传播（冗余表示）。后一种方法，当用于以进位保存形式添加一组数字时，可以被视为一种将最终转换步骤的传播延迟分摊到多次加法上的方法，从而使进位传播延迟的每次添加贡献相当小。在本章和接下来的两章中，仍有待讨论的是如何加速涉及传统（二进制）操作数的单个加法运算。</p>
+<p>We begin by analyzing how and to what extent carries propagate when adding two binary numbers. Consider the example addition of 16-bit binary numbers depicted in Fig. 5.8, where the carry chains of lengths 2, 3, 6, and 4 are shown. The length of a carry chain is the number of digit positions from where the carry is generated up to and including where it is finally absorbed or annihilated. A carry chain of length 0 thus means “no carry production,” and a chain of length 1 means that the carry is absorbed in the next position. We are interested in the length of the longest propagation chain (6 in Fig. 5.8), which dictates the adder’s latency. </p>
+<p>我们首先分析添加两个二进制数时进位如何传播以及传播到什么程度。考虑图 5.8 中所示的 16 位二进制数加法示例，其中显示了长度为 2、3、6 和 4 的进位链。进位链的长度是指从生成进位到（包括进位最终被吸收或消除）的位数位置。因此，长度为 0 的进位链意味着“无进位产生”，长度为 1 的进位链意味着进位被吸收到下一个位置。我们感兴趣的是最长传播链的长度（如图 5.8 中的6），它决定了加法器的延迟。</p>
+<p><img alt="image-20230804124626660" src="../assets/image-20230804124626660.png" /></p>
+<p>Given binary numbers with random bit values, for each position  <em>i</em>  we have </p>
+<ul>
+<li>Probability of carry generation = 1 <em>/</em> 4</li>
+<li>Probability of carry annihilation = 1 <em>/</em> 4</li>
+<li>Probability of carry propagation = 1 <em>/</em> 2</li>
+</ul>
+<p>给定具有随机位值的二进制数，对于每个位置 <span class="arithmatex">\(i\)</span>，我们有</p>
+<ul>
+<li>进位生成的概率 = 1 / 4</li>
+<li>进位湮没的概率 = 1 / 4 </li>
+<li>进位传播的概率 = 1 / 2</li>
+</ul>
+<p>The probability that a carry generated at position <em>i</em> will propagate up to and including position <em>j</em> − 1 and stop at position <em>j (j &gt; i)</em> is 2− <em>(j</em>−1− <em>i)</em> × 1 <em>/</em> 2 = 2− <em>(j</em>− <em>i)</em>. The expected length of the carry chain that starts at bit position <em>i</em> is, therefore, given by <em>k</em>−1</p>
+<p>位置 <span class="arithmatex">\(i\)</span> 生成的进位传播到位置 <span class="arithmatex">\(j − 1\)</span>（包括位置 <span class="arithmatex">\(j − 1\)</span>）并停止在位置 <span class="arithmatex">\(j (j &gt; i)\)</span> 的概率为 <span class="arithmatex">\(2^{− (j−1− i)} × 1 / 2 = 2^{− (j− i)}\)</span>。因此，从位位置$ i$ 开始的进位链的长度期望值如下给出</p>
+<div class="arithmatex">\[
+\begin{array}{l}
+\sum_{j=i+1}^{k-1}(j-i)2^{-(j-i)} &amp;+(k-i)2^{-(k-1-i)} = \\
+\sum_{l=1}^{k-1-i}l2^{-l} &amp;+(k-i)2^{-(k-1-i)} = \\
+2 - (k-i+1)2^{-(k-1-i)}   &amp;+ (k-i)2^{-(k-1-i)} = \\
+2 - 2^{-(k-i-1)}
+\end{array}
+\]</div>
+<p>其中简化是基于等式 <span class="arithmatex">\(\sum_{l=1}^{p}l2^l=2-(p+2)2^{-p}\)</span>。</p>
+<p>preceding derivation, the term  <em>(k</em> − <em>i)</em>  2− <em>(k</em>−1− <em>i)</em>  is added to the summation because carry definitely stops at position  <em>k</em>; so we do not multiply the term 2− <em>(k</em>−1− <em>i)</em>  by &frac12;, as was done for the terms within the summation. </p>
+<p>在前面的推导中，由于进位肯定在位置 k 处停止，因此将 <span class="arithmatex">\((k − i) 2^{− (k−1− i)}\)</span> 项添加到求和中；因此，我们不会像对求和中的项那样将 <span class="arithmatex">\(2^{− (k−1− i)}\)</span> 项乘以 &frac12;。</p>
+<p>The preceding result indicates that for  <em>i</em>   <em>k</em>, the expected length of the carry chain that starts at position  <em>i</em>  is approximately 2. Note that the formula checks out for the extreme case of  <em>i</em> =  <em>k</em> − 1, since in this case, the exact carry chain length, and thus its expected value, is 1. We conclude that carry chains are usually quite short. </p>
+<p>前面的结果表明，对于 <span class="arithmatex">\(i \ll k\)</span>，从位置 i 开始的进位链的预期长度约为 2。请注意，该公式检查了 <span class="arithmatex">\(i = k − 1\)</span> 的极端情况，因为在这种情况下，准确的进位链长度及其预期值是 1。我们得出结论，进位链通常相当短。</p>
+<p>On the average, the longest carry chain in adding  <em>k</em>-bit numbers is of length log2  <em>k</em>. This was first observed and proved by Burks, Goldstine, and von Neumann in their classic report defining the structure of a stored-program computer [Burk46]. An interesting analysis based on Kolmogorov complexity theory has been offered in [Beig98]. The latter paper also cites past attempts at providing alternate or more complete proofs of the proposition. </p>
+<p>平均而言，k 位数字相加时最长的进位链长度为 <span class="arithmatex">\(\log_2 k\)</span>。Burks、Goldstine 和 von Neumann 在定义存储程序计算机结构的经典报告中首次观察到并证明了这一点 [Burk46]。 [Beig98] 中提供了基于 <a href="https://zhuanlan.zhihu.com/p/586889341">柯尔莫哥洛夫复杂度</a>理论的有趣分析。后一篇论文还引用了过去为该命题提供替代或更完整证明的尝试。</p>
+<p>Here is one way to prove the logarithmic average length of the worst-case carry chain. The reader can skip the rest of this section without any loss of continuity. </p>
+<p>这是证明最坏情况进位链的对数平均长度的一种方法。读者可以跳过本节的其余部分，而不会失去任何连续性。</p>
+<p>Let  <em>ηk (h)</em>  be the probability that the longest carry chain in a  <em>k</em>-bit addition is of length <em>h</em>  or more. Clearly, the probability of the longest carry chain being of length exactly  <em>h</em>  is <em>ηk(h)</em> −  <em>ηk(h</em> + 1 <em>)</em>. We can use a recursive formulation to find  <em>ηk(h)</em>. The longest carry chain can be of length  <em>h</em>  or more in two mutually exclusive ways:</p>
+<p><strong>a.</strong> The least-significant  <em>k</em> − 1 bits have a carry chain of length  <em>h</em>  or more. </p>
+<p><strong>b.</strong> The least-significant  <em>k</em> − 1 bits do not have such a carry chain, but the most significant  <em>h</em>  bits, including the last bit, have a chain of the exact length  <em>h</em>. </p>
+<p>Thus, we have</p>
+<p>​        <span class="arithmatex">\(η_k(h) ≤ η_{k−1} (h) + 2^{− (h+1 )}\)</span> </p>
+<p>where 2− <em>(h</em>+1 <em>)</em>  is the product of &frac14; (representing the probability of carry generation) and 2− <em>(h</em>−1 <em>)</em> (probability that carry propagates across  <em>h</em> − 2 intermediate positions and stops in the last one). The inequality occurs because the second term is not multiplied by a probability as discussed above. Hence, assuming  <em>ηi(h)</em> = 0 for  <em>i &lt; h</em>: </p>
+<p>​       <span class="arithmatex">\(\eta_k(h)=\sum_{i=h}^{k}[\eta_i(h)-\eta_{i-1}(h)] \le (k-h+1)2^{-(h+l)} \le 2^{-(h+1)}k\)</span></p>
+<p>To complete our derivation of the expected length λ of the longest carry chain, we note that</p>
+<p>令 <span class="arithmatex">\(η_k (h)\)</span> 为 k 位加法中最长进位链长度为 h 或更长的概率。显然，最长进位链的长度恰好为 h 的概率为 <span class="arithmatex">\(η_k(h) − η_k(h + 1 )\)</span>。我们可以使用递归公式来求 <span class="arithmatex">\(η_k(h)\)</span>。最长的进位链可以通过两种互斥的方式达到 <span class="arithmatex">\(h\)</span> 或更长的长度：</p>
+<p><strong>a.</strong> 最低有效 <span class="arithmatex">\(k − 1\)</span> 位具有长度为 h 或更长的进位链。</p>
+<p><strong>b.</strong> 最低有效 <span class="arithmatex">\(k − 1\)</span> 位没有这样的进位链，但最高有效 h 位（包括最后一位）具有精确长度为 h 的链。</p>
+<p>因此，我们有</p>
+<p>​       <span class="arithmatex">\(η_k(h) ≤ η_{k−1} (h) + 2^{− (h+1 )}\)</span> </p>
+<p>其中 2^{− (h+1 )} 是 &frac14;（表示进位生成的概率）和 2^{− (h−1 )} （进位传播穿过 <span class="arithmatex">\(h − 2\)</span> 个中间位置并在最后一个位置停止的概率）的乘积。出现不等式是因为第二项没有乘以上面讨论的概率。因此，假设 <span class="arithmatex">\(η_i(h) = 0\)</span> for <span class="arithmatex">\(i &lt; h\)</span>: </p>
+<p>​       <span class="arithmatex">\(\eta_k(h)=\sum_{i=h}^{k}[\eta_i(h)-\eta_{i-1}(h)] \le (k-h+1)2^{-(h+l)} \le 2^{-(h+1)}k\)</span></p>
+<p>为了完成最长进位链的预期长度 λ 的推导，我们记为</p>
+<div class="arithmatex">\[
+\begin{array}{l}
+\lambda &amp;= \sum_{h=1}^{k}h[\eta_k(h)-\eta_k(h+1)] \\
+        &amp;= [\eta_k(1)-\eta_k(2)]  + 2[\eta_k(2)-\eta_k(3)] + \cdots + k[\eta_k(k)-0] \\
+        &amp;= \sum_{h=1}^{k}\eta_k(h)
+\end{array}
+\]</div>
+<p>We next break the final summation above into two parts: the first <em>γ</em> = log2 <em>k</em>− 1 terms and the remaining <em>k</em> − <em>γ</em> terms. Using the upper bound 1 for terms in the first part and 2− <em>(h</em>+1 <em>)k</em> for terms in the second part, we get</p>
+<p>接下来，我们将上面的最终求和分为两部分：第一个 <span class="arithmatex">\(γ = \left \lfloor \log_2 k \right \rfloor − 1\)</span> 项和其余的 <span class="arithmatex">\(k − γ\)</span> 项。对第一部分中的项使用上限 1，对第二部分中的项使用 <span class="arithmatex">\(2^{− (h+1 )}k\)</span>，我们得到</p>
+<p>​       <span class="arithmatex">\(\lambda = \sum_{h=1}^{k}\eta_k(h) \le \sum_{h=1}^{\gamma}1+\sum_{h=\gamma+1}^{k}2^{-(h+1)}k \lt \gamma + 2^{-(\gamma+1)}k\)</span></p>
+<p>Now let  <em>ε</em> = log2  <em>k</em> −log2  <em>k</em> or  <em>γ</em> = log2  <em>k</em> −1− <em>ε</em>, where 0 ≤  <em>ε &lt;</em>  1. Then, substituting the latter expression for  <em>γ</em>  in the preceding inequality and noting that 2log2  <em>k</em> =  <em>k</em>  and 2 <em>ε &lt;</em>  1 +  <em>ε</em>, we get  <em>λ &lt;</em>  log2  <em>k</em> − 1 −  <em>ε</em> + 2 <em>ε &lt;</em>  log2  <em>k</em></p>
+<p>现在令 <span class="arithmatex">\(ε = \log_2 k − \left \lfloor \log_2 k \right \rfloor\)</span> 或 <span class="arithmatex">\(γ = \log_2 k −1− ε\)</span>，其中 <span class="arithmatex">\(0 ≤ ε &lt; 1\)</span>。然后，将后一个表达式替换前面不等式中的 γ，并注意到 <span class="arithmatex">\(2^{\log_2 k} = k\)</span> 和 <span class="arithmatex">\(2^ε &lt; 1 + ε\)</span>，我们得到</p>
+<p>​       <span class="arithmatex">\(λ &lt; \log_2 k − 1 − ε + 2^ε &lt; \log_2 k\)</span></p>
+<p>This concludes our derivation of the result that the expected length of the worst-case carry chain in a  <em>k</em>-bit addition with random operands is upper-bounded by log2  <em>k</em>. Experimental results verify the log2  <em>k</em>  approximation to the length of the worst-case carry chain and suggest that log2(1.25 <em>k</em>) is a better estimate [Hend61]. </p>
+<p>这得出了我们对结果的推导，即与随机操作数进行 k 位加法时最坏情况进位链的预期长度上限为 <span class="arithmatex">\(\log_2 k\)</span>。实验结果验证了最坏情况进位链长度的 <span class="arithmatex">\(\log_2 k\)</span> 近似值，并表明 <span class="arithmatex">\(\log_2(1.25 k)\)</span> 是更好的估计 [Hend61]。</p>
+<h2 id="54">5.4 进位完成的检测<a class="headerlink" href="#54" title="Permanent link">&para;</a></h2>
+<p>A ripple-carry adder is the simplest and slowest adder design. For  <em>k</em>-bit operands, both the worst-case delay and the implementation cost of a ripple-carry adder are linear in  <em>k</em>.  However, based on the analysis in Section 5.3, the worst-case carry-propagation chain of length  <em>k</em>  almost never materializes. </p>
+<p>行波进位加法器是最简单且最慢的加法器设计。对于 k 位操作数，最坏情况的延迟和纹波进位加法器的实现成本与 k 成线性关系。然而，根据 5.3 节的分析，长度为 k 的最坏情况进位传播链几乎永远不会出现。</p>
+<p>A carry-completion detection adder takes advantage of the log2  <em>k</em>  average length of the longest carry chain to add two  <em>k</em>-bit binary numbers in O(log  <em>k</em>) time on the average. It is essentially a ripple-carry adder in which a carry of 0 is also explicitly represented and allowed to propagate between stages. The carry into stage  <em>i</em>  is represented by the two-rail code:</p>
+<p>进位完成检测加法器利用最长进位链的 <span class="arithmatex">\(\log_2 k\)</span> 平均长度，平均在 <span class="arithmatex">\(O(\log k)\)</span> 时间内将两个 k 位二进制数相加。它本质上是一个波纹进位加法器，其中也明确表示了进位 0 并允许在级之间传播。进入阶段 i 的进位由两轨编码表示：</p>
+<p><span class="arithmatex">\((b_i, c_i) =\)</span>  </p>
+<p>​       (0, 0) 进位未知</p>
+<p>​       (0, 1) 进位确定为1</p>
+<p>​       (1, 0) 进位确定为0</p>
+<p>Thus, just as two 1s in the operands generate a carry of 1 that propagates to the left, two 0s would produce a carry of 0. Initially, all carries are (0, 0) or unknown.  After initialization, a bit position with  <em>xi</em> =  <em>yi</em>  makes the no-carry/carry determination and injects the appropriate carry ( <em>bi</em>+1,  <em>ci</em>+1 <em>)</em> =  <em>(xi</em> ∨  <em>yi</em>,  <em>xiyi)</em>  into the carry-propagation chain of Fig. 5.9 via the OR gates. The carry  <em>(c</em> in,  <em>c</em> in <em>)</em>  is injected at the right end. When every carry has assumed one of the values (0, 1) or (1, 0), carry propagation is complete.  The local “done” signals  <em>di</em> =  <em>bi</em> ∨  <em>ci</em>  are combined by a global AND function into <em>alldone</em>, which indicates the end of carry propagation. </p>
+<p>因此，正如操作数中的两个 1 生成向左传播的进位 1 一样，两个 0 将生成进位 0。最初，所有进位都是 (0, 0) 或未知。初始化后，<span class="arithmatex">\(x_i = y_i\)</span> 的位位置可以判定是无进位/进位，并通过或门将适当的进位 <span class="arithmatex">\((b_{i+1}, c_{i+1}) = (x_i ∨ y_i, x_iy_i)\)</span> 注入图 5.9 的进位传播链中。进位 <span class="arithmatex">\((\bar{c} _{in}, c _{in} )\)</span> 在右端注入。当每个进位都取值 (0, 1) 或 (1, 0) 之一时，进位传播就完成了。局部“done”信号 <span class="arithmatex">\(d_i = b_i ∨ c_i\)</span> 通过全局 AND 函数组合成 alldone，表示进位传播结束。</p>
+<p><img alt="image-20230804143711079" src="../assets/image-20230804143711079.png" /></p>
+<p>In designing carry-completion adders, care must be taken to avoid hazards that might lead to a spurious  <em>alldone</em>  signal. Initialization of all carries to 0 through clearing of input bits and simultaneous application of all input data is one way of ensuring hazard-free operation. </p>
+<p>在设计进位完成加法器时，必须小心避免可能导致虚假 alldone 信号的危险。通过清除输入位并同时应用所有输入数据将所有进位初始化为 0，是确保无危险操作的一种方法。</p>
+<p>Excluding the initialization and carry-completion detection times, which must be considered and are the same in all cases, the latency of a  <em>k</em>-bit carry-completion adder ranges from 1 gate delay in the best case (no carry propagation at all: i.e., when adding a number to itself) to 2 <em>k</em> + 1 gate delays in the worst case (full carry propagation from  <em>c</em> in to cout), with the average latency being about <span class="arithmatex">\(2 \log_2  k + 1\)</span> gate delays. Note that once the final carries have arrived in all bit positions, the derivation of the sum bits is overlapped with completion detection and is thus not accounted for in the preceding latencies. </p>
+<p>排除初始化和进位完成检测时间（必须考虑这些时间并且在所有情况下都是相同的），k 位进位完成加法器的延迟范围从最好情况下的 1 个门延迟（根本没有进位传播：即，当将数字添加到自身时）到最坏情况下的 <span class="arithmatex">\(2k + 1\)</span> 个门延迟（从 <span class="arithmatex">\(c_{in}\)</span> 到 <span class="arithmatex">\(c_{out}\)</span> 的全进位传播）平均延迟约为 <span class="arithmatex">\(2 \log_2  k + 1\)</span> 个门延迟。请注意，一旦最终进位到达所有位位置，和的导出与完成检测重叠，因此不会算在前面得到的延迟中。</p>
+<p>Because the latency of the carry-completion adder is data-dependent, the design of Fig. 5.9 is suitable for use in asynchronous systems. Most modern computers, however, use synchronous logic and thus cannot take advantage of the high average speed of a carry-completion adder. </p>
+<p>由于进位完成加法器的延迟取决于数据，因此图 5.9 的设计适合在异步系统中使用。然而，大多数现代计算机使用同步逻辑，因此无法利用进位完成加法器的高平均速度。</p>
+<h2 id="55">5.5 加上一个常数:计数器<a class="headerlink" href="#55" title="Permanent link">&para;</a></h2>
+<p>When one input of the addition operation is a constant number, the design can be simplified or optimized compared with that of a general two-operand adder. With binary arithmetic, we can assume that the constant  <em>y</em>  to be added to  <em>x</em>  is odd, since in the addition <em>s</em> =  <em>x</em> +  <em>y</em> even =  <em>x</em> +  <em>(y</em> odd × 2 <em>h)</em>, one can ignore the  <em>h</em>  rightmost bits in  <em>x</em>  and add  <em>y</em> odd to the remaining bits. The special case of  <em>y</em> = 1 corresponds to standard counters, while <em>y</em> = ±1 yields an up/down counter. </p>
+<p>当加法运算的一个输入为常数时，与一般的二操作数加法器相比，可以简化或优化设计。对于二进制算术，我们可以假设要与 x 相加的常数 y 是奇数，因为在加法 <span class="arithmatex">\(s = x + y_{even} = x + (y_{odd} × 2^h)\)</span> 中，可以忽略 x 中最右边的 h 位并将 <span class="arithmatex">\(y_{odd}\)</span> 加到其余位。 y = 1 的特殊情况对应于标准计数器，而 y = ±1 则产生向上/向下计数器。</p>
+<p>Let the constant to be added to  <em>x</em> =  <em>(xk</em>−1 · · ·  <em>x</em> 2 <em>x</em> 1 <em>x</em> 0 <em>)</em> two be  <em>y</em> =  <em>(yk</em>−1 · · ·  <em>y</em> 2 <em>y</em> 1 1 <em>)</em> two.  The least-significant bit of the sum is  <em>x</em> 0. The remaining bits of  <em>s</em>  can be determined by a ( <em>k</em> − 1)-bit ripple-carry adder, with  <em>c</em> in =  <em>x</em> 0, each of its cells being a HA ( <em>yi</em> = 0) or a modified HA ( <em>yi</em> = 1). The fast-adder designs to be covered in Chapters 6 and 7 can similarly be optimized to take advantage of the known bits of  <em>y</em>. </p>
+<p>设与<span class="arithmatex">\(x = (x_{k−1} · · · x _2 x _1 x _0 )_2\)</span> 相加的常数为<span class="arithmatex">\(y = (y_{k−1} · · · y _2 y _1 1 ) _2\)</span>。和的最低有效位是 <span class="arithmatex">\(\bar{x}_0\)</span>。 s 的其余位可以由 <span class="arithmatex">\(( k − 1)\)</span> 位纹波进位加法器确定，其中 <span class="arithmatex">\(c_{in} = x_0\)</span>，其每个单元都是 HA <span class="arithmatex">\(( y_i = 0)\)</span> 或修改的 <span class="arithmatex">\(HA ( y_i = 1)\)</span>。第 6 章和第 7 章中介绍的快速加法器设计可以类似地进行优化，以利用 y 的已知位。</p>
+<p>When  <em>y</em> = 1 <em>(</em>−1 <em>)</em>, the resulting circuit is known as an  <em>incrementer</em> ( <em>decrementer</em>) and is used in the design of up (down) counters. Figure 5.10 depicts an up counter, with parallel load capability, built of a register, an incrementer, and a multiplexer. The design shown in Fig. 5.10 can be easily converted to an up/down counter by using an incrementer/decrementer and an extra control signal. Supplying the details is left as an exercise. </p>
+<p>当 y = 1 (−1) 时，所得电路称为增量器（减量器），并用于向上（向下）计数器的设计。图 5.10 描述了一个具有并行加载能力的向上计数器，由寄存器、增量器和多路复用器组成。通过使用增量器/减量器和额外的控制信号，图 5.10 所示的设计可以轻松转换为加/减计数器。留给读者留作练习。</p>
+<p><img alt="image-20230804145437397" src="../assets/image-20230804145437397.png" /></p>
+<p>Many designs for fast counters are available [Ober81]. Conventional synchronous designs are based on full carry propagation in each increment/decrement cycle, thus limiting the counter’s operating speed. In some cases, special features of the storage elements used can lead to simplifications. Figure 5.11 depicts an asynchronous counter built of cascaded negative-edge-triggered T (toggle) flip-flops. Each input pulse toggles the flip-flop at the least significant position, each 1-to-0 transition of the least-significant bit flip-flop toggles the next flip-flop, and so on. The next input pulse can be accepted before the carry has propagated all the way to the left. </p>
+<p>许多快速计数器的设计都是可用的[Ober81]。传统的同步设计基于每个递增/递减周期中的全进位传播，因此限制计数器的运行速度。在某些情况下，所使用的存储元件的特殊功能可以导致简化。图 5.11 描述了由级联负边沿触发 T（翻转）触发器构建的异步计数器。每个输入脉冲都会在最低有效位触发触发器，最低有效位触发器的每个 1 到 0 转换都会触发下一个触发器，依此类推。在进位一直向左传播之前，可以接受下一个输入脉冲。</p>
+<p><img alt="image-20230804145658521" src="../assets/image-20230804145658521.png" /></p>
+<p>Certain applications require high-speed counting, with the count potentially becoming quite large. In such cases, a high-speed incrementer must be used. Methods of designing fast adders (Chapters 6 and 7) can all be adapted for building fast incrementers. When even the highest-speed incrementer cannot keep up with the input rate or when cost considerations preclude the use of an ultrafast incrementer, the frequency of the input can be reduced by applying it to a prescaler. The lower-frequency output of the prescaler can then be counted with less stringent speed requirements. In the latter case, the resulting count will be approximate. </p>
+<p>某些应用需要高速计数，计数可能会变得相当大。在这种情况下，必须使用高速增量器。设计快速加法器的方法（第 6 章和第 7 章）都可以用于构建快速增量器。当即使是最高速度的增量器也无法跟上输入速率，或者当出于成本考虑而无法使用超快增量器时，可以通过将其应用于预分频器来降低输入频率。然后可以以不太严格的速度要求来计算预分频器的较低频率输出。在后一种情况下，所得计数将是近似值。</p>
+<p>Obviously, the count value can be represented in redundant format, allowing carry-free increment or decrement in constant time [Parh87]. However, with a redundant format, reading out the stored count involves some delay to allow for conversion of the internal representation to standard binary. Alternatively, one can design the counter as a cascade that begins with a very narrow, and thus fast, counter and continues with increasingly wider counters [Vuil91]. The wider counters on the left are incremented only occasionally and thus need not be very fast (their incremented counts can be precomputed by a slow incrementer and then simply loaded into the register when required). Figure 5.12 shows this principle applied to the design of a three-stage counter. Some details of this design, as well as its extension to up/down counting, will be explored in the end-of-chapter problems. </p>
+<p>显然，计数值可以用冗余格式表示，允许在恒定时间内进行无进位递增或递减[Parh87]。然而，使用冗余格式时，读出存储的计数会涉及一些延迟，以允许将内部表示转换为标准二进制。或者，可以将计数器设计为级联，从非常窄且因此速度快的计数器开始，然后以越来越宽的计数器继续[Vuil91]。左侧较宽的计数器仅偶尔递增，因此不需要非常快（它们的递增计数可以由慢速递增器预先计算，然后在需要时简单地加载到寄存器中）。图 5.12 显示了该原理应用于三级计数器的设计。这个设计的一些细节，以及它对加/减计数的扩展，将在章末的问题中探讨。</p>
+<p><img alt="image-20230804150259224" src="../assets/image-20230804150259224.png" /></p>
+<h2 id="56">5.6 曼彻斯特进位链与加法器<a class="headerlink" href="#56" title="Permanent link">&para;</a></h2>
+<p>In the next three chapters, we will examine methods for speeding up the addition process for two operands (Chapters 6 and 7) and for multiple operands (Chapter 8). For two operands, the key to fast addition is a low-latency carry network, since once the carry into position  <em>i</em>  is known, the sum digit can be determined from the operand digits  <em>xi</em>  and <em>yi</em>  and the incoming carry  <em>ci</em>  in constant time through modular addtition: <em>si</em> =  <em>(xi</em> +  <em>yi</em> +  <em>ci)</em>  mod  <em>r</em></p>
+<p>在接下来的三章中，我们将研究加速两个操作数（第 6 章和第 7 章）和多个操作数（第 8 章）的加法过程的方法。对于两个操作数，快速加法的关键是低延迟进位网络，因为一旦知道位置 i 的进位，就可以通过模加法在恒定时间内根据操作数位 xi 和 yi 以及传入的进位 ci 确定和位： </p>
+<p>​       <span class="arithmatex">\(s_i = (x_i + y_i + c_i) \mod r\)</span></p>
+<p>In the special case of radix 2, the relation above reduces to</p>
+<p>在基数为 2 的特殊情况下，上面的关系简化为</p>
+<p>​       <span class="arithmatex">\(s_i = x_i ⊕ y_i ⊕ c_i\)</span></p>
+<p>So, the primary problem in the design of two-operand adders is the computation of the <em>k</em>  carries  <em>ci</em>+1 based on the 2 <em>k</em>  operand digits  <em>xi</em>  and  <em>yi</em>, 0 ≤  <em>i &lt; k</em>. </p>
+<p>因此，双操作数加法器设计的首要问题是根据 <span class="arithmatex">\(2 k\)</span> 个操作数位 <span class="arithmatex">\(x_i\)</span> 和 <span class="arithmatex">\(y_i\)</span> 计算 <span class="arithmatex">\(k\)</span> 个进位 <span class="arithmatex">\(c_{i+1}\)</span>，<span class="arithmatex">\(0 ≤ i &lt; k\)</span>。</p>
+<p>From the point of view of carry propagation and the design of a carry network, the actual operand digits are not important. What matters is whether in a given position a carry is generated, propagated, or annihilated (absorbed). In the case of binary addition, the <em>generate</em>,  <em>propagate</em>, and  <em>annihilate</em> ( <em>absorb</em>) signals are characterized by the following logic equations:</p>
+<p>从进位传播和进位网络设计的角度来看，实际的操作数并不重要。重要的是在给定位置是否产生、传播或消除（吸收）进位。在二进制加法的情况下，生成、传播和消除（吸收）信号由以下逻辑方程表征：</p>
+<p><span class="arithmatex">\(g_i = x_iy_i\)</span></p>
+<p><span class="arithmatex">\(p_i = x_i ⊕ y_i\)</span></p>
+<p><span class="arithmatex">\(a_i = \bar{x}_i\bar{y}_i = \overline{x_i ∨ y_i}\)</span></p>
+<p>It is also helpful to define a  <em>transfer</em>  signal corresponding to the event that the carry-out will be 1, given that the carry-in is 1:</p>
+<p>假设进位为 1，定义与进位为 1 的事件相对应的传输信号也很有帮助：</p>
+<p><span class="arithmatex">\(t_i = g_i ∨ p_i = \bar a_i = x_i ∨ y_i\)</span></p>
+<p>More generally, for radix  <em>r</em>, we have</p>
+<p>更一般地，对于基数 r，我们有</p>
+<p><span class="arithmatex">\(g_i = 1 \iff x_i + y_i ≥ r\)</span></p>
+<p><span class="arithmatex">\(p_i = 1 \iff x_i + y_i = r − 1\)</span></p>
+<p><span class="arithmatex">\(a_i = 1 \iff x_i + y_i &lt; r − 1\)</span></p>
+<p>Thus, assuming that the signals above are produced and made available, the rest of the carry network design can be based on them and becomes completely independent of the operands or even the number representation radix. </p>
+<p>因此，假设上述信号已产生并可用，则进位网络设计的其余部分可以基于它们，并且完全独立于操作数甚至数字表示基数。</p>
+<p>Using the preceding signals, the  <em>carry recurrence</em>  can be written as follows:</p>
+<p>使用前面的信号，进位递推可以写成如下： </p>
+<p><span class="arithmatex">\(c_{i+1} = g_i ∨ c_ip_i\)</span></p>
+<p>The carry recurrence essentially states that a carry will enter stage  <em>i</em> + 1 if it is generated in stage  <em>i</em>  or it enters stage  <em>i</em>  and is propagated by that stage. Since </p>
+<p>进位递归本质上是指如果进位是在阶段 i 中生成的，或者进入阶段 i 并由该阶段传播的，则进位将进入阶段 i + 1。因为 </p>
+<div class="arithmatex">\[
+c_{i+1} = g_i ∨ c_ip_i = g_i ∨ c_ig_i ∨ c_ip_i \\
+= g_i ∨ c_i(g_i ∨ p_i) = g_i ∨ c_it_i
+\]</div>
+<p>the carry recurrence can be written in terms of  <em>ti</em>  instead of  <em>pi</em>. This latter version of the carry recurrence leads to slightly faster adders because in binary addition,  <em>ti</em>  is easier to produce than  <em>pi</em> (OR instead of XOR). </p>
+<p>进位递推可以用 <span class="arithmatex">\(t_i\)</span> 而不是 <span class="arithmatex">\(p_i\)</span> 来写。进位循环的后一个版本导致加法器稍快一些，因为在二进制加法中，<span class="arithmatex">\(t_i\)</span> 比 <span class="arithmatex">\(p_i\)</span> 更容易生成（OR 而不是 XOR）。</p>
+<p>In what follows, we always deal with the carry recurrence in its original form  <em>ci</em>+1 = <em>gi</em> ∨  <em>cipi</em>, since it is more intuitive, but we keep in mind that in most cases,  <em>pi</em>  can be replaced by  <em>ti</em>  if desired. </p>
+<p>在下文中，我们始终以原始形式处理进位递推 <span class="arithmatex">\(c_{i+1} = g_i ∨ c_ip_i\)</span>，因为它更直观，但我们请记住，在大多数情况下，如果需要，可以用 <span class="arithmatex">\(t_i\)</span> 代替 <span class="arithmatex">\(p_i\)</span>。</p>
+<p>The carry recurrence forms the basis of a simple carry network known as  <em>Manchester</em> <em>carry chain</em>. A  <em>Manchester adder</em>  is one that uses a Manchester carry chain as its carry network. Each stage of a Manchester carry chain can be viewed as consisting of three switches controlled by the signals  <em>pi</em>,  <em>gi</em>, and  <em>ai</em>, so that the switch closes (conducts electricity) when the corresponding control signal is 1. As shown in Fig. 5.13a, the carry-out signal  <em>ci</em>+1 is connected to 0 if  <em>ai</em> = 1, to 1 if  <em>gi</em> = 1, and to  <em>ci</em>  if  <em>pi</em> = 1, thus assuming the correct logical value  <em>ci</em>+1 =  <em>gi</em> ∨  <em>cipi</em>. Note that one, and only one, of the signals  <em>pi</em>,  <em>gi</em>, and  <em>ai</em>  is 1. </p>
+<p>进位循环构成了称为*曼彻斯特进位链*的简单进位网络的基础。曼彻斯特加法器是一种使用曼彻斯特进位链作为其进位网络的加法器。曼彻斯特进位链的每一级可以看作由信号 <span class="arithmatex">\(p_i\)</span>、<span class="arithmatex">\(g_i\)</span> 和 <span class="arithmatex">\(a_i\)</span> 控制的三个开关组成，因此当相应的控制信号为 1 时，开关闭合（导通）。如图 5.13a 所示，如果 <span class="arithmatex">\(a_i = 1\)</span>，则进位信号 <span class="arithmatex">\(c_{i+1}\)</span> 连接到 0，如果 <span class="arithmatex">\(g_i = 1\)</span>，则连接到 1，如果 <span class="arithmatex">\(p_i = 1\)</span>，则连接到 <span class="arithmatex">\(c_i\)</span>，也就得到正确的逻辑值 <span class="arithmatex">\(c_{i+1} = g_i ∨ c_ip_i\)</span>。请注意，信号 <span class="arithmatex">\(p_i、g_i 和 a_i\)</span> 中只有一个是 1。</p>
+<p>Figure 5.13b shows how a Manchester carry chain might be implemented in CMOS. When the clock is low, the  <em>c</em>  nodes precharge. Then, when the clock goes high, if  <em>gi</em>  is high,  <em>ci</em>+1 is asserted or drawn low. To prevent  <em>gi</em>  from affecting  <em>ci</em>, the signal  <em>pi</em>  must be computed as the XOR (rather than OR) of  <em>xi</em>  and  <em>yi</em>. This is not a problem because we need the XOR of  <em>xi</em>  and  <em>yi</em>  for computing the sum anyway. </p>
+<p>图 5.13b 显示了如何在 CMOS 中实现曼彻斯特进位链。当时钟为低电平时，c 节点预充电。然后，当时钟变高时，如果 <span class="arithmatex">\(g_i\)</span> 为高，则 <span class="arithmatex">\(c_{i+1}\)</span> 被断言或拉低。为了防止 <span class="arithmatex">\(g_i\)</span> 影响 <span class="arithmatex">\(c_i\)</span>，信号 <span class="arithmatex">\(p_i\)</span> 必须计算为 <span class="arithmatex">\(x_i\)</span> 和 <span class="arithmatex">\(y_i\)</span> 的异或（而不是或）。这不是问题，因为无论如何我们都需要 <span class="arithmatex">\(x_i\)</span> 和 <span class="arithmatex">\(y_i\)</span> 的异或来计算总和。</p>
+<p><img alt="image-20230804153155220" src="../assets/image-20230804153155220.png" /></p>
+<p>For a  <em>k</em>-bit Manchester carry chain, the total delay consists of three components: </p>
+<ol>
+<li>
+<p>The time to form the switch control signals. </p>
+</li>
+<li>
+<p>The setup time for the switches. </p>
+</li>
+<li>
+<p>Signal propagation delay through  <em>k</em>  switches in the worst case. </p>
+</li>
+</ol>
+<p>对于 k 位曼彻斯特进位链，总延迟由三个部分组成：</p>
+<ol>
+<li>
+<p>形成开关控制信号的时间。</p>
+</li>
+<li>
+<p>开关的建立时间。</p>
+</li>
+<li>
+<p>最坏情况下通过 k 个开关的信号传播延迟。</p>
+</li>
+</ol>
+<p>The first two components of delay are small, constant terms. The delay is thus dominated by the third component, which is at best linear in  <em>k</em>. For modern CMOS technology, the delay is roughly proportional to  <em>k</em> 2 (as  <em>k</em>  pass transistors are connected in series), making the method undesirable for direct realization of fast adders. However, when the delay is in fact linear in  <em>k</em>, speed is gained over gate-based ripple-carry adders because we have one switch delay rather than two gate delays per stage. The linear or superlinear delay of a Manchester carry chain limits its usefulness for wide words or in high-performance designs. Its main application is in implementing short chains (say, up to 8 bits) as building blocks for use with a variety of fast addition schemes and certain hybrid designs. </p>
+<p>延迟的前两个分量是小的常数项。因此，延迟主要由第三个分量决定，该分量至多与 k 呈线性关系。对于现代 CMOS 技术，延迟大致与 <span class="arithmatex">\(k^2\)</span> (因为 k 个传输晶体管串联连接)成正比，使得该方法不适合直接实现快速加法器。然而，当延迟实际上以 k 为线性时，速度比基于门的纹波进位加法器获得了提高，因为我们每级有一个开关延迟而不是两个门延迟。曼彻斯特进位链的线性或超线性延迟限制了其在宽字或高性能设计中的用途。它的主要应用是实现短链（例如，最多 8 位）作为构建块，以与各种快速加法方案和某些混合设计一起使用。</p>
+<p>We conclude this chapter by setting the stage for fast addition schemes to follow in Chapters 6 and 7. Taking advantage of generate and propagate signals defined in this section, an adder design can be viewed in the generic form of Fig. 5.14. Any adder will have the two sets of AND and XOR gates at the top to form the  <em>gi</em>  and  <em>pi</em>  signals, and it will have a set of XOR gates at the bottom to produce the sum bits  <em>si</em>. It will differ, however, in the design of its carry network, which is represented by the large oval block in Fig. 5.14. For example, a ripple-carry adder can be viewed as having the carry network shown in Fig. 5.15. Inserting this carry network into the generic design of Fig. 5.14 will produce a complete adder. Thus, in our subsequent discussions, we will focus on different designs for the carry network, and we will compare adders with respect to latency and cost of the carry network only.</p>
+<p>我们通过为第 6 章和第 7 章中的快速加法方案奠定基础来结束本章。利用本节中定义的生成和传播信号，可以以图 5.14 的通用形式查看加法器设计。任何加法器都会在顶部具有两组 AND 和 XOR 门以形成 <span class="arithmatex">\(g_i\)</span> 和 <span class="arithmatex">\(p_i\)</span> 信号，并且在底部具有一组 XOR 门以产生和位 <span class="arithmatex">\(s_i\)</span>。然而，它的进位网络的设计有所不同，如图 5.14 中的大椭圆形块所示。例如，纹波进位加法器可以被视为具有图 5.15 所示的进位网络。将此进位网络插入图 5.14 的通用设计将产生一个完整的加法器。因此，在后续讨论中，我们将重点关注进位网络的不同设计，并且我们将仅根据进位网络的延迟和成本来比较加法器。</p>
+<p><img alt="image-20230804153850790" src="../assets/image-20230804153850790.png" /></p>
+<p><img alt="image-20230804153907997" src="../assets/image-20230804153907997.png" /></p>
+<h2 id="_1">问题（略）<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_2">参考文献和进一步阅读<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[Beig98] Beigel, R., B. Gasarch, M. Li, and L. Zhang, “Addition in log2n + O(1) Steps on
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>         Average: A Simple Analysis,” Theoretical Computer Science, Vol. 191, Nos. 1–2,
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>         pp. 245–248, 1998.
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>[Bui02]  Bui, H. T., Y. Wang, and Y. Jiang, “Design and Analysis of Low-Power 10-Transistor
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>         Full Adders Using Novel XOR-XNOR Gates,” IEEE Trans. Circuits and Systems II,
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>         Vol. 49, No. 1, pp. 25–30, 2002.
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>[Burk46] Burks, A. W., H. H. Goldstine, and J. von Neumann, “Preliminary Discussion of the
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>         Logical Design of an Electronic Computing Instrument,” Institute for Advanced
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>         Study, Princeton, NJ, 1946.
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>[Gilc55] Gilchrist, B., J. H. Pomerene, and S. Y. Wong, “Fast Carry Logic for Digital
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>         Computers,” IRE Trans. Electronic Computers, Vol. 4, pp. 133–136, 1955.
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>[Hend61] Hendrickson, H. C., “Fast High-Accuracy Binary Parallel Addition,” IRE Trans.
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>         Electronic Computers, Vol. 10, pp. 465–468, 1961.
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>[Jian04] Jiang, Y., A. Al-Sheraidah, Y. Wang, E. Sha, and J.-G. Chung, “A Novel
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>         Multiplexer-Based Low-Power Full Adder,” IEEE Trans. Circuits and Systems II,
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>         Vol. 51, No. 7, pp. 345–353, 2004.
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>[Kilb60] Kilburn, T., D. B. G. Edwards, and D. Aspinall, “A Parallel Arithmetic Unit Using a
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>         Saturated Transistor Fast-Carry Circuit,” Proc. IEE, Vol. 107B, pp. 573–584,
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>         1960.
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>[Laps97] Lapsley, P., DSP Processor Fundamentals: Architectures and Features, IEEE Press,
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>         1997.
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>[Lin07]  Lin, J. F., Y.-T. Hwang, M.-H. Sheu, and C.-C. Ho, “A Novel High-Speed and Energy
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>         Efficient 10-Transistor Full Adder Design,” IEEE Trans. Circuits and Systems I,
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>         Vol. 54, No. 5, pp. 1050–1059, 2007.
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>[Ober81] Oberman, R. M. M., Counting and Counters, Macmillan, London, 1981.
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>[Parh87] Parhami, B., “Systolic Up/Down Counters with Zero and Sign Detection,” Proc.
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>         Symp. Computer Arithmetic, pp. 174–178, 1987.
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>[Puck94] Pucknell, D. A., and K. Eshraghian, Basic VLSI Design, 3rd ed., Prentice-Hall, 1994.
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>[Stel98] Stelling, P. F., C. U. Martel, V. G. Oklobdzija, and R. Ravi, “Optimal Circuits for
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>         Parallel Multipliers,” IEEE Trans. Computers, Vol. 47, No. 3, pp. 273–285, 1998.
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>[Vuil91] Vuillemin, J. E., “Constant Time Arbitrary Length Synchronous Binary Counters,”
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>         Proc. Symp. Computer Arithmetic, pp. 180–183, 1991.
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="上一页: 加法与减法" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                加法与减法
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../06/" class="md-footer__link md-footer__link--next" aria-label="下一页: 6. 超前进位加法器" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                6. 超前进位加法器
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.indexes", "navigation.instant", "navigation.top", "navigation.footer", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../javascripts/mathjax.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+        
+          <script src="../../javascripts/katex.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        
+      
+    
+  </body>
+</html>
