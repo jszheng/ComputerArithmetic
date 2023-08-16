@@ -511,9 +511,89 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          6. 超前进位加法器
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         6. 超前进位加法器
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    6.1 展开进位递归
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    6.2 超前进位加法器的设计
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-ling" class="md-nav__link">
+    6.3 LING型加法器与相关设计
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    6.4 并行前缀进位计算
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65" class="md-nav__link">
+    6.5 混合的并行前缀进位网络
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66-vlsi" class="md-nav__link">
+    6.6 VLSI实现相关
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    问题（略）
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考文献和进一步阅读
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1169,6 +1249,70 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    6.1 展开进位递归
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    6.2 超前进位加法器的设计
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-ling" class="md-nav__link">
+    6.3 LING型加法器与相关设计
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    6.4 并行前缀进位计算
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65" class="md-nav__link">
+    6.5 混合的并行前缀进位网络
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66-vlsi" class="md-nav__link">
+    6.6 VLSI实现相关
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    问题（略）
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考文献和进一步阅读
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1192,6 +1336,14 @@
 
 <h1 id="6">6. 超前进位加法器<a class="headerlink" href="#6" title="Permanent link">&para;</a></h1>
 <p>Cary-Lookahead Adders</p>
+<blockquote>
+<p>“Computers can figure out all kinds of problems, except the things in the world that just don’t add up.”
+              — ANONYMOUS</p>
+<p>“计算机可以解决各种各样的问题，除了世界上那些不合逻辑(不能加起来)的事情。”
+              — 匿名</p>
+</blockquote>
+<p>Adder designs considered in Chapter 5 have worst-case delays that grow at least linearly with the word width k. Since the most-significant bit of the sum is a function of all the 2k input bits, assuming that the gate fan-in is limited to d, a lower bound on addition latency is logd(2k). An interesting question, therefore, is whether one can add two k-bit binary numbers in O(log k) worst-case time. Carry-lookahead adders, covered in this chapter, represent a commonly used scheme for logarithmic time addition. Other schemes are introduced in Chapter 7.</p>
+<p>第 5 章中考虑的加法器设计具有最坏情况下的延迟，该延迟至少随字宽 k 线性增长。 由于和的最高有效位是所有 2k 输入位的函数，假设门扇入限制为 d，加法延迟的下限为 <span class="arithmatex">\(\log_d(2k)\)</span>。 因此，一个有趣的问题是，是否可以在 <span class="arithmatex">\(O(\log k)\)</span> 最坏情况时间内将两个 k 位二进制数相加。 本章介绍的超前进位加法器代表了对数时间加法的常用方案。 其他方案将在第 7 章中介绍。</p>
 <ul>
 <li>6.1 展开进位递归 UNROLLING THE CARRY RECURRENCE</li>
 <li>6.2 超前进位加法器的设计 CARRY-LOOKAHEAD ADDER DESIGN</li>
@@ -1200,6 +1352,284 @@
 <li>6.5 混合的并行前缀进位网络 ALTERNATIVE PARALLEL PREFIX NETWORKS</li>
 <li>6.6 VLSI实现相关 VLSI IMPLEMENTATION ASPECTS</li>
 </ul>
+<h2 id="61">6.1 展开进位递归<a class="headerlink" href="#61" title="Permanent link">&para;</a></h2>
+<p>Recall the <em>gi</em> (generate), <em>pi</em> (propagate), <em>ai</em> (annihilate or absorb), and <em>ti</em> (transfer) auxiliary signals introduced in Section 5.6:</p>
+<p>回想一下 5.6 节中介绍的 <span class="arithmatex">\(g_i\)</span>（生成）、<span class="arithmatex">\(p_i\)</span>（传播）、<span class="arithmatex">\(a_i\)</span>（消灭或吸收）和 <span class="arithmatex">\(t_i\)</span>（转移）辅助信号：</p>
+<div class="arithmatex">\[
+\begin{array}{l}
+g_i = 1 \iff x_i + y_i ≥ r     &amp; \text{进位必然产生} &amp; \text{Carry is generated}\\
+p_i = 1 \iff x_i + y_i = r − 1 &amp; \text{进位输入可以传递到输出} &amp; \text{Carry is propagated} \\
+t_i = \bar a_i = g_i \vee p_i  &amp; \text{进位不会被吸收} &amp; \text{Carry is not annihilated} \\
+\end{array}
+\]</div>
+<p>These signals, along with the carry recurrence</p>
+<p>这些信号以及进位递归</p>
+<p><span class="arithmatex">\(c_{i+1} = g_i \vee p_ic_i = g_i \vee t_ic_i\)</span></p>
+<p>allow us to decouple the problem of designing a fast carry network from details of the number system (radix, digit set). In fact it does not even matter whether we are adding or subtracting; any carry network can be used as a borrow network if we simply redefine the preceding signals to correspond to borrow generation, borrow propagation, and so on. </p>
+<p>让我们能够将设计快速进位网络的问题与数字系统的细节（基数、数字集）解耦。事实上，我们是加还是减并不重要；如果我们简单地重新定义前面的信号以对应借位生成、借位传播等，则任何进位网络都可以用作借位网络。</p>
+<p>The carry recurrence  <em>ci</em>+1 =  <em>gi</em> ∨  <em>pici</em>  states that a carry will enter stage  <em>i</em> + 1 if it is generated in stage  <em>i</em>  or it enters stage  <em>i</em>  and is propagated by that stage. One can easily unroll this recurrence, eventually obtaining each carry  <em>ci</em>  as a logical function of the operand bits and  <em>c</em> in. Here are three steps of the unrolling process for  :</p>
+<p>进位循环 <span class="arithmatex">\(c_{i+1} = g_i ∨ p_ic_i\)</span> 表明，如果进位在第 i 阶段生成，或者进入第 i 阶段并由该阶段传播，则进位将进入第 i + 1 阶段。人们可以很容易地展开这个递归式，最终获得每个进位 <span class="arithmatex">\(c_i\)</span> 作为操作数位和 <span class="arithmatex">\(c_{in}\)</span> 的逻辑函数。以下是 <span class="arithmatex">\(c_i\)</span> 展开过程的三个步骤：</p>
+<p><span class="arithmatex">\(c_i = g_{i−1} ∨ c_{i−1} p_{i−1}\)</span></p>
+<p><span class="arithmatex">\(\ = g_{i−1} ∨ (g_{i−2} ∨ c_{i−2}p_{i−2})p_{i−1} = g_{i−1} ∨ g_{i−2}p_{i−1} ∨ c_{i−2}p_{i−2}p_{i−1}\)</span></p>
+<p><span class="arithmatex">\(\ =g_{i−1} ∨ g_{i−2}p_{i−1} ∨ g_{i−3}p_{i−2}p_{i−1} ∨ c_{i−3}p_{i−3}p_{i−2}p_{i−1}\)</span></p>
+<p><span class="arithmatex">\(\ = g_{i−1} ∨ g_{i−2}p_{i−1} ∨ g_{i−3}p_{i−2}p_{i−1} ∨ g_{i−4}p_{i−3}p_{i−2}p_{i−1} ∨ c_{i−4}p_{i−4}p_{i−3}p_{i−2}p_{i−1}\)</span></p>
+<p>The unrolling can be continued until the last product term contains  <em>c</em> 0 =  <em>c</em> in. The unrolled version of the carry recurrence has the following simple interpretation: carry enters into position  <em>i</em>  if and only if a carry is generated in position  <em>i</em> − 1  <em>(gi</em>−1 <em>)</em>, or a carry generated in position  <em>i</em> − 2 is propagated by position  <em>i</em> − 1  <em>(gi</em>−2 <em>pi</em>−1 <em>)</em>, or a carry generated in position  <em>i</em> − 3 is propagated at  <em>i</em> − 2 and  <em>i</em> − 1  <em>(gi</em>−3 <em>pi</em>−2 <em>pi</em>−1 <em>)</em>, etc. </p>
+<p>可以继续展开，直到最后一个乘积项包含 <span class="arithmatex">\(c_0 = c_{in}\)</span>。进位递归的展开版本具有以下简单解释：进位进入位置 <span class="arithmatex">\(i\)</span> 当且仅当在位置 <span class="arithmatex">\(i − 1\)</span> 生成进位<span class="arithmatex">\((g_i−1 )\)</span> ，或者在位置 <span class="arithmatex">\(i − 2\)</span> 生成的进位由位置 <span class="arithmatex">\(i − 1\)</span>  传播<span class="arithmatex">\((g_{i−2} p_{i−1} )\)</span>，或者在位置 <span class="arithmatex">\(i − 3\)</span> 生成的进位在 <span class="arithmatex">\(i − 2\)</span> 和 <span class="arithmatex">\(i − 1\)</span> 传播($g_{i−3} p_{i−2} p_{i−1} $) 等</p>
+<p>After full unrolling, we can compute all the carries in a  <em>k</em>-bit adder directly from the auxiliary signals ( <em>gi</em>,  <em>pi</em>) and  <em>c</em> in, using two-level AND-OR logic circuits with maximum gate fan-in of  <em>k</em> + 1. For  <em>k</em> = 4, the logic expressions are as follows: </p>
+<p>完全展开后，我们可以使用最大门扇入为 k + 1 的两级 AND-OR 逻辑电路，直接根据辅助信号 ( gi, pi) 和 c in 计算 k 位加法器中的所有进位。对于 k = 4，逻辑表达式如下：</p>
+<p><span class="arithmatex">\(c_4 = g_3 ∨ g_2p_3 ∨ g_1p_2p_3 ∨ g_0p_1p_2p_3 ∨ c_0p_0p_1p_2p_3\)</span>
+<span class="arithmatex">\(c_3 = g_2 ∨ g_1p_2 ∨ g_0p_1p_2 ∨ c_0p_0p_1p_2\)</span>
+<span class="arithmatex">\(c_2 = g_1 ∨ g_0p_1 ∨ c_0p_0p_1\)</span>
+<span class="arithmatex">\(c_1 = g_0 ∨ c_0p_0\)</span></p>
+<p>Here,  <em>c</em> 0 and  <em>c</em> 4 are the 4-bit adder’s  <em>c</em> in and  <em>c</em> out, respectively. A carry network based on the preceding equations can be used in conjunction with two-input ANDs, producing the <em>gi</em>  signals, and two-input XORs, producing the  <em>pi</em>  and sum bits, to build a 4-bit binary adder. Such an adder is said to have  <em>full carry lookahead</em>. </p>
+<p>这里，c 0 和c 4 分别是4位加法器的<span class="arithmatex">\(c_{in}\)</span> 和<span class="arithmatex">\(c_{out}\)</span>。基于前述方程的进位网络可以与产生 <span class="arithmatex">\(g_i\)</span> 信号的双输入 AND 和产生 <span class="arithmatex">\(p_i\)</span> 和和位的双输入 XOR 结合使用，以构建 4 位二进制加法器。这样的加法器被称为是有*完全进位超前进位*。</p>
+<p>Note that since  <em>c</em> 4 does not affect the computation of the sum bits, it can be derived based on the simpler equation</p>
+<p>注意，由于c 4 不影响和位的计算，因此可以基于更简单的方程推导</p>
+<p><span class="arithmatex">\(c_4 = g_3 ∨ c_3 p_3\)</span></p>
+<p>with little or no speed penalty. The resulting carry network is depicted in Fig. 6.1. </p>
+<p>几乎没有速度损失。由此产生的进位网络如图 6.1 所示。</p>
+<p><img alt="image-20230804162221501" src="../assets/image-20230804162221501.png" /></p>
+<p>Clearly, full carry lookahead is impractical for wide words. The fully unrolled carry equation for  <em>c</em> 31, for example, consists of 32 product terms, the largest of which contains 32 literals. Thus, the required AND and OR functions must be realized by tree networks, leading to increased latency and cost. Two schemes for managing this complexity immediately suggest themselves:</p>
+<ul>
+<li>
+<p>High-radix addition (i.e., radix <span class="arithmatex">\(2^h\)</span>)</p>
+</li>
+<li>
+<p>Multilevel lookahead</p>
+</li>
+</ul>
+<p>显然，全进位超前对于宽字来说是不切实际的。例如，<span class="arithmatex">\(c_{31}\)</span> 的完全展开进位方程由 32 个乘积项组成，其中最大的包含32 个文字。因此，所需的“与”和“或”功能必须通过树形网络来实现，从而导致延迟和成本增加。管理这种复杂性的两种方案立即出现：</p>
+<ul>
+<li>高基数加法（即基数 <span class="arithmatex">\(2^h\)</span>）</li>
+<li>多级前瞻</li>
+</ul>
+<p>High-radix addition increases the latency for generating the auxiliary signals and sum digits but simplifies the carry network. Depending on the implementation method and technology, an optimal radix might exist. Multilevel lookahead is the technique used in practice and is covered in Section 6.2. </p>
+<p>高基数加法增加了生成辅助信号和和数字的延迟，但简化了进位网络。根据实现方法和技术，可能存在最佳基数。多级前瞻是实践中使用的技术，在 6.2 节中进行了介绍。</p>
+<h2 id="62">6.2 超前进位加法器的设计<a class="headerlink" href="#62" title="Permanent link">&para;</a></h2>
+<p>Consider radix-16 addition of two binary numbers that are characterized by their  <em>gi</em>  and <em>pi</em>  signals. For each radix-16 digit position, extending from bit position  <em>i</em>  to bit position <em>i</em> + 3 of the original binary numbers (where  <em>i</em>  is a multiple of 4), “block generate” and “block propagate” signals can be derived as follows:</p>
+<p>考虑以 <span class="arithmatex">\(g_i\)</span> 和 <span class="arithmatex">\(p_i\)</span> 信号为特征的两个二进制数的基 16 加法。对于每个基数 16 位位置，从原始二进制数的位位置 <span class="arithmatex">\(i\)</span> 延伸到位位置 <span class="arithmatex">\(i + 3\)</span>（其中 <span class="arithmatex">\(i\)</span> 是 4 的倍数），“块生成”和 “块传播”信号可以如下导出：</p>
+<p><span class="arithmatex">\(g_{[ i, i+3]} = g_{i+3} ∨ g_{i+2} p_{i+3} ∨ g_{i+1} p_{i+2} p_{i+3} ∨ g_ip_{i+1} p_{i+2} p_{i+3}\)</span></p>
+<p><span class="arithmatex">\(p_{[ i, i+3]} = p_ip_{i+1} p_{i+2} p_{i+3}\)</span></p>
+<p>The preceding equations can be interpreted in the same way as unrolled carry equations: the four bit positions collectively propagate an incoming carry  <em>ci</em>  if and only if each of the four positions propagates; they collectively generate a carry if a carry is produced in position  <em>i</em> + 3, or it is produced in position  <em>i</em> + 2 and propagated by position <em>i</em> + 3, etc. </p>
+<p>前面的方程可以用与展开进位方程相同的方式解释：当且仅当四个位置中的每一个都传播时，四个位位置共同传播传入进位 ci；如果在位置 <span class="arithmatex">\(i + 3\)</span> 产生进位，或者在位置 <span class="arithmatex">\(i + 2\)</span> 产生进位并通过位置 <span class="arithmatex">\(i + 3\)</span> 传播，等等，则它们共同产生进位。</p>
+<p>If we replace the  <em>c</em> 4 portion of the carry network of Fig. 6.1 with circuits that produce the block generate and propagate signals  <em>g</em>[ <em>i</em>,  <em>i</em>+3] and  <em>p</em>[ <em>i</em>,  <em>i</em>+3], the 4-bit  <em>lookahead carry</em> <em>generator</em>  of Fig. 6.2a is obtained. Figure 6.2b shows the 4-bit lookahead carry generator in schematic form. We will see shortly that such a block can be used in a multilevel structure to build a carry network of any desired width. </p>
+<p>如果我们用产生块生成和传播信号 <span class="arithmatex">\(g_{[i, i+3]}\)</span>和 <span class="arithmatex">\(p_{[i, i+3]}\)</span> 的电路替换图 6.1 进位网络的 <span class="arithmatex">\(c_4\)</span> 部分，则获得图 6.2a 的 4 位先行进位生成器。图 6.2b 以原理图形式显示了 4 位先行进位生成器。我们很快就会看到，这样的块可以在多层结构中使用，以构建任何所需宽度的进位网络。</p>
+<p><img alt="image-20230804163427965" src="../assets/image-20230804163427965.png" /></p>
+<p>First, however, let us take a somewhat more general view of the block generate and propagate signals. Assuming  <em>i</em> 0  <em>&lt; i</em> 1  <em>&lt; i</em> 2, we can write </p>
+<p>然而，首先让我们对模块生成和传播信号有一个更一般的看法。假设 <span class="arithmatex">\(i_0 &lt; i_1 &lt; i_2\)</span>，我们可以写出下面等式</p>
+<p><span class="arithmatex">\(g_{[ i_0, i_2−1]} = g_{[i_1, i_2−1]} ∨ g_{[i_0, i_1−1]} p_{[ i_1, i_2−1]}\)</span></p>
+<p>This equation essentially says that a carry is generated by the block of positions from  <em>i</em> 0 to  <em>i</em> 2 − 1 if and only if a carry is generated by the [ <em>i</em> 1,  <em>i</em> 2 − 1] block or a carry generated <em>p</em>[ <em>i</em>,  <em>i</em>+3] by the [i0, i1 − 1] block is propagated by the [i1, i2 − 1] block. Similarly</p>
+<p>该等式本质上表示进位是由 <span class="arithmatex">\(i_0\)</span> 开始的位置块生成的到 <span class="arithmatex">\(i_2 − 1\)</span> 当且仅当 <span class="arithmatex">\([ i_1, i_2 − 1]\)</span> 块生成进位或由 <span class="arithmatex">\([ i_0, i_1 − 1]\)</span> 块生成进位然后由 <span class="arithmatex">\([ i_1, i_2 − 1]\)</span> 块传播。类似的有下面等式</p>
+<p><span class="arithmatex">\(p[i_0,i_2−1] = p[i_0,i_1−1]p[i_1,i_2−1]\)</span></p>
+<p>In fact the two blocks being merged into a larger block do not have to be contiguous; they can also be overlapping. In other words, for the possibly overlapping blocks [ <em>i</em> 1,  <em>j</em> 1] and [ <em>i</em> 0,  <em>j</em> 0],  <em>i</em> 0 ≤  <em>i</em> 1 − 1 ≤  <em>j</em> 0  <em>&lt; j</em> 1, we have </p>
+<p>事实上，合并成一个更大块的两个块不必是连续的；它们也可以重叠。换句话说，对于可能重叠的块 <span class="arithmatex">\([ i_1, j_1]\)</span>  和 <span class="arithmatex">\([ i_0, j_0]\)</span>, <span class="arithmatex">\(i_0 ≤ i_1 − 1 ≤ j_0 &lt; j_1\)</span>，我们有</p>
+<p><span class="arithmatex">\(g[i_0,j_1] = g[i_1,j_1] ∨ g[i_0,j_0]p[i_1,j_1]\)</span></p>
+<p><span class="arithmatex">\(p[i_0,j_1] = p[i_0,j_0]p[i_1,j_1]\)</span></p>
+<p>Figure 6.3 shows that a 4-bit lookahead carry generator can be used to combine the <em>g</em>  and  <em>p</em>  signals from adjacent or overlapping blocks into the  <em>p</em>  and  <em>g</em>  signals for the combined block. </p>
+<p>图 6.3 显示 4 位先行进位发生器可用于将来自相邻或重叠块的 g 和 p 信号组合成组合块的 p 和 g 信号。</p>
+<p><img alt="image-20230807130403223" src="../assets/image-20230807130403223.png" /></p>
+<p>Given the 4-bit lookahead carry generator of Fig. 6.2, it is an easy matter to synthesize wider adders based on a multilevel carry-lookahead scheme. For example, to construct a two-level 16-bit carry-lookahead adder, we need four 4-bit adders and a 4-bit lookahead carry generator, connected together as shown on the upper right quadrant of Fig. 6.4. </p>
+<p>给定图 6.2 所示的 4 位超前进位生成器，基于多级超前进位方案合成更宽的加法器是一件容易的事。例如，要构建一个两级16位先行进位加法器，我们需要四个4位加法器和一个4位超前进位发生器，如图6.4右上象限所示连接在一起。</p>
+<p><img alt="image-20230807130736499" src="../assets/image-20230807130736499.png" /></p>
+<p>The 4-bit lookahead carry generator in this case can be viewed as predicting the three intermediate carries in a 4-digit radix-16 addition. The latency through this 16-bit adder consists of the time required for:</p>
+<ul>
+<li>Producing the  <em>g</em>  and  <em>p</em>  signals for individual bit positions (1 gate level). </li>
+<li>Producing the  <em>g</em>  and  <em>p</em>  signals for 4-bit blocks (2 gate levels). </li>
+<li>Predicting the carry-in signals  <em>c</em> 4,  <em>c</em> 8, and  <em>c</em> 12 for the blocks (2 gate levels). </li>
+<li>Predicting the internal carries within each 4-bit block (2 gate levels). </li>
+<li>Computing the sum bits (2 gate levels). </li>
+</ul>
+<p>Thus the total latency for the 16-bit adder is 9 gate levels, which is much better than the 32 gate levels required by a 16-bit ripple-carry adder. </p>
+<p>在这种情况下，4 位先行超前生成器可以被视为预测 4 位基 16 加法中的三个中间进位。通过该 16 位加法器的延迟包括以下所需的时间：</p>
+<ul>
+<li>为各个位位置（1 个门级）生成 g 和 p 信号。</li>
+<li>生成 4 位块（2 个门级）的 g 和 p 信号。预测块（2 个门级）的进位信号 c 4、c 8 和 c 12。</li>
+<li>预测每个 4 位块（2 个门级）内的内部进位。</li>
+<li>计算总和位（2 个门级）。</li>
+</ul>
+<p>因此，16 位加法器的总延迟为 9 个门级，这比 16 位纹波进位加法器所需的 32 个门级要好得多。</p>
+<p>Similarly, to construct a three-level 64-bit carry-lookahead adder, we can use four of the 16-bit adders above plus one 4-bit lookahead carry generator, connected together as shown in Fig. 6.4. The delay will increase by four gate levels with each additional level of lookahead: two levels in the downward movement of the  <em>g</em>  and  <em>p</em>  signals, and two levels for the upward propagation of carries through the extra level. Thus, the delay of a  <em>k</em>-bit carry-lookahead adder based on 4-bit lookahead blocks is</p>
+<p>同样，要构造一个三级 64 位先行进位加法器，我们可以使用上面的 4 个 16 位加法器加上 1 个 4 位先行进位发生器，连接在一起如图 6.4 所示。每增加一个超前级别，延迟将增加四个门级别：g 和 p 信号向下移动的两个级别，以及通过额外级别的进位向上传播的两个级别。因此，基于 4 位先行块的 k 位进位先行加法器的延迟为</p>
+<p><span class="arithmatex">\(\begin{equation} T_{Lookahead−add} = 4 \log_4 k + 1 \text{ gate levels} \end{equation}\)</span></p>
+<p>Hence, the 64-bit carry-lookahead adder of Fig. 6.4 has a latency of 13 gate levels. </p>
+<p>因此，图 6.4 的 64 位进位超前加法器具有 13 个门级的延迟。</p>
+<p>One can of course use 6-bit or 8-bit lookahead blocks to reduce the number of lookahead levels for a given word width. But this may not be worthwhile in view of the longer delays introduced by gates with higher fan-in. When the word width is not a power of 4, some of the inputs and/or outputs of the lookahead carry generators remain unused, and the latency formula becomes 4 log4  <em>k</em> + 1. </p>
+<p>当然可以使用 6 位或 8 位先行块来减少给定字宽的先行级别。但考虑到扇入较高的门会带来更长的延迟，这可能不值得。当字宽不是 4 的幂时，先行进位生成器的一些输入和/或输出保持未使用，并且延迟公式变为 <span class="arithmatex">\(4 \left \lceil \log_4 k \right \rceil + 1\)</span>。</p>
+<p>One final point about the design depicted in Fig. 6.4: this 64-bit adder does not produce a carry-out signal (<span class="arithmatex">\(c_{64}\)</span>), which would be needed in many applications. There are two ways to remedy this problem in carry-lookahead adders. One is to generate   <span class="arithmatex">\(c_{out}\)</span> externally based on auxiliary signals or the operand and sum bits in position  <em>k</em> − 1: </p>
+<p>关于图 6.4 中所示设计的最后一点：该 64 位加法器不会产生许多应用中需要的进位信号 (<span class="arithmatex">\(c_{64}\)</span>)。在超前进位加法器中，有两种方法可以解决这个问题。一种是根据辅助信号或位置 <span class="arithmatex">\(k − 1\)</span> 的操作数和和位在外部生成 <span class="arithmatex">\(c_{out}\)</span>： </p>
+<p><span class="arithmatex">\(c_{out} = g[0, k−1] ∨ c_0 p[0, k−1] = x_{k−1} y_{k−1} ∨ \bar{s}_{k−1} (x_{k−1} ∨ y_{k−1} )\)</span> </p>
+<p>Another is to design the adder to be 1 bit wider than needed (e.g., 61 bits instead of 60), using the additional sum bit as  <span class="arithmatex">\(c_{out}\)</span>. </p>
+<p>另一种方法是使用附加和将加法器设计为比所需宽 1 位（例如，61 位而不是 60 位）位为<span class="arithmatex">\(c_{out}\)</span>。</p>
+<h2 id="63-ling">6.3 LING型加法器与相关设计<a class="headerlink" href="#63-ling" title="Permanent link">&para;</a></h2>
+<p>The Ling adder is a type of carry-lookahead adder that achieves significant hardware savings. Consider the carry recurrence and its unrolling by four steps:</p>
+<p>Ling 加法器是一种超前进位加法器，可显着节省硬件成本。考虑进位递归将其展开四步：</p>
+<p><span class="arithmatex">\(\begin{array}{l} c_i &amp;= g_{i−1} ∨ c_{i−1}p_{i−1} = g_{i−1} ∨ c_{i−1}t_{i−1}
+\\ &amp;= g_{i−1} ∨ g_{i−2}t_{i−1} ∨ g_{i−3}t_{i−2}t_{i−1} ∨ g_{i−4}t_{i−3}t_{i−2}t_{i−1} ∨ c_{i−4}t_{i−4}t_{i−3}t_{i−2}t_{i−1} \end{array}\)</span></p>
+<p>Ling’s modification consists of propagating <em>hi</em> = <em>ci</em> ∨ <em>ci</em>−1 instead of <em>ci</em>. To understand the following derivations, we note that <em>gi</em>−1 implies <em>ci (ci</em> = 1 if <em>gi</em>−1 = 1 <em>)</em>, which in turn implies <em>hi</em>.</p>
+<p>Ling 的修改包括传播 hi = <span class="arithmatex">\(c_i ∨ c_{i−1}\)</span> 而不是 ci。为了理解以下推导，我们注意到 <span class="arithmatex">\(g_{i−1}\)</span> 蕴含 <span class="arithmatex">\(c_i\)</span> （如果 <span class="arithmatex">\(g_{i−1} = 1\)</span> 则 <span class="arithmatex">\(c_i = 1\)</span> ），这又蕴含 <span class="arithmatex">\(h_i\)</span>。</p>
+<div class="arithmatex">\[
+\begin{array}{rl}
+c_{i−1}p_{i−1} &amp;= c_{i−1}p_{i−1} ∨ g_{i−1}p_{i−1} \text{ \{zero\} } ∨ p_{i−1}c_{i−1}p_{i−1} \text{ \{repeated term\} } \\
+               &amp;= c_{i−1}p_{i−1} ∨ (g_{i−1} ∨ p_{i−1}c_{i−1})p_{i−1} \\
+               &amp;= (c_{i−1} ∨ c_i)p_{i−1} = h_ip_{i−1} \\
+c_i &amp;= g_{i−1} ∨ c_{i−1}p_{i−1} \\
+   &amp;= h_ig_{i−1} \text{ \{ since } g_{i−1} \text{ implies } h_i \text{\} } ∨ h_ip_{i−1} \text{ \{ from above \} } \\
+   &amp;= h_i(g_{i−1} ∨ p_{i−1}) = h_i t_{i−1} \\
+h_i &amp;= c_i ∨ c_{i−1} = (g_{i−1} ∨ c_{i−1}p_{i−1}) ∨ c_{i−1} \\
+   &amp;= g_{i−1} ∨ c_{i−1} = g_{i−1} ∨ h_{i−1}t_{i−2} \text{ \{from above\} }
+\end{array}
+\]</div>
+<p>Unrolling the preceding recurrence for <em>hi</em>, we get</p>
+<p>展开 <span class="arithmatex">\(h_i\)</span> 的前面的递归，我们得到
+$$
+\begin{array}{l}
+h_i &amp;= g_{i−1} ∨ t_{i−2} h_{i−1} = g_{i−1} ∨ t_{i−2}(g_{i−2} ∨ h_{i−2} t_{i−3}) \
+   &amp;= g_{i−1} ∨ g_{i−2} ∨ h_{i−2} t_{i−2} t_{i−3} \text{ { since } t_{i−2} g_{i−2} = g_{i−2} \text{ }} \
+   &amp;= g_{i−1} ∨ g_{i−2} ∨ g_{i−3} t_{i−3} t_{i−2} ∨ h_{i−3} t_{i−4} t_{i−3} t_{i−2} \
+   &amp;= g_{i−1} ∨ g_{i−2} ∨ g_{i−3} t_{i−2} ∨ g_{i−4} t_{i−3} t_{i−2} ∨ h_{i−4} t_{i−4} t_{i−3} t_{i−2} 
+\end{array}
+$$
+We see that expressing  <em>hi</em>  in terms of  <em>hi</em>−4 needs five product terms, with a maximum four-input AND gate, and a total of 14 gate inputs. By contrast, expressing  <em>ci</em>  as </p>
+<p>我们看到，用 <span class="arithmatex">\(h_{i−4}\)</span> 表达 <span class="arithmatex">\(h_i\)</span> 需要 5 个乘积项，最多有 4 个输入与门，总共 14 个门输入。相比之下，将 ci 表示为</p>
+<p><span class="arithmatex">\(c_i = g_{i−1} ∨ g_{i−2} t_{i−1} ∨ g_{i−3} t_{i−2} t_{i−1} ∨ g_{i−4} t_{i−3} t_{i−2} t_{i−1} ∨ c_{i−4} t_{i−4} t_{i−3} t_{i−2} t_{i−1}\)</span></p>
+<p>requires five terms, with a maximum five-input AND gate, and a total of 19 gate inputs. The advantage of  <em>hi</em>  over  <em>ci</em>  is even greater if we can use wired-OR (3 gates with 9 inputs vs. 4 gates with 14 inputs). Once  <em>hi</em>  is known, however, the sum is obtained by a slightly more complex expression compared with  <em>si</em> =  <em>pi</em> ⊕  <em>ci</em>:</p>
+<p>需要 5 项，最多有 5 个输入与门，总共 19 个门输入。如果我们可以使用线或（具有 9 个输入的 3 个门与具有 14 个输入的 4 个门），则 <span class="arithmatex">\(h_i\)</span> 相对于 <span class="arithmatex">\(c_i\)</span> 的优势会更大。然而，一旦 <span class="arithmatex">\(h_i\)</span> 已知，与 <span class="arithmatex">\(s_i = p_i ⊕ c_i\)</span> 相比，可以通过稍微复杂的表达式获得总和：</p>
+<p><span class="arithmatex">\(s_i = p_i ⊕ c_i = p_i ⊕ h_it_{i−1}\)</span></p>
+<p>This concludes our presentation of Ling’s improved carry-lookahead adder. The reader can skip the rest of this section with no harm to continuity. </p>
+<p>我们对 Ling 改进的超前进位加法器的介绍到此结束。读者可以跳过本节的其余部分，这不会影响连续性。</p>
+<p>A number of related designs have been developed based on ideas similar to Ling’s. For example, Doran [Dora88] suggests that one can in general propagate <span class="arithmatex">\(η\)</span> instead of <span class="arithmatex">\(c\)</span> where</p>
+<p>基于与凌类似的想法，已经开发出许多相关设计。例如，Doran [Dora88] 建议一般可以传播 <span class="arithmatex">\(η\)</span> 而不是 <span class="arithmatex">\(c\)</span>，其中</p>
+<p><span class="arithmatex">\(η_{i+1} = f (x_i, y_i, c_i) = ψ(x_i, y_i)c_i ∨ \phi(x_i, y_i)\bar{c}_i\)</span></p>
+<p>The residual functions <em>ψ</em> and <em>φ</em> in the preceding Shannon expansion of <em>f</em> around <em>ci</em> must be symmetric, and there are but eight symmetric functions of the two variables <em>xi</em> and <em>yi</em>. Doran shows that not all 8 × 8 = 64 possibilities are valid choices for <em>ψ</em> and <em>φ</em>, since in some cases the sum cannot be computed based on the <em>ηi</em> values. Dividing the eight symmetric functions of <em>xi</em> and <em>yi</em> into the two disjoint subsets {0, ¯ <em>ti</em>, <em>gi</em>, ¯ <em>pi</em>} and {1, <em>ti</em>, ¯ <em>gi</em>, <em>pi</em>}, Doran proves that <em>ψ</em> and <em>φ</em> cannot both belong to the same subset. Thus, there are only 32 possible adders. Four of these 32 possible adders have the desirable properties of Ling’s adder, which represents the special case of <em>ψ(xi</em>, <em>yi)</em> = 1 and <em>φ(xi</em>, <em>yi)</em> = <em>gi</em> = <em>xiyi</em>.</p>
+<p>前面 <span class="arithmatex">\(f\)</span> 围绕 <span class="arithmatex">\(c_i\)</span> 进行的香农展开中的残差函数 <span class="arithmatex">\(ψ\)</span> 和 <span class="arithmatex">\(\phi\)</span> 必须是对称的，并且两个变量 <span class="arithmatex">\(x_i\)</span> 和 <span class="arithmatex">\(y_i\)</span> 的对称函数只有 8 个。 Doran 表明，并非所有 8 × 8 = 64 种可能性都是 <span class="arithmatex">\(ψ\)</span> 和 <span class="arithmatex">\(\phi\)</span> 的有效选择，因为在某些情况下，无法根据 <span class="arithmatex">\(η_i\)</span> 值计算总和。将 <span class="arithmatex">\(x_i\)</span> 和 <span class="arithmatex">\(y_i\)</span> 的八个对称函数分为两个不相交的子集 {<span class="arithmatex">\(0, \bar{t}_i, g_i, \bar{p}_i\)</span>} 和 {<span class="arithmatex">\(1, t_i, \bar{g}_i, p_i\)</span>}，Doran证明 <span class="arithmatex">\(ψ\)</span> 和 <span class="arithmatex">\(\phi\)</span> 不能同时属于同一个子集。因此，只有 32 个可能的加法器。这 32 个可能的加法器中有 4 个具有 Ling 加法器的理想属性，它代表 <span class="arithmatex">\(ψ(x_i, y_i) = 1\)</span> 和 <span class="arithmatex">\(\phi(x_i, y_i) = g_i = x_iy_i\)</span> 的特殊情况。</p>
+<h2 id="64">6.4 并行前缀进位计算<a class="headerlink" href="#64" title="Permanent link">&para;</a></h2>
+<p>Consider two contiguous or overlapping blocks B and B and their associated generate and propagate signal pairs ( <em>g</em>,  <em>p</em>) and ( <em>g</em>,  <em>p</em>), respectively. As shown in Fig. 6.5, the generate and propagate signals for the merged block B can be obtained from the equations:</p>
+<p>考虑两个连续或重叠的块 <span class="arithmatex">\(B'\)</span> 和 <span class="arithmatex">\(B''\)</span> 及其关联的分别生成和传播信号对 <span class="arithmatex">\((g', p')\)</span> 和 <span class="arithmatex">\((g'', p'')\)</span>。如图 6.5 所示，合并块 B 的生成和传播信号可由以下等式获得：</p>
+<p><span class="arithmatex">\(g = g'' ∨ g' p''\)</span></p>
+<p><span class="arithmatex">\(p = p' p''\)</span></p>
+<p>That is, carry generation in the larger group takes place if the left group generates a carry or the right group generates a carry and the left one propagates it, while propagation occurs if both groups propagate the carry. </p>
+<p>也就是说，如果左侧组生成进位或右侧组生成进位并且左侧组传播进位，则较大组中会发生进位生成，而如果两个组都传播进位，则会发生传播。</p>
+<p><img alt="image-20230807202145867" src="../assets/image-20230807202145867.png" /></p>
+<p>We note that in the discussion above, the indices  <em>i</em> 0,  <em>j</em> 0,  <em>i</em> 1, and  <em>j</em> 1 defining the two contiguous or overlapping blocks are in fact immaterial, and the same expressions can be written for any two adjacent groups of any width. Let us define the “carry” operator c <em>/</em>  on (<em>g</em>,  <em>p</em>) signal pairs as follows (right side of Fig. 6.5):</p>
+<p>我们注意到，在上面的讨论中，定义两个连续或重叠块的索引 <span class="arithmatex">\(i_0 、j_0 、i_1 和 j_1\)</span> 实际上是无关紧要的，并且可以为任何宽度的任何两个相邻组编写相同的表达式。让我们定义“进位”运算符 <span class="arithmatex">\(\not{c}\)</span> 在( g, p) 信号对如下（图 6.5 右侧）：</p>
+<p>$(g, p) = (g', p' ) \not{c} (g'', p'' ) \text{ 代表 } g = g'' ∨ g' p'', p = p' p'' $</p>
+<p>The carry operator c <em>/</em>  is  <em>associative</em>, meaning that the order of evaluation does not affect the value of the expression  <em>(g</em>,  <em>p</em> <em>)</em>  c <em>/ (g</em>,  <em>p</em> <em>)</em>  c <em>/ (g</em>,  <em>p</em> <em>)</em>, but it is not  <em>commutative</em>, since <em>g</em> ∨  <em>g</em> <em>p</em> is in general not equal to  <em>g</em> ∨  <em>g</em> <em>p</em>. </p>
+<p>进位运算符 <span class="arithmatex">\(\not{c}\)</span> 满足结合律，这意味着求值顺序不会影响表达式 <span class="arithmatex">\((g', p' ) \not{c} (g'', p'' ) \not{c} (g''', p''' )\)</span> 的值，但它不可交换，因为 <span class="arithmatex">\(g'' ∨ g' p''\)</span> 通常不等于 <span class="arithmatex">\(g' ∨ g'' p'\)</span>。</p>
+<p>Observe that in an adder with no  <em>c</em> in, we have  <em>ci</em>+1 =  <em>g</em>[0,  <em>i</em>]; that is, a carry enters position  <em>i</em>+1 if and only if one is generated by the block [0,  <em>i</em>]. In an adder with  <em>c</em> in, a carryin of 1 can be viewed as a carry generated by stage −1; we thus set  <em>p</em>−1 = 0,  <em>g</em>−1 =  <em>c</em> in and compute  <em>g</em>[−1,  <em>i</em>] for all  <em>i</em>. So, the problem remains the same, but with an extra stage ( <em>k</em> + 1 rather than  <em>k</em>). The problem of carry determination can, therefore, be formulated as follows:</p>
+<p>观察到在没有 <span class="arithmatex">\(c_{in}\)</span> 的加法器中，我们有 <span class="arithmatex">\(c_{i+1}\)</span> = <span class="arithmatex">\(g[0, i]\)</span>；也就是说，当且仅当块 <span class="arithmatex">\([0, i]\)</span> 生成一个进位时，进位才会进入位置 <span class="arithmatex">\(i+1\)</span>。在有<span class="arithmatex">\(c_{in}\)</span>的加法器中，进位为1可以看作是级-1产生的进位；因此，我们设置 <span class="arithmatex">\(p_{−1} = 0, g_{−1} = c_{in}\)</span> 并计算所有 <span class="arithmatex">\(i\)</span> 的 <span class="arithmatex">\(g[−1, i]\)</span>。因此，问题仍然相同，但有一个额外的阶段（ <span class="arithmatex">\(k + 1\)</span> 而不是 <span class="arithmatex">\(k\)</span>）。因此，进位确定问题可以表述如下：</p>
+<p>给定</p>
+<p><span class="arithmatex">\((g_0, p_0) \  (g_1, p_1) \cdots (g_{k−2}, p_{k−2})\ (g_{k−1}, p_{k−1})\)</span></p>
+<p>找到</p>
+<p><span class="arithmatex">\((g[0,0], p[0,0]) (g[0,1], p[0,1]) · · · (g[0,k−2], p[0,k−2]) (g[0,k−1], p[0,k−1])\)</span></p>
+<p>The desired signal pairs can be obtained by evaluating all the prefixes of</p>
+<p>可以通过评估所有前缀来获得所需的信号对</p>
+<p>$(g_0, p_0 ) \not{c}  (g_1, p_1 ) \not{c} \cdots \not{c} (g_{k−2}, p_{k−2} ) \not{c} (g_{k−1}, p_{k−1} ) $</p>
+<p>in parallel. In this way, the carry problem is converted to a parallel prefix computation, and any prefix computation scheme can be used to find all the carries. </p>
+<p>并行进行。这样，进位问题就转化为并行的前缀计算，并且可以使用任何前缀计算方案来查找所有进位。</p>
+<p>A parallel prefix computation can be defined with any associative operator. In the following, we use the addition operator with integer operands, in view of its simplicity and familiarity, to illustrate the methods. The  <em>parallel prefix sums</em>  problem is defined as follows:</p>
+<p>并行前缀计算可以使用任何关联运算符来定义。鉴于其简单性和熟悉性，下面我们使用带有整数操作数的加法运算符来说明该方法。并行前缀和问题定义如下：</p>
+<div class="arithmatex">\[
+\begin{array}{l}
+\text{给定：} &amp;x_0 &amp;x_1       &amp;x_2          &amp;x_3                &amp;\cdots &amp;x_{k−1} \\
+\text{找到：} &amp;x_0 &amp;x_0 + x_1 &amp;x_0 + x_1 + x_2 &amp;x_0 + x_1 + x_2 + x_3 &amp;\cdots &amp;x_0 + x_1 + · · · + x_{k−1}
+\end{array}
+\]</div>
+<p>Any design for this parallel prefix sums problem can be converted to a carry computation network by simply replacing each adder cell with the carry operator of Fig. 6.5. There is one difference worth mentioning, though. Addition is commutative. So if prefix sums are obtained by computing and combining the partial sums in an arbitrary manner, the resulting design may be unsuitable for a carry network. However, as long as blocks whose sums we combine are always contiguous and we do not change their ordering, no problem arises. </p>
+<p>通过简单地将每个加法器单元替换为图 6.5 中的进位运算符，针对此并行前缀和问题的任何设计都可以转换为进位计算网络。不过，有一个差异值得一提。加法是可交换的。因此，如果通过以任意方式计算和组合部分和来获得前缀和，则所得设计可能不适合进位网络。然而，只要我们合并的块总是连续的并且我们不改变它们的顺序，就不会出现问题。</p>
+<p>Just as one can group numbers in any way to add them, ( <em>g</em>,  <em>p</em>) signal pairs can be grouped in any way for combining them into block signals. In fact, ( <em>g</em>,  <em>p</em>) signals give us an additional flexibility in that overlapping groups can be combined without affecting the outcome, whereas in addition, use of overlapping groups would lead to incorrect sums. </p>
+<p>正如人们可以以任何方式对数字进行分组以将它们相加一样，（g，p）信号对也可以以任何方式分组以将它们组合成块信号。事实上，( g, p) 信号为我们提供了额外的灵活性，因为可以组合重叠的组而不影响结果，而此外，使用重叠的组会导致不正确的总和。</p>
+<p>Figure 6.6a depicts a four-input prefix sums network composed of four adder blocks, arranged in two levels. It produces the prefix sums 5, 7, 6, and 12 when supplied with the inputs 5, 2, −1, and 6, going from right to left. Note that we use the right-to-left ordering of inputs and outputs on diagrams, because this corresponds to how we index digit positions in positional number representation. So, what we are computing really constitutes postfix sums of the expression <em>x</em> 3 + <em>x</em> 2 + <em>x</em> 1 + <em>x</em> 0. However, we will continue to use the terms “prefix sums” and “parallel prefix networks” in accordance with the common usage. As long as we remember that the indexing in carry network diagrams goes from right to left, no misinterpretation will arise. Figure 6.6b shows the carry network derived from the prefix sums network of Fig. 6.6a by replacing each adder with a carry operator. It also shows how the outputs of this carry network are related to carries that we need to complete a 4-bit addition.</p>
+<p>图 6.6a 描述了由四个加法器块组成的四输入前缀和网络，这些加法器块布置在两级中。当提供输入 5、2、-1 和 6（从右到左）时，它会生成前缀和 5、7、6 和 12。请注意，我们在图表上使用从右到左的输入和输出排序，因为这对应于我们在位置数字表示中索引数字位置的方式。因此，我们计算的实际上是表达式 <span class="arithmatex">\(x_3 + x_2 + x_1 + x_0\)</span> 的后缀和。但是，我们将继续按照常见用法使用术语“前缀和”和“并行前缀网络”。只要我们记住进位网络图中的索引是从右到左，就不会产生误解。图 6.6b 显示了通过用进位运算符替换每个加法器而从图 6.6a 的前缀和网络导出的进位网络。它还显示了该进位网络的输出如何与我们完成 4 位加法所需的进位相关。</p>
+<p><img alt="image-20230807204856461" src="../assets/image-20230807204856461.png" /></p>
+<h2 id="65">6.5 混合的并行前缀进位网络<a class="headerlink" href="#65" title="Permanent link">&para;</a></h2>
+<p>Now, focusing on the problem of computing prefix sums, we can use several strategies to synthesize a parallel prefix sum network. Figure 6.7 is based on a divide-and-conquer approach as proposed by Ladner and Fischer [Ladn80]. The low-order <em>k</em>/2 inputs are processed by the subnetwork at the right to compute the prefix sums <em>s</em> 0, <em>s</em> 1, <em>. . .</em> , <em>sk/</em> 2−1. Partial prefix sums are computed for the high-order <em>k</em>/2 values (the left subnetwork) and <em>sk/</em> 2−1 (the leftmost output of the first subnetwork) is added to them to complete the computation. Such a network is characterized by the following recurrences for its delay (in terms of adder levels) and cost (number of adder cells):</p>
+<p>现在，关注计算前缀和的问题，我们可以使用多种策略来合成并行前缀和网络。图 6.7 基于 Ladner 和 Fischer [Ladn80] 提出的分而治之方法。低阶 k/2 输入由右侧的子网络处理，以计算前缀和 <span class="arithmatex">\(s_0, s_1, ...，s_{k/2−1}\)</span>。计算高阶 <span class="arithmatex">\(k/2\)</span> 值（左侧子网）的部分前缀和，并将 <span class="arithmatex">\(s_{k/2−1}\)</span> （第一个子网的最左侧输出）添加到其中以完成计算。这种网络的特点是其延迟（就加法器级别而言）和成本（加法器单元的数量）具有以下递归：</p>
+<p>$\text{延迟递归：} D(k) = D(k/2) + 1 = \log_2 k $</p>
+<p><span class="arithmatex">\(\text{成本递归：}C(k) = 2C(k/2) + k/2 = (k/2) \log_2 k\)</span></p>
+<p><img alt="image-20230807210229970" src="../assets/image-20230807210229970.png" /></p>
+<p>A second divide-and-conquer design for computing prefix sums, proposed by Brent and Kung [Bren82], is depicted in Fig. 6.8. Here, the inputs are first combined pairwise to obtain the following sequence of length <em>k</em>/2:</p>
+<p>Brent 和 Kung [Bren82] 提出的用于计算前缀和的第二种分治设计如图 6.8 所示。这里，首先将输入两两组合以获得以下长度为 k/2 的序列：</p>
+<p><span class="arithmatex">\(\begin{matrix}x_0 + x_1 &amp;x_2 + x_3 &amp;x_4 + x_5 &amp;· · · &amp;x_{k−4} + x_{k−3} &amp;x_{k−2} + x_{k−1}\end{matrix}\)</span></p>
+<p>Parallel prefix sum computation on this new sequence yields the odd-indexed prefix sums <em>s</em> 1,  <em>s</em> 3,  <em>s</em> 5,  <em>. . .</em>  for the original sequence. Even-indexed prefix sums are then computed by using  <em>s</em> 2 <em>j</em> =  <em>s</em> 2 <em>j</em>−1 +  <em>x</em> 2 <em>j</em>. The cost and delay recurrences for the design of Fig. 6.8 are: Delay recurrence:</p>
+<p>对此新序列的并行前缀和计算产生奇数索引前缀和 <span class="arithmatex">\(s_1, s_3, s_5,...\)</span>为原始序列。然后使用 <span class="arithmatex">\(s_{2 j} = s_{2 j−1} + x_{2 j}\)</span> 计算偶索引前缀和。图 6.8 设计的成本和延迟递归为：</p>
+<p>$\text{延迟递归：} D(k) = D(k/2) + 2 = 2\log_2 k-1 $</p>
+<p>​             事实上后面我们可以看到是<span class="arithmatex">\(D(k) = 2 \log_2 k − 2\)</span></p>
+<p><span class="arithmatex">\(\text{成本递归：}C(k) = C(k/2) + k - 1 = 2k-2- \log_2 k\)</span></p>
+<p>So, the Ladner–Fischer design is faster than the Brent–Kung design (log2  <em>k</em>  as opposed to 2 log2  <em>k</em> − 2 adder levels) but also much more expensive [ <em>(k/</em> 2 <em>)</em>  log2  <em>k</em>  as opposed to 2 <em>k</em> − 2 − log2  <em>k</em>  adder cells]. The Ladner–Fischer design also leads to large fan-out requirements if implemented directly in hardware. In other words, the output of one of the adders in the right part must feed the inputs of  <em>k</em>/2 adders in the left part. </p>
+<p>因此，Ladner–Fischer 设计比 Brent–Kung 设计更快（<span class="arithmatex">\(\log_2 k\)</span> 相对于 <span class="arithmatex">\(2 \log_2 k − 2\)</span> 个加法器级别），但也更昂贵 [ <span class="arithmatex">\((k/ 2 ) \log_2 k\)</span> 相对于 <span class="arithmatex">\(2 k − 2 − log2 k\)</span> 加法器单元]。如果直接在硬件中实现，Ladner-Fischer 设计还会导致较大的扇出要求。换句话说，右侧部分中的一个加法器的输出必须馈送到左侧部分中的 k/2 个加法器的输入。</p>
+<p><img alt="image-20230807212856139" src="../assets/image-20230807212856139.png" /></p>
+<p>The 16-input instance of the Brent–Kung design of Fig. 6.8 is depicted in Fig. 6.9.Note that even though the graph of Fig. 6.9 appears to have seven levels, two of the levels near the middle are independent, thus implying a single level of delay. In general, a <em>k</em>-input Brent–Kung parallel prefix graph will have a delay of 2 log2 <em>k</em> − 2 levels and a cost of 2 <em>k</em> − 2 − log2 <em>k</em> cells.</p>
+<p>图 6.8 的 Brent-Kung 设计的 16 输入实例如图 6.9 所示。请注意，即使图 6.9 的图表看起来有七级，但中间附近的两个级别是独立的，因此意味着单个延迟级别。一般来说，k 输入的 Brent-Kung 并行前缀图将具有 <span class="arithmatex">\(2 \log_2 k − 2\)</span> 个级别的延迟和 <span class="arithmatex">\(2 k − 2 − log2 k\)</span> 个单元的成本。</p>
+<p><img alt="image-20230807213404559" src="../assets/image-20230807213404559.png" /></p>
+<p>Figure 6.10 depicts a Kogge–Stone parallel prefix graph that has the same delay as the design shown in Fig. 6.7 but avoids its fan-out problem by distributing the computations. A <em>k</em>-input Kogge–Stone parallel prefix graph has a delay of log2 <em>k</em> levels and a cost of <em>k</em> log2 <em>k</em> − <em>k</em> + 1 cells. The Kogge–Stone parallel prefix graph represents the fastest possible implementation of a parallel prefix computation if only two-input blocks are allowed. However, its cost can be prohibitive for large  <em>k</em>, in terms of both the number of cells and the dense wiring between them. </p>
+<p>图 6.10 描绘了一个 Kogge-Stone 并行前缀图，它与图 6.7 所示的设计具有相同的延迟，但通过分布计算避免了扇出问题。 k 输入 Kogge-Stone 并行前缀图具有 <span class="arithmatex">\(\log_2 k\)</span> 级别的延迟和 <span class="arithmatex">\(k \log_2 k − k + 1\)</span> 个单元的成本。 如果只允许两个输入块，则Kogge-Stone 并行前缀图代表最快可能实现并行前缀计算。然而，对于大 k 的单元数量和单元之间的密集布线而言，其成本可能令人望而却步。</p>
+<p><img alt="image-20230807213450122" src="../assets/image-20230807213450122.png" /></p>
+<p>Many other parallel prefix network designs are possible. For example, it has been suggested that the Brent–Kung and Kogge–Stone approaches be combined to form hybrid designs [Sugl90]. In Fig. 6.11, the middle four of the six levels in the design of Fig. 6.9 (representing an eight-input parallel prefix computation) have been replaced by the eight-input Kogge–Stone network. The resulting design has five levels and 32 cells, placing it between the pure Brent–Kung (six levels, 26 cells) and pure Kogge–Stone (four levels, 49 cells) designs. </p>
+<p>许多其他并行前缀网络设计也是可能的。例如，有人建议将 Brent-Kung 和 Kogge-Stone 方法结合起来形成混合设计 [Sugl90]。在图6.11中，图6.9的设计中的六个级别中的中间四个（代表八输入并行前缀计算）已被八输入 Kogge-Stone 网络取代。最终的设计有五层和 32 个单元，介于纯 Brent-Kung（六层，26 个单元）和纯 Kogge-Stone（四层，49 个单元）设计之间。</p>
+<p><img alt="image-20230807213723940" src="../assets/image-20230807213723940.png" /></p>
+<p>More generally, if a single Brent–Kung level is used along with a  <em>k</em>/2-input Kogge–Stone design, delay and cost of the hybrid network become log2  <em>k</em> + 1 and ( <em>k</em>/2)log2  <em>k</em>, respectively. The resulting design is thus close to minimum in terms of delay (only one level more than Kogge–Stone) but costs roughly half as much. </p>
+<p>更一般地，如果单个 Brent–Kung 级别与 k/2 输入 Kogge–Stone设计一起使用 ，混合网络的时延和成本分别变为<span class="arithmatex">\(\log_2k+1\)</span>和<span class="arithmatex">\((k/2)\log_2k\)</span>。因此，最终的设计在延迟方面接近最低水平（仅比 Kogge-Stone 多一级），但成本大约是后者的一半。</p>
+<p>The theory of parallel prefix graphs is quite rich and well developed. There exist both theoretical bounds and actual designs with different restrictions on fan-in/fan-out and with various optimality criteria in terms of cost and delay (see, e.g., Chapters 5–7, pp. 133–211, of [Laks94]). </p>
+<p>并行前缀图的理论相当丰富且发达。理论界限和实际设计都存在，对扇入/扇出有不同的限制，并且在成本和延迟方面有不同的最优标准（例如，参见[Laks94]的第5-7章，第133-211页）。</p>
+<p>In devising their design, Brent and Kung [Bren82] were motivated by the need to reduce the chip area in very large-scale integration (VLSI) layout of the carry network. Other performance or hardware limitations may also be considered. The nice thing about formulating the problem of carry determination as a parallel prefix computation is that theoretical results and a wealth of design strategies carry over with virtually no effort.  Not all such relationships between carry networks and parallel prefix networks, or the virtually unlimited hybrid combinations, have been explored in full. </p>
+<p>在设计过程中，Brent 和 Kung [Bren82] 的动机是需要减少进位网络在超大规模集成 (VLSI) 布局中的芯片面积。还可以考虑其他性能或硬件限制。将进位确定问题表述为并行前缀计算的好处在于，理论结果和大量设计策略几乎可以毫不费力地延续下去。进位网络和并行前缀网络之间的所有此类关系，或几乎无限的混合组合，并未得到充分探索。</p>
+<h2 id="66-vlsi">6.6 VLSI实现相关<a class="headerlink" href="#66-vlsi" title="Permanent link">&para;</a></h2>
+<p>The carry network of Fig. 6.9 is quite suitable for VLSI implementation, but it might be deemed too slow for high-performance designs and/or wide words. Many designers have proposed alternate networks that offer reduced latency by using features of particular technologies and taking advantage of related optimizations. We review one example here that is based on radix-256 addition of 56-bit numbers as implemented in the Advanced Micro Devices Am29050 microprocessor. The following description is based on a 64-bit version of the adder. </p>
+<p>图 6.9 的进位网络非常适合 VLSI 实现，但对于高性能设计和/或宽字来说可能会被认为太慢。许多设计人员提出了替代网络，通过使用特定技术的功能并利用相关优化来减少延迟。我们在此回顾一个基于 56 位数字的 radix-256 加法的示例，该示例在 Advanced Micro Devices Am29050 微处理器中实现。以下描述基于 64 位版本的加法器。</p>
+<p>In radix-256 addition of 64-bit numbers, only the carries  <em>c</em> 8,  <em>c</em> 16,  <em>c</em> 24,  <em>c</em> 32,  <em>c</em> 40,  <em>c</em> 48, and  <em>c</em> 56 need to be computed. First, 4-bit Manchester carry chains (MCCs) of the type shown in Fig. 6.12a are used to derive  <em>g</em>  and  <em>p</em>  signals for 4-bit blocks. These signals, denoted by [0, 3], [4, 7], [8, 11], etc. on the left side of Fig. 6.13, then form the inputs to one 5-bit and three 4-bit MCCs that in turn feed two more MCCs in the third level. The six MCCs in levels 2 and 3 in Fig. 6.13 are of the type shown in Fig. 6.12b; that is, they also produce intermediate  <em>g</em>  and  <em>p</em>  signals. For example, the MCC with inputs [16, 19], [20, 23], [24, 27], and [28, 31] yields the intermediate outputs [16, 23] and [16, 27], in addition to the signal pair [16, 31] for the entire group. </p>
+<p>在 64 位数字的基 256 加法中，仅需要计算进位 <span class="arithmatex">\(c_8、c_16、c_24、c_32、c_40、c_48 和 c_56\)</span>。首先，图 6.12a 所示类型的 4 位曼彻斯特进位链 (MCC) 用于导出 4 位块的 g 和 p 信号。这些信号在图 6.13 左侧用 [0, 3]、[4, 7]、[8, 11] 等表示，然后形成一个 5 位 MCC 和三个 4 位 MCC 的输入，这些 MCC 又为第三级中的另外两个 MCC 提供信号。图 6.13 中第 2 层和第 3 层的 6 个 MCC 的类型如图 6.12b 所示；也就是说，它们还产生中间 g 和 p 信号。例如，具有输入 [16, 19]、 [20, 23]、[24, 27] 和 [28, 31]的 MCC，除了整个组的信号对 [16, 31] 之外， 还生成中间输出 [16, 23] 和 [16, 27]。</p>
+<p>Various parallel-prefix adders, all with minimum-latency designs when only node delays are considered, may turn out quite different when the effects of interconnects (including fan-in, fan-out, and signal propagation delay on wires) are considered[Beau01], [Huan00], [Know99].</p>
+<p>当仅考虑节点延迟时，各种并行前缀加法器都采用最小延迟设计，但当考虑互连的影响（包括线路上的扇入、扇出和信号传播延迟）时，结果可能会大不相同 [Beau01], [Huan00], [Know99]。</p>
+<p><img alt="image-20230807215046550" src="../assets/image-20230807215046550.png" /></p>
+<p><img alt="image-20230807215110009" src="../assets/image-20230807215110009.png" /></p>
+<h2 id="_1">问题（略）<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_2">参考文献和进一步阅读<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[Bayo83] Bayoumi, M. A., G. A. Jullien, and W. C. Miller, “An Area-Time Efficient NMOS
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>         Adder,” Integration: The VLSI Journal, Vol. 1, pp. 317–334, 1983.
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>[Beau01] Beaumont-Smith, A., and C.-C. Lim, “Parallel Prefix Adder Design,” Proc. 15th
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>         Symp. Computer Arithmetic, pp. 218–225, 2001.
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>[Bren82] Brent, R. P., and H. T. Kung, “A Regular Layout for Parallel Adders,” IEEE Trans.
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>         Computers, Vol. 31, pp. 260–264, 1982.
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>[Burg99] Burgess, N., and S. Knowles, &quot;Efficient Implementation of Rounding Units&quot;, Proc.
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>         33rd Asilomar Conf. Signals Systems and Computers, pp. 1489–1493, 1999.
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>[Burg05] Burgess, N., “New Models of Prefix Adder Topologies,” J. VLSI Signal Processing,
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>         Vol. 40, pp. 125–141, 2005.
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>[Dimi05] Dimitrakopoulos, G., and D. Nikolos, “High-Speed Parallel-Prefix VLSI Ling
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>         Adders,” IEEE Trans. Computers, Vol. 54, No. 2, pp. 225–231, 2005.
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>[Dora88] Doran, R. W., “Variants of an Improved Carry Look-Ahead Adder,” IEEE Trans.
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>         Computers, Vol. 37, No. 9, pp. 1110–1113, 1988.
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>[Han87] Han, T., and D. A. Carlson, “Fast Area-Efficient Adders,” Proc. 8th Symp. Computer
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>         Arithmetic, pp. 49–56, 1987.
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>[Harr03] Harris, D., “A Taxonomy of Parallel Prefix Networks,” Proc. 37th Asilomar Conf.
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>         Signals, Systems, and Computers, Vol. 2, pp. 2213–2217, 2003.
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>[Huan00] Huang, Z., and M. D. Ercegovac, “Effect of Wire Delay on the Design of Prefix
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>         Adders in Deep-Submicron Technology,” Proc. 34th Asilomar Conf. Signals, Systems,
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>         and Computers, October 2000, pp. 1713–1717, 2000.
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>[Kant93] Kantabutra, V., “A Recursive Carry-Lookahead/Carry-Select Hybrid Adder,” IEEE
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>         Trans. Computers, Vol. 42, No. 12, pp. 1495–1499, 1993.
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>[Know99] Knowles, S., “A Family of Adders,” Proc. 14th Symp. Computer Arithmetic, 1999,
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>         printed at the end of ARITH-15 Proceedings, pp. 277–284, 2001.
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>[Kogg73] Kogge, P. M. and H. S. Stone, “A Parallel Algorithm for the Efficient Solution of a
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>         General Class of Recurrences,” IEEE Trans. Computers, Vol. 22, pp. 786–793, 1973.
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>[Ladn80] Ladner, R. E., and M. J. Fischer, “Parallel Prefix Computation,” J. ACM, Vol. 27,
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>         No. 4, pp. 831–838, 1980.
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>[Laks94] Lakshmivarahan, S., and S. K. Dhall, Parallel Computing Using the Prefix Problem,
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>         Oxford University Press, 1994.
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>[Ling81] Ling, H., “High-Speed Binary Adder,” IBM J. Research and Development, Vol. 25,
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>         No. 3, pp. 156–166, 1981.
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>[Lync92] Lynch, T., and E. Swartzlander, “A Spanning Tree Carry Lookahead Adder,” IEEE
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>         Trans. Computers, Vol. 41, No. 8, pp. 931–939, 1992.
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>[Mano98] Manohar, R., and J. A. Tierno, &quot;Asynchronous Parallel Prefix Computation,&quot; IEEE
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>         Trans. Computers, Vol. 47, No. 11, pp. 1244–1252, 1998.
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>[Ngai84] Ngai, T. F., M. J. Irwin, and S. Rawat, “Regular Area-Time Efficient Carry-Lookahead
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>         Adders,” J. Parallel and Distributed Computing, Vol. 3, No. 3, pp. 92–105, 1984.
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>[Sugl90] Sugla, B., and D. A. Carlson, “Extreme Area-Time Tradeoffs in VLSI,” IEEE Trans.
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>         Computers, Vol. 39, No. 2, pp. 251–257, 1990.
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>[Wei90] Wei, B. W. Y., and C. D. Thompson, “Area-Time Optimal Adder Design,” IEEE
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>         Trans. Computers, Vol. 39, No. 5, pp. 666–675, 1990.
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>[Wein56] Weinberger, A., and J. L. Smith, “A One-Microsecond Adder Using One-Megacycle
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>         Circuitry,” IRE Trans. Computers, Vol. 5, pp. 65–73, 1956.
+</code></pre></div>
 
 
 

@@ -525,9 +525,89 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          7. 其它高速加法器
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         7. 其它高速加法器
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    7.1 简单进位跳跃加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    7.2 多层次的进位跳跃加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    7.3 进位选择加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    7.4 条件和加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#75" class="md-nav__link">
+    7.5 混合设计与优化
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#76" class="md-nav__link">
+    7.6 二操作数模加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    问题（略）
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考文献和进一步阅读
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1169,6 +1249,70 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    7.1 简单进位跳跃加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    7.2 多层次的进位跳跃加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    7.3 进位选择加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    7.4 条件和加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#75" class="md-nav__link">
+    7.5 混合设计与优化
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#76" class="md-nav__link">
+    7.6 二操作数模加法器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    问题（略）
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考文献和进一步阅读
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1192,6 +1336,14 @@
 
 <h1 id="7">7. 其它高速加法器<a class="headerlink" href="#7" title="Permanent link">&para;</a></h1>
 <p>Variations in Fast Adders</p>
+<blockquote>
+<p>“The most constant difficulty in contriving the engine has arisen from the desire to reduce the time in which the calculations were executed to the shortest which is possible.”
+              — CHARLES BABBAGE , ON THE MATHEMATICAL POWERS OF THE CALCULATING ENGINE</p>
+<p>“设计引擎的最持续的困难源于希望将执行计算的时间减少到尽可能短的时间。”
+              — 查尔斯·巴贝奇,论计算引擎的数学能力</p>
+</blockquote>
+<p>The carry-lookahead method of Chapter 6 represents the most widely used design for high-speed adders in modern computers. Certain alternative designs, however, either are quite competitive with carry-lookahead adders or offer advantages with particular hardware realizations or technology constraints. The most important of these alternative designs, and various hybrid combinations, are discussed in this chapter.</p>
+<p>第 6 章的超前进位方法代表了现代计算机中高速加法器最广泛使用的设计。 然而，某些替代设计要么与超前进位加法器具有相当的竞争力，要么在特定的硬件实现或技术限制方面提供优势。 本章讨论了这些替代设计中最重要的以及各种混合组合。</p>
 <ul>
 <li>7.1 简单的进位跳跃加法器 SIMPLE CARRY SKIP ADDERS</li>
 <li>7.2 多层次的进位跳跃加法器 MULTILEVEL CARRY SKIP ADDERS</li>
@@ -1200,6 +1352,251 @@
 <li>7.5 混合设计与优化 HYBRID DESIGNS AND OPTIMIZATIONS</li>
 <li>7.6 二操作数模加法器 MODULAR TWO-OPERAND ADDERS</li>
 </ul>
+<h2 id="71">7.1 简单进位跳跃加法器<a class="headerlink" href="#71" title="Permanent link">&para;</a></h2>
+<p>Consider a 4-bit group or block in a ripple-carry adder, from stage  <em>i</em>  to stage  <em>i</em> + 3, where <em>i</em>  is a multiple of 4 (Fig. 7.1a). A carry into stage  <em>i</em>  propagates through this group of 4 bits if and only if it propagates through all four of its stages. Thus, a  <em>group propagate</em> signal is defined as  <em>p</em>[ <em>i</em>,  <em>i</em>+3] =  <em>pipi</em>+1  <em>pi</em>+2  <em>pi</em>+3, which is computable from individual propagate signals by a single four-input AND gate. To speed up carry propagation, one can establish bypass or skip paths around 4-bit blocks, as shown in Fig. 7.1b. </p>
+<p>考虑纹波进位加法器中的 4 位组或块，从阶段 <span class="arithmatex">\(i\)</span> 到阶段 <span class="arithmatex">\(i + 3\)</span>，其中 <span class="arithmatex">\(i\)</span> 是 4 的倍数（图 7.1a）。进入阶段 <span class="arithmatex">\(i\)</span> 的进位能通过这组 4 位传播，当且仅当它传播通过所有四个阶段时。因此，组传播信号定义为 <span class="arithmatex">\(p[i, i+3] = p_ip_{i+1} p_{i+2} p_{i+3}\)</span>，它可以通过单个四输入 AND 门根据各个传播信号进行计算。为了加速进位传播，可以在 4 位块周围建立旁路或跳过路径，如图 7.1b 所示。</p>
+<p><img alt="image-20230808082910602" src="../assets/image-20230808082910602.png" /></p>
+<p>Let us assume that the delay of the skip multiplexer (mux) is equal to carry-propagation delay through one-bit position. Then, the worst-case propagation delay through the carry-skip adder of Fig. 7.1b corresponds to a carry that is generated in stage 0, ripples through stages 1–3, goes through the multiplexer, skips the middle two groups, and ripples in the last group from stage 12 to stage 15. This leads to 9 stages of propagation (18 gate levels) compared to 16 stages (32 gate levels) for a 16-bit ripple-carry adder.</p>
+<p>让我们假设跳跃多路复用器 (mux) 的延迟等于进位通过一位位置的传播延迟。然后，最坏情况的传播延迟通过图 7.1b 的跳过进位加法器的进位对应于第 0 级中生成的进位，经过第 1-3 级脉动，经过多路复用器，跳过中间两组，最后一组从第 12 级脉动到第 15 级。与 16 位脉动进位加法器的 16 个级（32 个门级）相比，这导致 9 个传播级（18 个门级）。</p>
+<p>Generalizing from the preceding example, the worst-case carry-propagation delay in a <em>k</em>-bit carry-skip adder with fixed block width <em>b</em>, assuming that one stage of ripple has the same delay as one skip, can be derived:</p>
+<p>从前面的示例进行概括，假设一级纹波具有与一级跳跃相同的延迟，则可以得出具有固定块宽度 b 的 k 位跳跃进位加法器中最坏情况的进位传播延迟：</p>
+<div class="arithmatex">\[
+\begin{matrix}
+T_{fixed-skip-add} &amp;= &amp;(b − 1) &amp;+ &amp;1 &amp;+ &amp;(k/b − 2) &amp;+ &amp;(b − 1) \\
+&amp;&amp;\text{in block 0} &amp;&amp;\text{mux} &amp;&amp;\text{skips} &amp;&amp;\text{in last block} \\
+&amp;≈ &amp;2b + k/b − 3 \text{ stages} &amp; &amp; &amp;
+\end{matrix}
+\]</div>
+<p>The optimal fixed block size can be derived by equating <em>dT</em> fixed-skip-add <em>/db</em> with 0: <em>dT</em></p>
+<p>最佳固定块大小可以通过求导将 <span class="arithmatex">\(\mathrm{d}T_{fixed-skip-add} / \mathrm{d}b\)</span> 等于 0 得出：</p>
+<p><span class="arithmatex">\(\frac{\mathrm{d}T_{fixed-skip-add}}{\mathrm{d}b}=2-k/b^2=0 \Rightarrow b^{opt}=\sqrt{k/2}\)</span></p>
+<p>The adder delay with the optimal block size above is</p>
+<p>上述最佳块大小的加法器延迟为</p>
+<p><span class="arithmatex">\(T^{opt}_{fixed−skip−add} = 2\sqrt{k/2}+\frac{k}{\sqrt{k/2}}-3=2\sqrt{2k}-3\)</span></p>
+<p>For example, to construct a 32-bit carry-skip adder with fixed-size blocks, we set  <em>k</em> = 32 in the preceding equations to obtain  <em>b</em> opt = 4 bits and  <em>T</em> opt fixed−skip−add= 13 stages (26 gate levels). By comparison, the propagation delay of a 32-bit ripple-carry adder is about 2.5 times as long. </p>
+<p>例如，要构造一个具有固定大小块的 32 位跳进位加法器，我们设置 前面等式中的 k = 32 以获得 <span class="arithmatex">\(b_{opt} = 4\)</span> 位和</p>
+<p><span class="arithmatex">\(T^{opt}_{fixed−skip−add}=13\)</span> 级（26 个门级别）。相比之下，32 位纹波进位加法器的传播延迟约为 2.5 倍。</p>
+<p>Clearly, a carry that is generated in, or absorbed by, one of the inner blocks travels a shorter distance through the skip blocks. We can thus afford to allow more ripple stages for such a carry without increasing the overall adder delay. This leads to the idea of variable skip-block sizes. </p>
+<p>显然，在内部块之一中生成或吸收的进位通过跳跃块行进较短的距离。因此，我们可以在不增加总体加法器延迟的情况下为此类进位允许更多纹波级。这导致了可变跳过块大小的想法。</p>
+<p>Let there be  <em>t</em>  blocks of widths  <em>b</em> 0,  <em>b</em> 1, · · · ,  <em>bt</em>−1 going from right to left (Fig. 7.2). Consider the two carry paths (1) and (2) in Fig. 7.2, both starting in block 0, one ending in block <em>t</em> − 1 and the other in block <em>t</em> − 2. Carry path (2) goes through one fewer skip than (1), so block <em>t</em> − 2 can be 1 bit wider than block <em>t</em> − 1 without increasing the total adder delay. Similarly, by comparing carry paths (1) and (3), we conclude that block 1 can be 1 bit wider than block 0. So, assuming for ease of analysis that <em>b</em> 0 = <em>bt</em>−1 = <em>b</em> and that the number <em>t</em> of blocks is even, the optimal block widths are</p>
+<p>设<span class="arithmatex">\(t\)</span>个块的宽度为<span class="arithmatex">\(b_0 、b_1 、····、b_{t−1}\)</span> 从右到左（图7.2）。考虑图 7.2 中的两条进位路径 (1) 和 (2)，均从块 0 开始，其中一个结束在块 t-1 中，另一个在块 t-2 中。进位路径 (2) 比 (1) 少经过一次跳跃，因此块 t-2 可以比块 t-1 宽 1 位，而不会增加总加法器延迟。类似地，通过比较进位路径（1）和（3），我们得出结论：块 1可以比块 0 宽 1 位。因此，为了便于分析，假设 <span class="arithmatex">\(b_0 = b_{t−1} = b\)</span> 并且块的数量 t 为偶数，则最佳块宽度为</p>
+<p><span class="arithmatex">\(\begin{matrix} b &amp;b+1 &amp;\cdots &amp;b+\frac{t}{2}-1 &amp;b+\frac{t}{2}-1 &amp;\cdots &amp;b+1 &amp;b\end{matrix}\)</span></p>
+<p><img alt="image-20230808095003338" src="../assets/image-20230808095003338.png" /></p>
+<p>The first assumption  <em>(b</em> 0 =  <em>bt</em>−1 <em>)</em>  is justified because the total delay is a function of <em>b</em> 0 +  <em>bt</em>−1 rather than their individual values and the second one ( <em>t</em>  even) does not affect the results significantly. </p>
+<p>第一个假设 <span class="arithmatex">\((b_0 = b_{t−1})\)</span> 是合理的，因为总延迟是 <span class="arithmatex">\(b_0 + b_{t−1}\)</span> 的函数，而不是它们各自的值，而第二个假设 ( t 为偶数 ) 不会显着影响结果。</p>
+<p>Based on the preceding block widths, the total number of bits in the  <em>t</em>  blocks is</p>
+<p>根据前面的块宽度，t 个块中的总位数为</p>
+<p>$2[ b + (b + 1 ) + · · · + (b + t/ 2 − 1 )] = t(b + t/ 4 − 1 / 2 ) $</p>
+<p>Equating the total above with  <em>k</em>  yields</p>
+<p>将上述总数对k做等式化简，得到</p>
+<p><span class="arithmatex">\(b = k/t − t/4 + 1/2\)</span></p>
+<p>The adder delay with the preceding assumptions is</p>
+<p>前面假设的加法器延迟为</p>
+<div class="arithmatex">\[
+T_{var−skip−add} = 2(b − 1) + 1 + t − 2 = \frac{2k}{t}+\frac{t}{2}-2
+\]</div>
+<p>The optimal number of blocks is thus obtained as follows:</p>
+<p>由此获得最佳块数如下：</p>
+<div class="arithmatex">\[
+\frac{\mathrm{d}T_{fixed-skip-add}}{\mathrm{d}t}=\frac{-2k}{t^2}+\frac{1}{2}=0 \Rightarrow t^{opt}=2\sqrt{k}
+\]</div>
+<p>Note that the optimal number of blocks with variable-size blocks is <span class="arithmatex">\(\sqrt{2}\)</span> times that obtained with fixed-size blocks. Note also that with the optimal number of blocks,  <em>b</em> becomes &frac12;; thus we take it to be 1. The adder delay with  <em>t</em> opt blocks is</p>
+<p>请注意，具有可变大小块的块的最佳数量是固定大小块的<span class="arithmatex">\(\sqrt{2}\)</span>倍。还要注意，对于最佳块数，<span class="arithmatex">\(b\)</span> 变为 &frac12;；因此我们将其设为 1。<span class="arithmatex">\(t^{opt}\)</span> 块的加法器延迟为</p>
+<div class="arithmatex">\[
+T^{opt}_{var−skip−add} \approx 2 \sqrt{k} - 2
+\]</div>
+<p>which is roughly a factor of <span class="arithmatex">\(\sqrt{2}\)</span> smaller than that obtained with optimal fixed-size skip-blocks.</p>
+<p>这大约是一个因素<span class="arithmatex">\(\sqrt{2}\)</span>比最佳固定尺寸获得的小跳过块。</p>
+<p>The preceding analyses were based on a number of simplifying assumptions. For example, skip and ripple delays were assumed to be equal and ripple delay was assumed to be linearly proportional to the block width. These may not be true in practice. With complementary metal-oxide semiconductor implementation, for example, the ripple delay in a Manchester carry chain grows as the square of the block width. The analyses for obtaining the optimal fixed or variable block size carry-skip adder must be appropriately modified in such cases. A number of researchers have used various assumptions about technology-dependent parameters to deal with this optimization problem. Some of these variations are explored in the end-of-chapter problems.</p>
+<p>前面的分析基于一些简化的假设。例如，假设跳跃延迟和纹波延迟相等，并且假设纹波延迟与块宽度成线性比例。这些在实践中可能并不正确。例如，在互补金属氧化物半导体实现中，曼彻斯特进位链中的纹波延迟随着块宽度的平方而增长。在这种情况下，必须适当修改用于获得最佳固定或可变块大小跳进位加法器的分析。许多研究人员使用了关于技术相关参数的各种假设来处理这个优化问题。其中一些变化将在本章末尾的问题中进行探讨。</p>
+<h2 id="72">7.2 多层次的进位跳跃加法器<a class="headerlink" href="#72" title="Permanent link">&para;</a></h2>
+<p>A (single-level) carry-skip adder of the types discussed in Section 7.1 can be represented schematically as in Fig. 7.3. In our subsequent discussions, we continue to assume that the ripple and skip delays are equal, although the analyses can be easily modified to account for different ripple and skip delays. We thus equate the carry-skip adder delay with the worst-case sum, over all possible carry paths, of the number of ripple stages and the number of skip stages. </p>
+<p>第 7.1 节中讨论的类型的（单级）跳进位加法器可以如图 7.3 所示示意性表示。在我们随后的讨论中，我们继续假设纹波和跳跃延迟是相等的，尽管可以轻松修改分析以考虑不同的纹波和跳跃延迟。因此，我们将跳跃进位加法器延迟等同于所有可能的进位路径上纹波级数和跳跃级数的最坏情况总和。</p>
+<p><img alt="image-20230808095252644" src="../assets/image-20230808095252644.png" /></p>
+<p>Multilevel carry-skip adders are obtained if we allow a carry to skip over several blocks at once. Figure 7.4 depicts a two-level carry-skip adder in which second-level skip logic has been provided for the leftmost three blocks. The signal controlling this second-level skip logic is derived as the logical AND of the first-level skip signals. A carry that would need 3 time units to skip these three blocks in a single-level carry-skip adder can now do so in 1 time unit. </p>
+<p>如果我们允许进位一次跳过多个块，则获得多级进位跳跃加法器。图 7.4 描述了一个二级跳过进位加法器，其中为最左边的三个块提供了二级跳过逻辑。控制该第二级跳跃逻辑的信号是作为第一级跳跃信号的逻辑与而导出的。在单级进位跳跃加法器中需要 3 个时间单位来跳过这三个块的进位现在只需 1 个时间单位即可完成。</p>
+<p><img alt="image-20230808095659324" src="../assets/image-20230808095659324.png" /></p>
+<p>If the rightmost/leftmost block in a carry-skip adder is short, skipping it may not yield any advantage over allowing the carry to ripple through the block. In this case,  the carry-skip adder of Fig. 7.4 can be simplified by removing such inefficient skip circuits. Figure 7.5 shows the resulting two-level carry-skip adder. With our simplifying assumption about ripple and skip delays being equal, the first-level skip circuit should be eliminated only for 1-bit, and possibly 2-bit, blocks (remember that generating the skip control signal also takes some time). </p>
+<p>如果进位跳跃加法器中最右/最左的块很短，则跳过它可能不会比允许进位纹波通过该块产生任何优势。在这种情况下通过去除这种低效的跳跃电路，可以简化图 7.4 的跳跃进位加法器。图 7.5 显示了最终的两级跳进位加法器。通过我们关于纹波和跳跃延迟相等的简化假设，应该仅针对 1 位和可能的 2 位块消除第一级跳跃电路（请记住，生成跳跃控制信号也需要一些时间）。</p>
+<p><img alt="image-20230808095931057" src="../assets/image-20230808095931057.png" /></p>
+<p>■ <strong>EXAMPLE 7.1</strong> Assume that each of the following operations takes 1 unit of time: generation of  <em>gi</em>  and  <em>pi</em>  signals, generation of a level- <em>i</em>  skip signal from level-( <em>i</em> − 1) skip signals, ripple, skip, and computation of sum bit once the incoming carry is known. Build the widest possible single-level carry-skip adder with a total delay not exceeding 8 time units. </p>
+<p>Let  <em>bi</em>  be the width of block  <em>i</em>. The numbers given on the adder diagram of Fig. 7.6 denote the time steps when the various signals stabilize, assuming that  <em>c</em> in is available at time 0. At the right end, block width is limited by the output timing requirement. For example,  <em>b</em> 1 cannot be more than 3 bits if its output is to be available at time 3 (1 time unit is taken by <em>gi</em>,  <em>pi</em>  generation at the rightmost bit, plus 2 time units for propagation across the other 2 bits).  Block 0 is an exception, because to accommodate  <em>c</em> in, its width must be reduced by 1 bit. At the left end, block width is limited by input timing. For example,  <em>b</em> 4 cannot be more than 3 bits, given that its input becomes available at time 5 and the total adder delay is to be 8 units. Based on this analysis, the maximum possible adder width is 1+3+4+4+3+2+1 = 18 bits. </p>
+<p>■ <strong>示例7.1</strong> 假设以下每个操作需要 1 个时间单位：生成 <span class="arithmatex">\(g_i\)</span> 和 <span class="arithmatex">\(p_i\)</span> 信号、从 level-<span class="arithmatex">\((i − 1)\)</span> 个跳跃信号生成 level- <span class="arithmatex">\(i\)</span> 跳跃信号、纹波、skip ，和计算和位(有传入进位)。 构建尽可能宽的单级跳进位加法器，总延迟不超过 8 个时间单位。</p>
+<p>令 <span class="arithmatex">\(b_i\)</span> 为块 <span class="arithmatex">\(i\)</span> 的宽度。 图 7.6 的加法器图上给出的数字表示各种信号稳定时的时间步长，假设 <span class="arithmatex">\(c_{in}\)</span> 在时间 0 可用。在右端，块宽度受到输出时序要求的限制。 例如，如果 <span class="arithmatex">\(b_1\)</span> 的输出在时间 3 可用（最右边位的 <span class="arithmatex">\(g_i、p_i\)</span> 生成占用 1 个时间单位，加上 2 个时间单位用于传播），则 <span class="arithmatex">\(b_1\)</span> 不能超过 3 位。 其他 2 位）。 块0是一个例外，因为要容纳<span class="arithmatex">\(c_{in}\)</span>，它的宽度必须减少1位。 在左端，块宽度受到输入时序的限制。 例如，<span class="arithmatex">\(b_4\)</span> 不能超过 3 位，假设其输入在时间 5 可用并且总加法器延迟为 8 个单位。 根据此分析，最大可能的加法器宽度为 <span class="arithmatex">\(1+3+4+4+3+2+1 = 18\)</span> 位。</p>
+<p><img alt="image-20230808102948717" src="../assets/image-20230808102948717.png" /></p>
+<p>■ <strong>EXAMPLE 7.2</strong> With the same assumptions as in Example 7.1, build the widest possible two-level carry-skip adder with a total delay not exceeding 8 time units. </p>
+<p>We begin with an analysis of skip paths at level 2. In Fig. 7.7a, the notation { <em>β</em>,  <em>α</em>} for a block means that the block’s carry-out must become available no later than  <em>T</em> produce =  <em>β</em> and that the block’s carry-in can take  <em>T</em> assimilate =  <em>α</em>  time units to propagate within the block without exceeding the overall time limit of 8 units. The remaining problem is to construct single-level carry-skip adders with the parameters  <em>T</em> produce =  <em>β</em>  and  <em>T</em> assimilate =  <em>α</em>. Given the delay pair { <em>β</em>,  <em>α</em>}, the number of first-level blocks (subblocks) will be  <em>γ</em> = min <em>(β</em> −1,  <em>α)</em>, with the width of the  <em>i</em> th subblock, 0 ≤  <em>i</em> ≤  <em>γ</em> − 1, given by  <em>bi</em> = min <em>(β</em> −  <em>γ</em> +  <em>i</em> + 1,  <em>α</em> −  <em>i)</em>; the only exception is subblock 0 in block A, which has 1 fewer bit (why?). So, the total widthof such a block is <em>γ</em>−1 min <em>(β</em> −  <em>γ</em> +  <em>i</em> + 1,  <em>α</em> −  <em>i)</em>. Table 7.1 summarizes our analyses <em>i</em>=0 for the second-level blocks A–F. Note that the second skip level has increased the adder width from 18 bits (in Example 7.1) to 30 bits. Figure 7.7b shows the resulting two-level carry-skip adder. </p>
+<p>■ <strong>例7.2</strong> 采用与例7.1 相同的假设，构建尽可能宽的两级跳进位加法器，总延迟不超过8 个时间单位。</p>
+<p>我们从第 2 层的跳跃路径分析开始。在图 7.7a 中，块的记号 {<span class="arithmatex">\(β, α\)</span>} 意味着该块的进位输出必须在不晚于 <span class="arithmatex">\(T_{Produce} = β\)</span> 时可用。并且块的进位可以花费 <span class="arithmatex">\(T_{assimilate} = α\)</span> 时间单位在块内传播，而不超过 8 个单位的总时间限制。剩下的问题是构建单级跳进位加法器，其参数<span class="arithmatex">\(T_{Produce} = β\)</span> 且 <span class="arithmatex">\(T_{assimilate} = α\)</span> 。给定延迟对<span class="arithmatex">\(\{β，α\}\)</span>，第一级块（子块）的数量为<span class="arithmatex">\(γ = min(β−1，α)\)</span>，第<span class="arithmatex">\(i\)</span>个子块的宽度为<span class="arithmatex">\(0≤i≤γ−1\)</span>，由<span class="arithmatex">\(b_i = min(β−γ+i+1，α−i)\)</span>给出；唯一的例外是块 A 中的子块 0，它少了 1 位（为什么？）。因此，这样一个块的总宽度是<span class="arithmatex">\(\sum_{i=0}^{\gamma-1}min(\beta-\gamma+i+1, \alpha-i)\)</span>。表 7.1 总结了我们对于二级块 A–F的分析。请注意，第二个跳跃级已将加法器宽度从 18 位（例 7.1 中）增加到 30 位。图 7.7b 显示了最终的两级跳进位加法器。</p>
+<p><img alt="image-20230808103951702" src="../assets/image-20230808103951702.png" /></p>
+<p><img alt="image-20230808110224332" src="../assets/image-20230808110224332.png" /></p>
+<p>The preceding analyses of one- and two-level carry-skip adders are based on many simplifying assumptions. If these assumptions are relaxed, the problem may no longer lend itself to analytical solution. Chan et al. [Chan92] use dynamic programming to obtain optimal configurations of carry-skip adders for which the various worst-case delays in a block of  <em>b</em>  full-adder units are characterized by arbitrary given functions (Fig. 7.8). These delays include: </p>
+<ul>
+<li>
+<p><em>I (b)</em> Internal carry-propagate delay for the block</p>
+</li>
+<li>
+<p><em>G(b)</em>  Carry-generate delay for the block</p>
+</li>
+<li>
+<p><em>A(b)</em> Carry-assimilate delay for the block</p>
+</li>
+</ul>
+<p>前面对一级和二级跳进位加法器的分析基于许多简化假设。如果放宽这些假设，问题可能不再适合解析解。陈等人。 [Chan92]使用动态规划来获得跳进位加法器的最佳配置，其中b 个全加器单元块中各种最坏情况的延迟由任意给定函数表征（图 7.8）。这些延误包括：</p>
+<ul>
+<li><span class="arithmatex">\(I(b)\)</span>​ : 块的内部进位传播延迟</li>
+<li><span class="arithmatex">\(G(b)\)</span>: 块的进位生成延迟</li>
+<li><span class="arithmatex">\(A(b)\)</span>: 块的进位吸收延迟</li>
+</ul>
+<p><img alt="image-20230808110824698" src="../assets/image-20230808110824698.png" /></p>
+<p>In addition, skip and enable delay functions,  <em>Sh(b)</em>  and  <em>Eh(b)</em>, are defined for each skip level  <em>h</em>. In terms of this general model, our preceding analysis can be characterized as corresponding to  <em>I (b)</em> =  <em>b</em> − 1,  <em>G(b)</em> =  <em>b</em>,  <em>A(b)</em> =  <em>b</em>,  <em>Sh(b)</em> = 1, and  <em>Eh(b)</em> =  <em>h</em> + 1. This is the model assumed by Turrini [Turr89]. Similar methods can be used to derive optimal block widths in variable-block carry-lookahead adders [Chan92]. </p>
+<p>此外，还为每个跳跃级别 <span class="arithmatex">\(h\)</span> 定义了跳跃和启用延迟函数 <span class="arithmatex">\(S_h(b)\)</span> 和 <span class="arithmatex">\(E_h(b)\)</span>。根据这个通用模型，我们前面的分析可以表征为对应于<span class="arithmatex">\(I(b) = b − 1\)</span>、<span class="arithmatex">\(G(b) = b\)</span>、<span class="arithmatex">\(A(b) = b\)</span>、<span class="arithmatex">\(S_h(b) = 1\)</span> 和 <span class="arithmatex">\(E_h(b) = h + 1\)</span>。这是 Turrini [Turr89] 假设的模型。类似的方法可用于导出可变块超前进位加法器中的最佳块宽度[Chan92]。</p>
+<h2 id="73">7.3 进位选择加法器<a class="headerlink" href="#73" title="Permanent link">&para;</a></h2>
+<p>One of the earliest logarithmic time adder designs is based on the conditional-sum addition algorithm. In this scheme, blocks of bits are added in two ways: assuming an incoming carry of 0 or of 1, with the correct outputs selected later as the block’s true carry-in becomes known. With each level of selection, the number of known output bits doubles, leading to a logarithmic number of levels and thus logarithmic time addition. Underlying the building of conditional-sum adders is the carry-select principle, which is described in this section. </p>
+<p>最早的对数时间加法器设计之一是基于条件和加法算法。在此方案中，位块以两种方式相加：假设传入进位为 0 或 1，稍后当知道该块的真实进位时选择正确的输出。对于每个级别的选择，已知输出位数加倍，导致级别数为对数，从而导致时间相加为对数。构建条件和加法器的基础是进位选择原理，本节将对此进行描述。</p>
+<p>A (single-level) carry-select adder is one that combines three  <em>k</em>/2-bit adders of any design into a  <em>k</em>-bit adder (Fig. 7.9). One  <em>k</em>/2-bit adder is used to compute the lower half of the  <em>k</em>-bit sum directly. Two  <em>k</em>/2-bit adders are used to compute the upper  <em>k</em>/2 bits of the sum and the carry-out under two different scenarios:  <em>ck/</em> 2 = 0 or  <em>ck/</em> 2 = 1. The correct values for the adder’s carry-out signal and the sum bits in positions  <em>k</em>/2 through  <em>k</em> − 1 are selected when the value of  <em>ck/</em> 2 becomes known. The delay of the resulting  <em>k</em>-bit adder is two gate levels more than that of the  <em>k</em>/2-bit adders that are used in its construction. </p>
+<p>（单级）进位选择加法器是将任意设计的三个 <span class="arithmatex">\(k/2\)</span> 位加法器组合成一个 <span class="arithmatex">\(k\)</span> 位加法器（图 7.9）。使用一个<span class="arithmatex">\(k/2\)</span>位加法器直接计算k位和的下半部分。两个 <span class="arithmatex">\(k/2\)</span> 位加法器用于在两种不同情况下计算总和和进位的高 <span class="arithmatex">\(k/2\)</span> 位：<span class="arithmatex">\(c_{k/2} = 0\)</span> 或 <span class="arithmatex">\(c_{k/2} = 1\)</span>。当 <span class="arithmatex">\(c_{k/2}\)</span> 的值已知时，就会选择加法器进位输出信号以及位置 <span class="arithmatex">\(k/2\)</span> 到 <span class="arithmatex">\(k−1\)</span> 中的和位的正确值。由此产生的 <span class="arithmatex">\(k\)</span> 位加法器的延迟比其构造中使用的 <span class="arithmatex">\(k/2\)</span> 位加法器的延迟多两个门级。</p>
+<p><img alt="image-20230808112046241" src="../assets/image-20230808112046241.png" /></p>
+<p>The following simple analysis demonstrates the cost-effectiveness of the carry-select method. Let us take the cost and delay of a single-bit 2-to-1 multiplexer as our units and assume that the cost and delay of a  <em>k</em>-bit adder are  <em>C</em> add <em>(k)</em>  and  <em>T</em> add <em>(k)</em>, respectively. Then, the cost and delay of the carry-select adder of Fig. 7.9 are</p>
+<p>下面的简单分析说明了进位选择方法的成本效益。让我们以单比特2对1复用器的成本和延迟为单位，并假设k位加法器的成本和延迟分别为<span class="arithmatex">\(C_{add}(k)\)</span>和<span class="arithmatex">\(T_{add}(k)\)</span>。那么，图 7.9 的进位选择加法器的成本和延迟为</p>
+<div class="arithmatex">\[
+\begin{array}{l}
+C_{select−add}(k) = 3C_{add}(k/2) + k/2 + 1 \\
+T_{select−add}(k) = T_{add}(k/2) + 1
+\end{array}
+\]</div>
+<p>If we take the product of cost and delay as our measure of cost-effectiveness, the carry-select scheme of Fig. 7.9 is more cost-effective than the scheme used in synthesizing its component adders if and only if</p>
+<p>如果我们将成本和延迟的乘积作为成本效益的衡量标准，则图 7.9 的进位选择方案要想比用于合成其分量加法器的方案更具成本效益，只有当且仅当</p>
+<p><span class="arithmatex">\([3 C_{add} (k/2) + k/ 2 + 1][ T_{add} (k/2) + 1] &lt; C_{add}(k) T_{add}(k)\)</span></p>
+<p>For ripple-carry adders, we have <em>C</em> add <em>(k)</em> = <em>αk</em> and <em>T</em> add <em>(k)</em> = <em>τ k</em>. To simplify the analysis, assume <em>τ</em> = <em>α/</em> 2 <em>&gt;</em> 1. Then, it is easy to show that the carry-select method is more cost-effective than the ripple-carry scheme if <em>k &gt;</em> 16 <em>/(α</em> − 1 <em>)</em>. For <em>α</em> = 4 and <em>τ</em> = 2, say, the carry-select approach is almost always preferable to ripple-carry. Similar analyses can be carried out to compare the carry-select method against other addition schemes.</p>
+<p>对于纹波进位加法器，我们有 <span class="arithmatex">\(C_{add}(k) = αk\)</span> 和 <span class="arithmatex">\(T_{add}(k) = τ k\)</span>。为了简化分析，假设 <span class="arithmatex">\(τ = α/ 2 &gt; 1\)</span>。然后，很容易证明，如果 <span class="arithmatex">\(k &gt; 16 /(α − 1)\)</span>，进位选择方法比纹波进位方案更具成本效益。例如，对于 α = 4 和 τ = 2，进位选择方法几乎总是优于纹波进位。可以进行类似的分析来将进位选择方法与其他加法方案进行比较。</p>
+<p>Note that in the preceding analysis, the use of three complete <em>k</em>/2-bit adders was assumed. With some adder types, the two <em>k</em>/2-bit adders at the left of Fig. 7.9 can share some hardware, thus leading to even greater cost-effectiveness. For example, if the component adders used are of the carry-lookahead variety, much of the carry network can be shared between the two adders computing the sum bits with <em>ck/</em> 2 = 0 and <em>ck/</em> 2 = 1(how?).</p>
+<p>请注意，在前面的分析中，假设使用三个完整的 k/2 位加法器。对于某些加法器类型，图 7.9 左侧的两个 k/2 位加法器可以共享一些硬件，从而带来更大的成本效益。例如，如果所使用的分量加法器属于先行进位类型，则可以在计算 ck/ 2 = 0 和 ck/ 2 = 1 的总和位的两个加法器之间共享大部分进位网络（如何做？）。</p>
+<p>Note that the carry-select method works just as well when the component adders have different widths. For example, Fig. 7.9 could have been drawn with one <em>a</em>-bit and two <em>b</em>-bit adders used to form an ( <em>a</em> + <em>b</em>)-bit adder. Then <em>ca</em> would be used to select the upper <em>b</em> bits of the sum through a ( <em>b</em> + 1)-bit multiplexer. Unequal widths for the component adders is appropriate when the delay in deriving the selection signal <em>ca</em> is different from that of the sum bits.</p>
+<p>请注意，进位选择方法在有不同的宽度分量加法器时也同样有效。例如，图 7.9 可以用一个 a 位加法器和两个 b 位加法器来绘制，用于形成 <span class="arithmatex">\((a + b)\)</span> 位加法器。然后，<span class="arithmatex">\(c_a\)</span> 将用于通过 <span class="arithmatex">\((b + 1)\)</span> 位多路复用器选择和的高 <span class="arithmatex">\(b\)</span> 位。当导出选择信号<span class="arithmatex">\(c_a\)</span>的延迟与求和位的延迟不同时，分量加法器的不等宽度是合适的。</p>
+<p>Figure 7.10 depicts how the carry-select idea can be carried one step further to obtain a two-level carry-select adder. Sum and carry-out bits are computed for each <em>k</em>/4-bit block (except for the rightmost one) under two scenarios. The three first-level multiplexers, each of which is  <em>k/</em> 4 + 1 bits wide, merge the results of  <em>k</em>/4-bit blocks into those of <em>k</em>/2-bit blocks. Note how the carry-out signals of the adders spanning bit positions  <em>k</em>/2 through 3 <em>k/</em> 4 − 1 are used to select the most-significant  <em>k</em>/4 bits of the sum under the two scenarios of  <em>ck/</em> 2 = 0 or  <em>ck/</em> 2 = 1. At this stage,  <em>k</em>/2 bits of the final sum are known. The second-level multiplexer, which is  <em>k/</em> 2 + 1 bits wide, is used to select appropriate values for the upper  <em>k</em>/2 bits of the sum (positions  <em>k</em>/2 through  <em>k</em> − 1) and the adder’s carry-out. </p>
+<p>图 7.10 描述了如何将进位选择思想进一步推进以获得两级进位选择加法器。为每个 <span class="arithmatex">\(k/4\)</span> 位块计算总和和进位位（除了最右边的）两种情况下。三个第一级多路复用器，每个都是 <span class="arithmatex">\(k/ 4 + 1\)</span> 位宽，将 <span class="arithmatex">\(k/4\)</span> 位块的结果合并到 <span class="arithmatex">\(k/2\)</span> 位块的结果中。注意加法器的进位信号如何跨越位位置 <span class="arithmatex">\(k/2\)</span>到<span class="arithmatex">\(3 k/ 4 − 1\)</span>用于在<span class="arithmatex">\(c_k/ 2 = 0\)</span>或<span class="arithmatex">\(c_k/ 2 = 1\)</span>两种情况下选择和的最高有效<span class="arithmatex">\(k/4\)</span>位。此时，最终和的<span class="arithmatex">\(k/2\)</span>位是已知的。第二级多路复用器的宽度为 <span class="arithmatex">\(k/ 2 + 1\)</span> 位，用于为和的高 <span class="arithmatex">\(k/2\)</span> 位（位置 <span class="arithmatex">\(k/2\)</span> 到 <span class="arithmatex">\(k − 1\)</span>）和加法器的进位选择适当的值。</p>
+<p><img alt="image-20230808122502075" src="../assets/image-20230808122502075.png" /></p>
+<p>Comparing the two-level carry-select adder of Fig. 7.10 with a similar two-level carry-lookahead adder (Fig. 6.4, but with 2-bit, rather than 4-bit, lookahead carry generators), we note that the one-directional top-to-bottom data flow in Fig. 7.10 makes pipelining easier and more efficient. Of course, from Section 6.5 and the example in Fig. 6.13, we know that carry-lookahead adders can also be implemented to possess one-directional data flow. In such cases, comparison is somewhat more difficult, inso-far as carry-select adders have a more complex upper structure (the small adders) and simpler lower structure (the multiplexers). </p>
+<p>将图 7.10 的两级进位选择加法器与类似的两级进位超前加法器（图 6.4，但使用 2 位而不是 4 位超前进位生成器）进行比较，我们注意到图 7.10 中的单向从上到下数据流使流水线操作更容易、更高效。当然，从6.5节和图6.13中的例子，我们知道超前进位加法器也可以实现为拥有单向数据流。在这种情况下，比较有点困难，因为进位选择加法器具有更复杂的上部结构（小加法器）和更简单的下部结构（多路复用器）。</p>
+<p>Which design comes out ahead for a given word width depends on the implementation technology, performance requirements, and other design constraints. Very often, the best choice is a hybrid combination of carry-select and carry-lookahead (see Section 7.5). </p>
+<p>对于给定的字宽，哪种设计领先取决于实现技术、性能要求和其他设计约束。通常，最好的选择是进位选择和进位前瞻的混合组合（参见第 7.5 节）。</p>
+<p>To understand the similarities between carry-select and carry-lookahead adders, consider a design similar to Fig. 7.9 in which only carry signals, rather than the final sum bits, are of interest. Clearly, once all carries are known, the sum bits can be generated rapidly by means of  <em>k</em>  XOR gates. Thus, the upper half of the new circuit derived from Fig. 7.9 will be responsible for generating two versions of the carries, rather than two versions of the sum bits. The carry  <em>ci</em>+1 into position  <em>i</em> + 1 <em>(i</em> ≥  <em>k/</em> 2 <em>)</em>  is  <em>g</em>[ <em>k/</em> 2,  <em>i</em>] when  <em>ck/</em> 2 = 0, and it is  <em>t</em>[ <em>k/</em> 2,  <em>i</em>] when  <em>ck/</em> 2 = 1. Recall that  <em>t</em>[ <em>k/</em> 2,  <em>i</em>] =  <em>g</em>[ <em>k/</em> 2,  <em>i</em>] ∨  <em>p</em>[ <em>k/</em> 2,  <em>i</em>]. Thus, the pair of adders spanning positions  <em>k/</em> 2 through  <em>k</em> − 1 in Fig. 7.9 become a parallel prefix carry network that uses the signal pair  <em>(g</em>,  <em>t)</em>  instead of the usual  <em>(g</em>,  <em>p)</em>. The entire structure of the modified design based on producing carries rather than sum bits is thus quite similar to the Ladner-Fischer carry network of Fig. 6.7. It even suffers from the same drawback of large fan-out for  <em>ck/</em> 2, which is used as the selection signal for  <em>k/</em> 2 + 1 two-way multiplexers. </p>
+<p>为了理解进位选择加法器和进位超前加法器之间的相似之处，请考虑类似于图 7.9 的设计，其中仅对进位信号而不是最终的和位感兴趣。显然，一旦知道了所有进位，就可以通过 k 个异或门快速生成和位。因此，从图 7.9 导出的新电路的上半部分将负责生成两个版本的进位，而不是两个版本的和位。当<span class="arithmatex">\(c_{k/2} = 0\)</span>，进位 <span class="arithmatex">\(c_{i+1}\)</span> 到位置 <span class="arithmatex">\(i + 1 (i ≥ k/ 2)\)</span> 是 <span class="arithmatex">\(g[ k/ 2, i]\)</span>，当 <span class="arithmatex">\(c_{k/2} = 1\)</span> 时为 <span class="arithmatex">\(t[k/2, i]\)</span>。回想一下 <span class="arithmatex">\(t[ k/ 2, i] = g[ k/ 2, i] ∨ p[ k/ 2, i]\)</span>。因此，图 7.9 中跨越位置 <span class="arithmatex">\(k/2\)</span> 到 <span class="arithmatex">\(k-1\)</span> 的一对加法器成为并行前缀进位网络，它使用信号对 <span class="arithmatex">\((g, t)\)</span> 而不是通常的 <span class="arithmatex">\((g, p)\)</span>。因此，基于产生进位而不是和位的修改设计的整个结构与图 6.7 的 Ladner-Fischer 进位网络非常相似。它甚至遭受同样的缺点，即 <span class="arithmatex">\(c_{k/2}\)</span> 的大扇出，用作 <span class="arithmatex">\(k/2 + 1\)</span> 双向多路复用器的选择信号。</p>
+<h2 id="74">7.4 条件和加法器<a class="headerlink" href="#74" title="Permanent link">&para;</a></h2>
+<p>The process that led to the two-level carry-select adder of Fig. 7.10 can be continued to derive a three-level <em>k</em>-bit adder built of <em>k</em>/8-bit adders, a four-level adder composed of <em>k</em>/16-bit adders, and so on. A logarithmic time conditional-sum adder results if we proceed to the extreme of having 1-bit adders at the very top. Thus, taking the cost and delay of a 1-bit 2-to-1 multiplexer as our units, the cost and delay of a conditional-sum adder are characterized by the following recurrences:</p>
+<p>产生图7.10的两级进位选择加法器的过程可以继续推导出由<span class="arithmatex">\(k/8\)</span>位加法器构成的三级k位加法器、由<span class="arithmatex">\(k/16\)</span>位加法器组成的四级加法器等等。如果我们继续在最顶部使用 1 位加法器，则会产生对数时间条件和加法器。因此，以 1 位 2比1多路复用器的成本和延迟为单位，条件和加法器的成本和延迟由以下递归式表征：</p>
+<div class="arithmatex">\[
+\begin{array}{l}
+C(k) \approx 2 C(k/2) + k + 2 \approx k( \log_2 k + 2 ) + kC( 1 ) \\
+T(k) = T(k/2) + 1 = \log_2 k + T(1)
+\end{array}
+\]</div>
+<p>where <em>C</em>(1) and <em>T</em> (1) are the cost and delay of the circuit of Fig. 7.11 used at the top to derive the sum and carry bits with a carry-in of 0 and 1. The term <em>k</em> + 2 in the first recurrence represents an upper bound on the number of single-bit 2-to-1 multiplexers needed for combining two <em>k</em>/2-bit adders into a <em>k</em>-bit adder.</p>
+<p>其中 <span class="arithmatex">\(C(1)\)</span> 和 <span class="arithmatex">\(T (1)\)</span> 是图 7.11 顶部电路的成本和延迟，用于导出进位输入为 0 和 1 的和和进位位。第一个递归中的 2 表示将两个 <span class="arithmatex">\(k/2\)</span> 位加法器组合成 <span class="arithmatex">\(k\)</span> 位加法器所需的单位2到1多路复用器的数量上限。</p>
+<p><img alt="image-20230808124054832" src="../assets/image-20230808124054832.png" /></p>
+<p>The recurrence for cost is approximate, since for simplicity, we have ignored the fact that the right half of Fig. 7.10 is less complex than its left half. In other words, we have assumed that two parallel ( <em>b</em> + 1)-bit multiplexers are needed to combine the outputs from <em>b</em>-bit adders, although in some cases, one is enough.</p>
+<p>成本的递推是近似的，因为为了简单起见，我们忽略了图 7.10 的右半部分比左半部分复杂的事实。换句话说，我们假设需要两个并行 (b + 1) 位多路复用器来组合 b 位加法器的输出，尽管在某些情况下，一个就足够了。</p>
+<p>An exact analysis leads to a comparable count for the number of 1-bit multiplexers needed in a conditional-sum adder. Assuming that <em>k</em> is a power of 2, the required number of multiplexers for a <em>k</em>-bit adder is</p>
+<p>精确分析得出条件和加法器中所需的 1 位多路复用器数量的可比计数。假设k是2的幂，则k 位加法器的多路复用器的所需数量为</p>
+<p><span class="arithmatex">\((k/2 + 1) + 3(k/4 + 1) + 7(k/8 + 1) + · · · + (k − 1)2 = (k − 1)(\log_2 k + 1)\)</span></p>
+<p>leading to an overall cost of <span class="arithmatex">\((k − 1)(\log_2 k + 1 ) + kC(1)\)</span>.</p>
+<p>导致总成本为 <span class="arithmatex">\((k − 1)(\log_2 k + 1 ) + kC(1)\)</span>。</p>
+<p>The conditional-sum algorithm can be visualized by the 16-bit addition example shown in Table 7.2.</p>
+<p>条件和的算法可以通过 16 位加法示例来可视化，如表 7.2 所示。</p>
+<p><img alt="image-20230808125133221" src="../assets/image-20230808125133221.png" /></p>
+<blockquote>
+<p>表 7.2 两个 16 位数字的条件和加法：已知和和进位位的块的宽度随着每个附加级别而加倍，导致加法时间随着字宽 k 的对数而增长</p>
+</blockquote>
+<p>Given that a conditional-sum adder is actually a (log2 <em>k</em>)-level carry-select adder, the comparisons and trade-offs between carry-select adders and carry-lookahead adders, as discussed at the end of Section 7.3, are relevant here as well.</p>
+<p>鉴于条件和加法器实际上是 (<span class="arithmatex">\(\log_2 k\)</span>) 级进位选择加法器，进位选择加法器和进位超前加法器之间的比较和权衡（如第 7.3 节末尾所讨论的）也与此相关。</p>
+<h2 id="75">7.5 混合设计与优化<a class="headerlink" href="#75" title="Permanent link">&para;</a></h2>
+<p>Hybrid adders are obtained by combining elements of two or more “pure” design methods to obtain adders with higher performance, greater cost-effectiveness, lower power consumption, and so on. Since any two or more pure design methods can be combined in a variety of ways, the space of possible designs for hybrid adders is immense. This leads to a great deal of flexibility in matching the design to given requirements and constraints. It also makes the designer’s search for an optimal design nontrivial. In this section, we review several possible hybrid adders as representative examples.</p>
+<p>混合加法器是通过将两种或多种“纯”设计方法的元素结合起来获得的，以获得具有更高性能、更大成本效益、更低功耗等的加法器。由于任何两种或多种纯设计方法都可以以多种方式组合，因此混合加法器的可能设计空间是巨大的。这使得设计与给定要求和约束的匹配具有很大的灵活性。这也使得设计师对最佳设计的寻找变得非常重要。在本节中，我们将回顾几种可能的混合加法器作为代表性示例。</p>
+<p>The one- and two-level carry-select adders of Figs. 7.9 and 7.10 are essentially hybrid adders, since the top-level <em>k</em>/2- or <em>k</em>/4-bit adders can be of any type. In fact, a common use for the carry-select scheme is in building fast adders whose width would lead to inefficient implementations with certain pure designs. For example, when 4-bit lookahead carry blocks are used, both 16-bit and 64-bit carry-lookahead adders can be synthesized quite efficiently (Fig. 6.4). A 32-bit adder, on the other hand, would require two levels of lookahead and is thus not any faster than the 64-bit adder. Using 16-bit carry-lookahead adders, plus a single carry-select level to double the width, is likely to lead to a faster 32-bit adder. The resulting adder has a hybrid carry-select/carry-lookahead design.</p>
+<p>图7.9 和 7.10 的一级和二级进位选择加法器本质上是混合加法器，因为顶级 k/2 位或 k/4 位加法器可以是任何类型。事实上，进位选择方案的一个常见用途是构建快速加法器，其宽度会导致某些纯设计的低效实现。例如，当使用 4 位先行进位块时，可以非常高效地合成 16 位和 64 位先行进位加法器（图 6.4）。另一方面，32 位加法器需要两级超前，因此并不比 64 位加法器快。使用 16 位超前进位加法器，再加上单个进位选择级别以加倍宽度，可能会产生更快的 32 位加法器。由此产生的加法器具有混合进位选择/进位超前设计。</p>
+<p>The reverse combination (viz., hybrid carry-lookahead/carry-select) is also possible and is in fact used quite widely. An example hybrid carry-lookahead/carry-select adder is depicted in Fig. 7.12. The small adder blocks, shown in pairs, may be based on Manchester carry chains that supply the required <em>g</em> and <em>p</em> signals to the lookahead carry generator and compute the final intermediate carries as well as the sum bits once the block carry-in signals have become known.</p>
+<p>相反的组合（即混合进位超前/进位选择）也是可能的，并且实际上使用得相当广泛。图 7.12 描述了混合进位超前/进位选择加法器的示例。成对显示的小加法器块可以基于曼彻斯特进位链，其向先行进位生成器提供所需的g和p信号，并在块进位信号已知后计算最终的中间进位以及和位。</p>
+<p><img alt="image-20230808125914091" src="../assets/image-20230808125914091.png" /></p>
+<p>A wider hybrid carry-lookahead/carry-select adder will likely have a multilevel carry-lookahead network rather than a single lookahead carry generator as depicted in Fig. 7.12. If the needed block <em>g</em> and <em>p</em> signals are produced quickly, the propagation of signals in the carry-lookahead network can be completely overlapped with carry propagation in the small carry-select adders. The carry-lookahead network of Fig. 6.13 was in fact developed for use in such a hybrid scheme, with 8-bit carry-select adders based on Manchester carry chains [Lync92]. The 8-bit adders complete their computation at about the same time that the carries  <em>c</em> 24,  <em>c</em> 32,  <em>c</em> 40,  <em>c</em> 48, and  <em>c</em> 56 become available (Fig. 6.13). Thus, the total adder delay is only two logic levels more than that of the carry-lookahead network. </p>
+<p>更宽的混合先行进位/进位选择加法器可能具有多级先行进位网络，而不是如图 7.12 所示的单个先行进位生成器。如果快速产生所需的块g和p信号，则进位超前网络中的信号传播可以与小型进位选择加法器中的进位传播完全重叠。图 6.13 的超前进位网络实际上是为这种混合方案而开发的，具有基于曼彻斯特进位链的 8 位进位选择加法器 [Lync92]。 8 位加法器大约在进位 <span class="arithmatex">\(c_{24}、c_{32}、c_{40}、c_{48}\)</span> 和 <span class="arithmatex">\(c_{56}\)</span> 变得可用同时完成计算（图 6.13）。因此，总加法器延迟仅比超前进位网络的延迟多两个逻辑深度。</p>
+<p>Another interesting hybrid design is the ripple-carry/carry-lookahead adder, an example of which is depicted in Fig. 7.13. This hybrid design is somewhat slower than a pure carry-lookahead scheme, but its simplicity and greater modularity may compensate for this drawback. The analysis of cost and delay for this hybrid design relative to pure ripple-carry and carry-lookahead adders is left as an exercise, as is the development and analysis of the reverse carry-lookahead/ripple-carry hybrid combination. </p>
+<p>另一个有趣的混合设计是纹波进位/超前进位加法器，其示例如图 7.13 所示。这种混合设计比纯粹的超前进位方案要慢一些，但其简单性和更高的模块化性可以弥补这一缺点。这种混合设计相对于纯纹波进位和先行进位加法器的成本和延迟的分析留作练习，反向进位先行/纹波进位混合组合的开发和分析也是如此。</p>
+<p><img alt="image-20230808130551531" src="../assets/image-20230808130551531.png" /></p>
+<p>Another hybrid adder example uses the hybrid carry-lookahead/conditional-sum combination. One drawback of the conditional-sum adder for wide words is the requirement of large fan-out for the signals controlling the multiplexers at the lower levels (Fig. 7.10). This problem can be alleviated by, for example, using conditional-sum addition in smaller blocks, forming the interblock carries through carry-lookahead. For detailed description of one such adder, used in Manchester University’s MU5 computer, see [Omon94, pp. 104–111]. </p>
+<p>另一个混合加法器示例使用混合进位前瞻/条件和的组合。宽字条件和加法器的一个缺点是控制较低层多路复用器的信号需要大扇出（图 7.10）。这个问题可以通过例如在较小的块中使用条件和加法来缓解，通过超前进位形成块间进位。有关曼彻斯特大学 MU5 计算机中使用的此类加法器的详细说明，请参阅 [Omon94，第 104–111 页]。</p>
+<p>A hybrid adder may use more than two different schemes. For example, the 64-bit adder in the Compaq/DEC Alpha 21064 microprocessor is designed using four different methods [Dobb92]. At the lowest level, 8-bit Manchester carry chains are employed.  The lower 32-bits of the sum are derived via carry lookahead at the second level, while conditional-sum addition is used to obtain two versions of the upper 32 bits. Carry-select is used to pick the correct version of the sum’s upper 32 bits. </p>
+<p>混合加法器可以使用两种以上不同的方案。例如，Compaq/DEC Alpha 21064 微处理器中的 64 位加法器是使用四种不同的方法设计的 [Dobb92]。在最低层，采用 8 位曼彻斯特进位链。总和的低 32 位是通过第二级的超前进位导出的，而条件和加法用于获得高 32 位的两个版本。进位选择用于选择和的高 32 位的正确版本。</p>
+<p>Clearly, it is possible to combine ideas from various designs in many different ways, giving rise to a steady stream of new implementations and theoretical proposals for the design of fast adders. Different combinations become attractive with particular technologies in view of their specific cost factors and fundamental constraints [Kant93]. In addition, application requirements, such as low power consumption, may shift the balance in favor of a particular hybrid design. </p>
+<p>显然，可以以多种不同的方式结合各种设计的思想，从而为快速加法器的设计带来源源不断的新实现和理论建议。鉴于特定技术的特定成本因素和基本限制，不同的组合变得有吸引力[Kant93]。此外，诸如低功耗之类的应用要求可能会改变平衡，有利于特定的混合设计。</p>
+<p>Just as optimal carry-skip adders have variable block widths, it is often possible to reduce the delay of other (pure or hybrid) adders by optimizing the block widths. For example, depending on the implementation technology, a carry-lookahead adder with fixed blocks may not yield the lowest possible delay [Niga95]. Again, the exact optimal configuration is highly technology-dependent. In fact, with modern very large-scale integration technology, gate count alone is no longer a meaningful measure of implementation cost. Designs that minimize or regularize the interconnection may actually be more cost-effective despite using more gates. The ultimate test of cost-effectiveness for a particular hybrid design or “optimal” configuration is its actual speed and cost when implemented with the target technology.</p>
+<p>正如最佳跳进位加法器具有可变的块宽度一样，通常可以通过优化块宽度来减少其他（纯或混合）加法器的延迟。例如，根据实现技术的不同，具有固定块的超前进位加法器可能不会产生尽可能低的延迟[Niga95]。同样，确切的最佳配置高度依赖于技术。事实上，利用现代超大规模集成技术，仅门数不再是衡量实施成本的有意义的指标。最小化或使得互连更规范的设计尽管使用更多的门，但实际上可能更具成本效益。对特定混合设计或“最佳”配置的成本效益的最终测试是其使用目标技术实施时的实际速度和成本。</p>
+<p>So far our discussion of adder delay has been based on the tacit assumption that all input digits are available at the outset, or at time 0, and that all output digits are computed and taken out after worst-case carries have propagated. The other extreme, where input/output digits arrive and leave serially, leads to very simple digit-serial adder designs. In between the two extremes, there are practical situations in which different arrival times are associated with the input digits or certain output digits must be produced earlier than others.</p>
+<p>到目前为止，我们对加法器延迟的讨论都是基于默认假设，即所有输入数字在一开始或时间 0 时都可用，并且所有输出数字在最坏情况进位传播后计算并取出。另一个极端，即输入/输出数字串行到达和离开，导致非常简单的数字串行加法器设计。在这两个极端之间，存在一些实际情况，其中不同的到达时间与输入数字相关联或者某些输出数字必须比其他数字更早产生。</p>
+<p>We will later see, for example, that in multiplying two binary numbers, the partial products are reduced to two binary numbers, which are then added in a fast two-operand adder to produce the final product. The individual bits of these two numbers become available at different times in view of the differing logic path depths from primary inputs. Figure 7.14 shows a typical example for the input arrival times at various bit positions of this final fast adder. This information can be used in optimizing the adder design [Oklo96]. A number of details and additional perspective can be found in [Liu03] and [Yeh00].</p>
+<p>例如，我们稍后会看到，在将两个二进制数相乘时，部分积会减少为两个二进制数，然后将它们在快速双操作数加法器中相加以产生最终的乘积。鉴于来自主输入的不同逻辑路径深度，这两个数字的各个位在不同时间变得可用。图 7.14 显示了最终快速加法器各个位位置的输入到达时间的典型示例。该信息可用于优化加法器设计[Oklo96]。许多细节和额外的观点可以在[Liu03]和[Yeh00].</p>
+<p><img alt="image-20230808131240051" src="../assets/image-20230808131240051.png" /></p>
+<h2 id="76">7.6 二操作数模加法器<a class="headerlink" href="#76" title="Permanent link">&para;</a></h2>
+<p>In some applications, with redundant number system arithmetic and cryptographic algorithms being the most notable examples, the sum of input operands  <em>x</em>  and  <em>y</em>  must be computed modulo a given constant  <em>m</em>. In other words, we are interested in deriving <em>(x</em> +  <em>y)</em>  mod  <em>m</em>, rather than  <em>x</em> +  <em>y</em>. An obvious approach would be to perform the required computation in two stages: (1) forming  <em>x</em> +  <em>y</em>, using any of the adder designs described thus far, and (2) reducing  <em>x</em> +  <em>y</em>  modulo  <em>m</em>. Because the latency of the latter  <em>modular</em> <em>reduction</em>  step can be significant for an arbitrary value of  <em>m</em>, direct methods similar to the carry-select approach have been used to combine the two steps. </p>
+<p>在一些应用中，冗余数字系统算术和密码算法是最值得注意的例子，输入操作数 x 和 y 的总和必须以给定常数 m 为模进行计算。换句话说，我们感兴趣的是导出 <span class="arithmatex">\((x + y) \mod m\)</span>，而不是 <span class="arithmatex">\(x + y\)</span>。一种明显的方法是分两个阶段执行所需的计算：</p>
+<p>(1) 使用迄今为止描述的任何加法器设计形成 x + y，以及 </p>
+<p>(2) 以 m 为模减少 x + y。由于后一个模数归约步骤的延迟对于 m 的任意值都可能很大，因此使用类似于进位选择方法的直接方法来组合这两个步骤。</p>
+<p>Let us first focus on unsigned operands and certain special values of  <em>m</em>  that lead to simple modular addition. Clearly, when  <em>m</em> = 2 <em>k</em> , the modulo- <em>m</em>  sum is obtained by simply ignoring the carry-out. We also know that for  <em>m</em> = 2 <em>k</em> − 1, using end-around carry allows us to reduce the sum modulo  <em>m</em>  by means of a conventional binary adder. A third special case pertains to  <em>m</em> = 2 <em>k</em> + 1. Here, we need  <em>k</em> + 1 bits to represent the 2 <em>k</em> + 1 different residues modulo  <em>m</em>. Because we can represent 2 <em>k</em>+1 distinct values with  <em>k</em> + 1 bits, different encodings of the 2 <em>k</em> + 1 residues are possible. An interesting encoding that has been found to be quite efficient is the diminished-1 encoding. With this encoding, 0 is represented by asserting a special flag bit and setting the remaining  <em>k</em>  bits to 0, while a nonzero value  <em>x</em>  is represented by de-asserting the flag bit and appending it with the representation of  <em>x</em> − 1. </p>
+<p>让我们首先关注无符号操作数和导致简单模加法的 m 的某些特殊值。显然，当 <span class="arithmatex">\(m = 2^k\)</span> 时，模 m 和是通过简单地忽略进位而获得的。我们还知道，对于 <span class="arithmatex">\(m = 2^k − 1\)</span>，使用尾部进位允许我们通过传统的二进制加法器来减少模 m 的和。第三种特殊情况涉及 <span class="arithmatex">\(m = 2^k + 1\)</span>。这里，我们需要 <span class="arithmatex">\(k + 1\)</span> 位来表示 <span class="arithmatex">\(2^k + 1\)</span>模 m 的不同余数。因为我们可以用 <span class="arithmatex">\(k + 1\)</span>位表示 <span class="arithmatex">\(2^k+1\)</span> 个不同的值，可以做不同<span class="arithmatex">\(2^k + 1\)</span> 个余数的编码。已一种非常有效的有趣编码是减 1 编码。通过这种编码，通过置位特殊标志位并将剩余 k 位设置为 0 来表示0，而非零值 x 通过复位标志位并用 <span class="arithmatex">\(x − 1\)</span> 的形式来表示。</p>
+<p>■ <strong>EXAMPLE 7.3</strong> Design a modulo-17 adder for unsigned integer operands in the range [0, 16], represented in the diminished-1 format. </p>
+<p>Each of the input operands  <em>x</em>  and  <em>y</em>  consists of a 0-flag bit and a 4-bit binary magnitude that is one less than its true value, if nonzero. The design described in the following is based on the assumption that both operands are nonzero, as is their modulo-17 sum; that is, we assume  <em>x</em> = 0,  <em>y</em> = 0,  <em>x</em> +  <em>y</em> = 17. Augmenting the design to correctly handle these special cases is left as an exercise. The output should be  <em>x</em> +  <em>y</em> − 1, the diminished-1 representation of  <em>x</em> +  <em>y</em>, if  <em>x</em> +  <em>y</em> ≤ 17, and it should be  <em>x</em> +  <em>y</em> − 18, the diminished-1 representation of <em>x</em> + <em>y</em> −17, if  <em>x</em> + <em>y</em> ≥ 18. The desired results above can be rewritten as  <em>(x</em> −1 <em>)</em>+ <em>(y</em> −1 <em>)</em>+1 if <em>(x</em>−1 <em>)</em>+ <em>(y</em>−1 <em>)</em> ≤ 15 and  <em>(x</em>−1 <em>)</em>+ <em>(y</em>−1 <em>)</em>−16 if  <em>(x</em>−1 <em>)</em>+ <em>(y</em>−1 <em>)</em> ≥ 16. These observations suggest that adding  <em>x</em> − 1 and  <em>y</em> − 1 with an inverted end-around carry (carry-in set to the complement of carry-out) will produce the desired result in either case. The inverted end-around carry arrangement will add 1 to the sum of  <em>x</em> − 1 and  <em>y</em> − 1 when  <em>c</em> out = 0, that is, <em>(x</em>−1 <em>)</em>+ <em>(y</em>−1 <em>)</em> ≤ 15, and will subtract 16 (by dropping the outgoing carry) when  <em>c</em> out = 1, corresponding to the condition  <em>(x</em> − 1 <em>)</em> +  <em>(y</em> − 1 <em>)</em> ≥ 16. </p>
+<p>■ 示例7.3 为范围内的无符号整数操作数设计一个模17 加法器[0, 16]，以减 1 格式表示。</p>
+<p>每个输入操作数 x 和 y 均包含一个 0 标志位和一个 4 位二进制量值（如果非零），该二进制量值比其真实值小 1。下面描述的设计基于两个操作数均非零的假设，它们的模 17 和也是非零；也就是说，我们假设 <span class="arithmatex">\(x \ne 0、y \ne 0、x + y \ne 17\)</span>。增强设计以正确处理这些特殊情况留作读者练习。如果 <span class="arithmatex">\(x + y \le 17\)</span>，输出应为 <span class="arithmatex">\(x + y − 1\)</span>，即 <span class="arithmatex">\(x + y\)</span> 的减 1 表示；<span class="arithmatex">\(如果 x + y ≥ 18\)</span>，输出应为 <span class="arithmatex">\(x + y − 18\)</span>，即 <span class="arithmatex">\(x + y −17\)</span> 的减 1 表示。</p>
+<p>如果 <span class="arithmatex">\((x−1 )+ (y−1 ) ≤ 15\)</span> ，则上述所需结果可重写为 <span class="arithmatex">\((x −1 )+ (y −1 )+1\)</span>。或<span class="arithmatex">\((x−1) + (y−1)−16\)</span> 如果 (x−1 )+ (y−1) ≥ 16。这些观察结果表明，将 <span class="arithmatex">\(x − 1\)</span> 与<span class="arithmatex">\(y − 1\)</span>和再加上反转的末端进位（进位输入设置为进位输出的补码），在任何一种情况下都会产生所需的结果。当 <span class="arithmatex">\(c_{out}\)</span> = 0 时，反转的循环进位安排将在 <span class="arithmatex">\(x − 1\)</span> 和 <span class="arithmatex">\(y − 1\)</span> 之和上加 1，即 <span class="arithmatex">\((x−1)+ (y−1) ≤ 15\)</span>，并且当 <span class="arithmatex">\(c_{out} = 1\)</span> 时将减去 16（通过丢弃传出进位），对应于条件$ (x − 1 ) + (y − 1 ) ≥ 16$。</p>
+<p>For a general modulus <em>m</em>, we need to compare the sum <em>x</em> + <em>y</em> to the modulus <em>m</em>, subtracting <em>m</em> from the computed sum if it equals or exceeds <em>m</em>. Because both the comparison and the ensuing subtraction require full carry propagation in the worst case, this approach would add a significant delay to the operation, which may be unacceptable. An alternative is to compute <em>x</em> + <em>y</em> and <em>x</em> + <em>y</em> − <em>m</em> in parallel and then use the sign of the latter value to decide whether <em>x</em> + <em>y</em> ≥ <em>m</em>. If so, then <em>x</em> + <em>y</em> − <em>m</em> is the correct result; otherwise, <em>x</em> + <em>y</em> should be selected as the output. The resulting design, shown in Fig. 7.15, is quite fast, given that it only adds a full-adder level (the carry-save adder) and a multiplexer to the critical path of a conventional adder.</p>
+<p>对于一般模数 m，我们需要将总和 <span class="arithmatex">\(x + y\)</span> 与模数 <span class="arithmatex">\(m\)</span> 进行比较，如果等于或超过 <span class="arithmatex">\(m\)</span>，则从计算的总和中减去 <span class="arithmatex">\(m\)</span>。因为在最坏的情况下比较和随后的减法都需要完全进位传播，所以这种方法会给操作增加显着的延迟，这可能是不可接受的。另一种方法是并行计算 <span class="arithmatex">\(x + y\)</span> 和 <span class="arithmatex">\(x + y − m\)</span>，然后使用后一个值的符号来确定是否 <span class="arithmatex">\(x + y ≥ m\)</span>。如果是，则 <span class="arithmatex">\(x + y − m\)</span> 为正确结果；否则，应选择 <span class="arithmatex">\(x + y\)</span> 作为输出。由此产生的设计如图 7.15 所示，速度相当快，因为它仅在传统加法器的关键路径上添加了一个全加器级（进位保存加法器）和一个多路复用器。</p>
+<p><img alt="image-20230808143414557" src="../assets/image-20230808143414557.png" /></p>
+<h2 id="_1">问题（略）<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_2">参考文献和进一步阅读<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[Bedr62] Bedrij, O. J., “Carry-Select Adder,” IRE Trans. Electronic Computers, Vol. 11,
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>         pp. 340–346, 1962.
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>[Chan90] Chan, P. K., and M. D. F. Schlag, “Analysis and Design of CMOS Manchester Adders
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>         with Variable Carry Skip,” IEEE Trans. Computers, Vol. 39, pp. 983–992, 1990.
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>[Chan92] Chan, P. K., M. D. F. Schlag, C. D. Thomborson, and V. G. Oklobdzija, “Delay
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>         Optimization of Carry-Skip Adders and Block Carry-Lookahead Adders Using
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>         Multidimensional Dynamic Programming,” IEEE Trans. Computers, Vol. 41, No. 8,
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>         pp. 920–930, 1992.
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>[Dobb92] Dobberpuhl, D., et al., “A 200 MHz 64-b Dual-Issue CMOS Microprocessor,” IEEE
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>         J. Solid-State Circuits, Vol. 27, No. 11, 1992.
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>[Guyo87] Guyot, A., and J.-M. Muller, “A Way to Build Efficient Carry-Skip Adders,” IEEE
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>         Trans. Computers, Vol. 36, No. 10, pp. 1144–1152, 1987.
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>[Jabe09] Jaberipur, G. and B. Parhami, “Unified Approach to the Design of Modulo-(2n ± 1)
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>         Adders Based on Signed-LSB Representation of Residues,” Proc. 19th IEEE Int’l
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>         Symp. Computer Arithmetic, June 2009, pp. 57–64.
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>[Kala00] Kalampoukas, L., D. Nikolos, C. Efstathiou, H. T. Vergos, and J. Kalamatianos,
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>         “High-Speed Parallel-Prefix Modulo 2n − 1 Adders,” IEEE Trans. Computers, Vol.
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>         49, No. 7, pp. 673–680, 2000.
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>[Kant93] Kantabutra, V., “Designing Optimum One-Level Carry-Skip Adders,” IEEE Trans.
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>         Computers, Vol. 42, No. 6, pp. 759–764, 1993.
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>[Lehm61] Lehman, M., and N. Burla, “Skip Techniques for High-Speed Carry Propagation in
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>         Binary Arithmetic Units,” IRE Trans. Electronic Computers, Vol. 10, pp. 691–698,
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>         1961.
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>[Liu03] Liu, J., S. Zhou, H. Zhu, and C.-K. Cheng, “An Algorithmic Approach for Generic
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>         Parallel Adders,” Proc. IEEE/ACM Int’l Conf. Computer-Aided Design, November
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>         2003, pp. 734–740.
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>[Lync92] Lynch, T., and E. Swartzlander, “A Spanning Tree Carry Lookahead Adder,” IEEE
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>         Trans. Computers, Vol. 41, No. 8, pp. 931–939, 1992.
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>[Maje67] Majerski, S., “On Determination of Optimal Distributions of Carry Skip in Adders,”
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>         IEEE Trans. Electronic Computers, Vol. 16, pp. 45–58, 1967.
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>[Niga95] Nigaglioni, R. H., and E. E. Swartzlander, “Variable Spanning Tree Adder,” Proc.
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>         Asilomar Conf. Signals, Systems, and Computers, 1995, pp. 586–590, 1995.
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>[Oklo96] Oklobdzija, V. G., D. Villeger, and S. S. Liu, “A Method for Speed Optimized Partial
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>         Product Reduction and Generation of Fast Parallel Multipliers Using an Algorithmic
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>         Approach,” IEEE Trans. Computers, Vol. 45, No. 3, pp. 294–306, 1996.
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>[Omon94] Omondi, A. R., Computer Arithmetic Systems: Algorithms, Architecture and
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>         Implementation, Prentice-Hall, 1994.
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>[Skla60] Sklansky, J., “Conditional-Sum Addition Logic,” IRE Trans. Electronic Computers,
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>         Vol. 9, No. 2, pp. 226–231, 1960.
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>[Turr89] Turrini, S., “Optimal Group Distribution in Carry-Skip Adders,” Proc. 9th Symp.
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>         Computer Arithmetic, pp. 96–103, 1989.
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>[Yeh00] Yeh, W.-C., and C.-W. Jen, “High-Speed Booth-Encoded Parallel Multiplier Design,”
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>         IEEE Trans. Computers, Vol. 49, No. 7, pp. 692–701, 2000.
+</code></pre></div>
 
 
 
